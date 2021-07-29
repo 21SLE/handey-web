@@ -1,4 +1,4 @@
-package handey.handeyweb;
+package com.handey.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
