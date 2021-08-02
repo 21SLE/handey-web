@@ -6,12 +6,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebController {
     @GetMapping("")
-    public String home() {
-        return "login";
+    public String indexView() {
+        return "redirect:/login";
     }
 
     @GetMapping("login")
     public String login() {
         return "login";
+    }
+
+    @GetMapping("join")
+    public String join() {
+        return "join";
+    }
+
+    @GetMapping("home")
+    public String home() {
+        return "home";
     }
 }
