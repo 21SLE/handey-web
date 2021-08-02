@@ -1,0 +1,127 @@
+body {
+    color: #fccc00;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow-x: hidden; overflow-y: hidden;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+}
+
+.btn {
+    cursor:pointer;
+}
+
+.xs-wrap {
+    width:100%;
+    display:block;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+}
+
+fieldset {
+    border: 0;
+    width:100%;
+    margin: 0;
+    margin-bottom: 15px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+.login-form-div {
+    width: 200px;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    display:inline-block;
+}
+
+.login-btn-div {
+    width: 100px;
+    margin-right: 40px;
+    display:inline-block;
+}
+
+input {
+    padding-top:5px;
+    padding-bottom: 5px;
+    background-color:rgba(0,0,0,0);
+    border:none;
+    border-bottom: #b7b7b7 solid 2px ;
+}
+
+input::placeholder {
+    color: #b7b7b7;
+}
+
+input:focus {
+    border: none;
+    outline: none;
+    border-bottom: grey solid 2px;
+    animation: fadeInOut 0.3s ease-in-out forwards;
+}
+
+#password {
+    padding-top:15px;
+}
+
+.company-name {
+    width:100%;
+    display:block;
+    text-align:center;
+    font-size: 65px;
+    margin-top: 12%;
+    margin-bottom: 20px;
+    padding-bottom:0;
+}
+
+.row {
+    width: 100%;
+    display:block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 15px;
+
+}
+
+.button-form {
+    display: block;
+    width: 180px;
+    border-radius: 4px;
+    color: #999;
+    cursor: pointer;
+    text-align: center;
+    background: transparent;
+    border: 1px solid #b7b7b7;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    padding: 12px 0px 11px;
+}
+
+.login-btn {
+    width: 100px;
+    padding: 30px 0px 30px;
+}
+
+.find-pw-btn {
+
+}
+
+.join-btn {
+    background-color: #fccc00;
+    color: #ffffff;
+    border: none;
+}

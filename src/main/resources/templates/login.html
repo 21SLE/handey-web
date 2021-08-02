@@ -3,48 +3,38 @@
 <link th:href="@{/css/login.css}" rel="stylesheet" />
 
 
-<!-- index.html 고유 CSS 추가 -->
-<th:block layout:fragment="css">
-    <style>
-
-    </style>
-</th:block>
-
-<!-- index.html 고유 스크립트 추가 -->
-<th:block layout:fragment="script">
-</th:block>
-
 <th:block layout:fragment="content">
     <div class="account-layout">
-        <div class="ollacare-logo pb-10 justify-center">
+        <div class="logo">
 <!--            <img src="/images/ad-biglogo.png" srcset="/images/ad-biglogo@2x.png 2x" alt="핸디">-->
+
         </div>
-        <p class="title-3 text-center pt-5 mb-50 text-gray-2">HANDEY</p>
+        <p class="company-name">HANDEY</p>
 
         <div class="xs-wrap">
             <form>
                 <fieldset>
-                    <div class="mb-30">
-                        <div class="mb-10">
+                    <div class="login-form-div">
+                        <div>
                             <input id='email' name='email' tabindex='1' type="text" class="input-form" placeholder="이메일을 입력해주세요.">
                         </div>
-                        <div class="mb-10">
+                        <div>
                             <input id='password' name='password' tabindex='2' type="password" class="input-form"
                                    placeholder="비밀번호를 입력해주세요.">
                         </div>
                     </div>
-                    <div class="mb-10">
-                        <a class="button-form button-primary" href="/home" role="button">로그인</a>
+                    <div class="login-btn-div">
+                        <a class="button-form login-btn" href="/home" role="button">로그인</a>
                     </div>
                 </fieldset>
             </form>
-            <div class="row mb-40">
-                <div class="col">
-                    <a class="button-form" href="/" role="button">비밀번호 찾기</a>
+            <div class="row">
+                <div style="margin-right: 10px; display:inline-block;">
+                    <a class="button-form find-pw-btn" href="/" role="button">비밀번호 찾기</a>
 
                 </div>
-                <div class="col">
-                    <a class="button-form" href="/join" role="button">회원가입</a>
+                <div style="display:inline-block;">
+                    <a class="button-form join-btn" href="/join" role="button">회원가입</a>
                 </div>
             </div>
 
