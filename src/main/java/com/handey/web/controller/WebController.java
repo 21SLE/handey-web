@@ -15,6 +15,11 @@ public class WebController {
         return "login";
     }
 
+    @GetMapping("joinagree")
+    public String joinAgree() {
+        return "joinagree";
+    }
+
     @GetMapping("join")
     public String join() {
         return "join";

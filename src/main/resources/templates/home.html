@@ -2,94 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <style>
-    * {padding:0;margin:0;}
-    input[id="settingicon"] {display:none;}
-    input[id="settingicon"] + ul {display:block;position:fixed;right:0;top:3.5%;transform:translateY(-50%);transition:all .35s;text-align:right;}
-    input[id="settingicon"] + ul > li {display:block;width:50px;height:50px;border:1px solid #f1f1f1;position:relative;margin-top:-1px;}
-    input[id="settingicon"] + ul > li > a {display:block;width:auto;height:50px;overflow:hidden;transition:all .35s;}
-    input[id="settingicon"] + ul > li > label {display:block;cursor:pointer;width:auto;height:50px;background:#FFF978;}
-    input[id="settingicon"] + ul > li:nth-child(1) label span {display:block;position:absolute;width:50%;height:3px;border-radius:30px;background:#333;transition:all .35s;}
-    input[id="settingicon"] + ul > li:nth-child(1) label span:nth-child(1) {top:30%;left:50%;transform:translateX(-50%);}
-    input[id="settingicon"] + ul > li:nth-child(1) label span:nth-child(2) {top:50%;left:50%;transform:translate(-50%,-50%);}
-    input[id="settingicon"] + ul > li:nth-child(1) label span:nth-child(3) {bottom:30%;left:50%;transform:translateX(-50%);}
-    input[id="settingicon"]:checked + ul {z-index:2;right:300px;}
-    input[id="settingicon"]:checked + ul > li:nth-child(1) label {z-index:2;right:300px;}
-    input[id="settingicon"]:checked + ul > li:nth-child(1) label span:nth-child(1) {top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);}
-    input[id="settingicon"]:checked + ul > li:nth-child(1) label span:nth-child(2) {opacity:0;}
-    input[id="settingicon"]:checked + ul > li:nth-child(1) label span:nth-child(3) {bottom:50%;left:50%;transform:translate(-50%,50%) rotate(-45deg);}
-    div[class="sidebar"] {width:300px;height:100%;background:#FFE65A;position:fixed;top:0;right:-300px;z-index:1;transition:all .35s;}
-    input[id="settingicon"]:checked + ul + div {right:0;}
-
-
-    .sidebar{
-        text-align:center;
-        align:center;
-    }
-
-    .menu{
-        font-family:비비트리고딕_L;
-    }
-
-    h1{
-        color:#ffffff;
-        height:60px;
-        font-size:30px;
-        padding:30px;
-        font-family:Cooper
-    }
-
-    #help{
-        font-size:20px;
-        text-align:center;
-        color:#ffffff;
-        text-decoration:none;
-    }
-
-    #info{
-        font-size:20px;
-        text-align:center;
-        color:#ffffff;
-        text-decoration:none;
-    }
-
-    #mem{
-        font-size:20px;
-        text-align:center;
-        color:#ffbe0a;
-        text-decoration:none;
-    }
-
-    #mem_mo{
-        font-size:20px;
-        text-align:center;
-        color:#ffffff;
-        text-decoration:none;
-    }
-
-    #mem_de{
-        font-size:20px;
-        text-align:center;
-        color:#ffffff;
-        text-decoration:none;
-    }
-
-    #connect{
-        font-size:20px;
-        text-align:center;
-        color:#ffffff;
-        text-decoration:none;
-    }
-
-    .line{
-        height:1.5px;
-        align:center;
-        background-color:#fafad2;
-        border-bottom:0px;
-        border:none;
-    }
-
-    </style>
+    <link th:href="@{/css/home.css}" rel="stylesheet" type="text/css"/>
 </head>
 <input type="checkbox" id="settingicon">
 <ul>
@@ -107,9 +20,7 @@
         <a id="help" href="/setting/help">도움말</a><br><br>
         <a id="info" href="/setting/info">정보</a><br><br>
         <br><hr class="line" style="align:center"> <br><br>
-        <p id="mem">계정설정</p><br>
-        <a id="mem_mo" href="/setting/modify">계정변경</a><br><br>
-        <a id="mem_de" href="/setting/delete">계정삭제</a><br><br>
+        <a id="mem" href="/setting/modify">계정설정</a><br><br>
         <br><hr class="line"> <br><br>
         <a id="connect" href="/setting/conn">다른 기기 연동</a><br><br>
         <br><hr class="line"> <br><br>
