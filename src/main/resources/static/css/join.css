@@ -1,0 +1,174 @@
+html{
+    height: 100%;
+}
+
+body{
+    margin: 0;
+    height: 100%;
+    font-family: Datum,'돋움',Helvetica,sans-serif;
+}
+
+placeholder{
+    color:#cccccc;
+}
+
+#logo{
+    font-family: Datum,'고딕std굵게',Helvetica,sans-serif;
+    color:#fccc00;
+    font-size:40px;
+    font-weight:bolder;
+    cursor: pointer;
+}
+
+#pwalert{
+    font-size: 13px;
+}
+
+.header {
+    text-align: center;
+}
+
+#content {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 550px;
+    position: relative;
+    height: 100%;
+}
+
+h3 {
+    margin: 18px 0 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+input {
+    font-family: Datum,'돋움',Helvetica,sans-serif;
+}
+
+#but1{
+    height:50px;
+    width:70px;
+    color:white;
+    background:#cccccc;
+    border:none;
+    border-radius:5px;
+    cursor: pointer;
+    text-align:center;
+}
+
+#id{
+    width:50px;
+}
+
+.box {
+    display: inline-block;
+    width: 68%;
+    height: 50px;
+    border: 1px;
+    border-style:solid;
+    padding-top:10px;
+    padding-right:14px;
+    padding-left:10px;
+    padding-bottom:14px;
+    box-sizing: border-box;
+    color: #cccccc;
+    border-radius:5px;
+}
+
+.email1{
+    display:inline-block;
+    width: 35%;
+    height: 50px;
+    border: 1px;
+    border-style:solid;
+    padding-top:10px;
+    padding-right:14px;
+    padding-left:10px;
+    padding-bottom:14px;
+    box-sizing: border-box;
+    color: #cccccc;
+    border-radius:5px;
+}
+
+.email2{
+    display:inline-block;
+    width: 35%;
+    height: 50px;
+    border: 1px;
+    border-style:solid;
+    padding-top:10px;
+    padding-right:14px;
+    padding-left:10px;
+    padding-bottom:14px;
+    box-sizing: border-box;
+    color: #cccccc;
+    border-radius:5px;
+}
+
+#chemail{
+    height:50px;
+    width:20%;
+    border-radius:5px;
+    border-color:#cccccc;
+    margin:auto;
+}
+
+.int {
+    position:relative;
+    top:-7px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    background: #ffffff;
+    font-size: 15px;
+}
+
+.box int_pass id {
+    padding-right: 40px;
+}
+
+.box int_pass password {
+    padding-right: 40px;
+}
+
+.box int_pass_check password {
+    padding-right: 40px;
+}
+
+
+.error_box {
+    margin-top: 9px;
+    font-size: 12px;
+    color: red;
+    display: none;
+}
+
+#alert {
+    position:absolute;
+    top: 19px;
+    right: 38px;
+    font-size: 12px;
+    color: red;
+    display: none;
+}
+
+/* 버튼 */
+
+.btn {
+    margin: 30px 0 91px 130px;
+}
+
+#join {
+    width: 70%;
+    padding: 21px 0 17px;
+    border: 0;
+    border-radius:5px;
+    cursor: pointer;
+    color:#fff;
+    background-color: #fccc00;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: Datum,'돋움',Helvetica,sans-serif;
+}
