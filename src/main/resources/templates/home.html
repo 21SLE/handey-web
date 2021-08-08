@@ -1,36 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link th:href="@{/css/home.css}" rel="stylesheet" type="text/css"/>
-</head>
-<input type="checkbox" id="settingicon">
-<ul>
-    <li>
-        <label for="settingicon">
-            <span></span><span></span><span></span>
-        </label>
-    </li>
-</ul>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!--css-->
+<link th:href="@{/css/home.css}" rel="stylesheet"/>
 
-<div class="sidebar">
-    <h1>Setting</h1>
-    <div class="menu">
-        <hr class="line" style="align:center"><br><br>
-        <a id="help" href="/setting/help">도움말</a><br><br>
-        <a id="info" href="/setting/info">정보</a><br><br>
-        <br><hr class="line" style="align:center"> <br><br>
-        <a id="mem" href="/setting/modify">계정설정</a><br><br>
-        <br><hr class="line"> <br><br>
-        <a id="connect" href="/setting/conn">다른 기기 연동</a><br><br>
-        <br><hr class="line"> <br><br>
-    </div>
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>메인창</title>
+</head>
+
+<body th:fragment="body">
+
+<div id="content">
+
 </div>
 
-<body>
-    <div class="main">
-        <h2>이쪽이 메인화면</h2>
-    </div>
-</body>
+<div id="menu">
+    <ul>
+        <li><a class="home" href="home">home</a></li>
+        <li><a class="history" href="history">history</a></li>
+        <li><a class="계정설정" href="#">계정설정</a></li>
+        <li><a class="도움말" href="#">도움말</a></li>
+        <li><a class="정보" href="#">정보</a></li>
+    </ul>
+</div>
 
+<div id="memo">
+
+</div>
+</body>
 </html>

@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!--css-->
+<link th:href="@{/css/history.css}" rel="stylesheet"/>
 
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>메인창</title>
+</head>
+
+<body th:fragment="body">
+
+<div id="content">
+
+</div>
+
+<div id="menu">
+    <ul>
+        <li><a class="home" href="home">home</a></li>
+        <li><a class="history" href="history">history</a></li>
+        <li><a class="계정설정" href="#">계정설정</a></li>
+        <li><a class="도움말" href="#">도움말</a></li>
+        <li><a class="정보" href="#">정보</a></li>
+    </ul>
+</div>
+
+<div id="memo">
+
+</div>
 </body>
 </html>
