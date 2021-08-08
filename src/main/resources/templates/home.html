@@ -1,11 +1,32 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:cellpadding="0">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!--css-->
 <link th:href="@{/css/home.css}" rel="stylesheet"/>
 
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title>HANDEY HOME</title>
 </head>
+
+<body th:fragment="body">
+
+<div id="content">
+
+</div>
+
+<div id="menu">
+    <ul>
+        <li><a class="home" href="home">home</a></li>
+        <li><a class="history" href="#history">history</a></li>
+        <li><a class="계정설정" href="#">계정설정</a></li>
+        <li><a class="도움말" href="#">도움말</a></li>
+        <li><a class="정보" href="#">정보</a></li>
+    </ul>
+</div>
+
+<div id="memo">
+
+</div>
 
 <body th:fragment="body">
     <div class="home-layout">
