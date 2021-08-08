@@ -1,0 +1,8 @@
+/* 자주쓰는 색상, 여백 등등 */
+
+:root {
+    --deep-yellow: #F5BC10;
+    --yellow: #FDDC42;
+    --horizontal-space: 20px;
+    --main-border:1px solid rgba(0,0,0,0.2);
+}
