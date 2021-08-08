@@ -11,22 +11,27 @@ public class WebController {
     }
 
     @GetMapping("login")
-    public String login() {
+    public String loginView() {
         return "login";
     }
 
     @GetMapping("joinagree")
-    public String joinAgree() {
+    public String joinAgreeView() {
         return "joinagree";
     }
 
     @GetMapping("join")
-    public String join() {
+    public String joinView() {
         return "join";
     }
 
     @GetMapping("home")
-    public String home() {
+    public String homeView() {
         return "home";
+    }
+
+    @GetMapping("history")
+    public String historyView() {
+        return "history";
     }
 }
