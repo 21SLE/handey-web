@@ -14,7 +14,7 @@ placeholder{
 
 #logo{
     font-family: Datum,'고딕std굵게',Helvetica,sans-serif;
-    color:#fccc00;
+    color:var(--deep-yellow);
     font-size:40px;
     font-weight:bolder;
     cursor: pointer;
@@ -167,7 +167,7 @@ input {
     border-radius:5px;
     cursor: pointer;
     color:#fff;
-    background-color: #fccc00;
+    background-color:var(--deep-yellow);
     font-size: 14px;
     font-weight: 400;
     font-family: Datum,'돋움',Helvetica,sans-serif;

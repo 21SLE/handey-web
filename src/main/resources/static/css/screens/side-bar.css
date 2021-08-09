@@ -1,0 +1,31 @@
+ul {
+    list-style-type: none;
+    background-color: var(--deep-yellow);
+    width: 20%;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+li a {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    color: #ffffff;
+    padding: 8px 15px 8px 15px;
+    font-weight: bold;
+}
+
+li a:hover {
+    background-color: var(--yellow);
+    text-align: center;
+    color: #ffffff;
+}
+
+.name{
+    text-align: center;
+    display: block;
+    padding: 10px 15px 10px 15px;
+}

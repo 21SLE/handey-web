@@ -21,30 +21,6 @@ body {
     height: 100%;
 }
 
-ul {
-    list-style-type: none;
-    background-color: var(--deep-yellow);
-    width: 20%;
-    margin: 0;
-    padding: 0;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-}
-
-li a {
-    text-decoration: none;
-    display: block;
-    color: #ffffff;
-    padding: 8px 15px 8px 15px;
-    font-weight: bold;
-}
-
-li a:hover {
-    background-color: var(--yellow);
-    color: #cccccc;
-}
-
 .home-layout {
     width: 80vw;
     height: 100%;

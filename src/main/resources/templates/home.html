@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <!--css-->
-<link th:href="@{/css/styles.css}" rel="stylesheet"/>
+<link th:href="@{style.css}" rel="stylesheet"/>
 
 <head th:fragment="head">
     <meta charset="UTF-8">
@@ -12,8 +12,8 @@
 <body th:fragment="body">
     <div id="menu">
         <ul>
-            <li><a class="home" href="/home">home</a></li>
-            <li><a class="history" href="/history">history</a></li>
+            <li><a class="home" href="home">home</a></li>
+            <li><a class="history" href="#history">history</a></li>
             <li><a class="계정설정" href="#">계정설정</a></li>
             <li><a class="도움말" href="#">도움말</a></li>
             <li><a class="정보" href="#">정보</a></li>
