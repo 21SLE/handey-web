@@ -14,7 +14,7 @@ placeholder{
 
 #logo{
     font-family: Datum,'고딕std굵게',Helvetica,sans-serif;
-    color:var(--deep-yellow);
+    color:#fccc00;
     font-size:40px;
     font-weight:bolder;
     cursor: pointer;
@@ -56,10 +56,6 @@ input {
     border-radius:5px;
     cursor: pointer;
     text-align:center;
-}
-
-#id{
-    width:50px;
 }
 
 .box {
@@ -157,17 +153,17 @@ input {
 /* 버튼 */
 
 .btn {
-    margin: 30px 0 91px 130px;
+    margin: 50px 0 91px 130px;
 }
 
 #join {
-    width: 70%;
+    width: 280px;
     padding: 21px 0 17px;
     border: 0;
     border-radius:5px;
     cursor: pointer;
     color:#fff;
-    background-color:var(--deep-yellow);
+    background-color:#fccc00;
     font-size: 14px;
     font-weight: 400;
     font-family: Datum,'돋움',Helvetica,sans-serif;

@@ -14,20 +14,39 @@
     <div class="header">
         <p id="logo">HANDEY</p>
     </div>
-    <!--ID-->
-    <div>
-        <h3>
-        <label for="id">아이디</label>
-        </h3>
-        <span class="box int_pass id">
-            <input type="text" id="id" class="int" maxlength="20" placeholder="아이디">
-        </span>
-        <button type="button" id=but1>
-            <span>중복확인</span>
-        </button>
-        <span class="error_box"></span>
-    </div>
 
+        <!--Name-->
+        <div>
+            <h3>
+                <label for="name">이름</label>
+            </h3>
+            <span class="box int_pass name">
+            <input type="text" id="name" class="int" maxlength="20" placeholder="이름">
+        </span>
+            <span class="error_box"></span>
+        </div>
+        <!--Email-->
+        <div>
+            <h3>
+                <label>Email</label>
+            </h3>
+            <span class="int_pass email1">
+            <input type="text" id="email1" class="int" maxlength="30" placeholder="이메일">
+        </span>
+            <span>@</span>
+            <span class="int_pass email2">
+            <input type="text" id="email2" class="int" maxlength="30"></span>
+            <span>
+             <select id="chemail">
+                <option value="self" selected>직접입력</option>
+                <option value="naver">naver.com</option>
+                <option value="gmail">gmail.com</option>
+                <option value="daum">daum.com</option>
+                <option value="yahoo">yahoo.com</option>
+            </select>
+        </span>
+            <span class="error_box"></span>
+        </div>
     <!--PW1-->
     <div>
         <h3>
@@ -48,39 +67,6 @@
         </h3>
         <span class="box int_pass password check">
             <input type="text" id="pw2" class="int" maxlength="20" placeholder="비밀번호 재입력">
-        </span>
-        <span class="error_box"></span>
-    </div>
-
-    <!--Name-->
-    <div>
-        <h3>
-        <label for="name">이름</label>
-        </h3>
-        <span class="box int_pass name">
-            <input type="text" id="name" class="int" maxlength="20" placeholder="이름">
-        </span>
-        <span class="error_box"></span>
-    </div>
-    <!--Email-->
-    <div>
-        <h3>
-        <label>Email</label>
-        </h3>
-        <span class="int_pass email1">
-            <input type="text" id="email1" class="int" maxlength="30" placeholder="이메일">
-        </span>
-        <span>@</span>
-        <span class="int_pass email2">
-            <input type="text" id="email2" class="int" maxlength="30"></span>
-        <span>
-             <select id="chemail">
-                <option value="self" selected>직접입력</option>
-                <option value="naver">naver.com</option>
-                <option value="gmail">gmail.com</option>
-                <option value="daum">daum.com</option>
-                <option value="yahoo">yahoo.com</option>
-            </select>
         </span>
         <span class="error_box"></span>
     </div>
