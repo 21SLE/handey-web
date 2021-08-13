@@ -17,25 +17,28 @@ body {
 }
 
 .history-search {
-    border: 3px solid var(--deep-yellow);
-    display: inline-block;
+    border: 2px solid var(--deep-yellow);
+    text-align: left;
+    display: inline-flex;
     float: left;
     position: absolute;
     top: 0;
     left: 0;
-    width: 80vw;
-    height: 5vw;
+    width: 75vw;
+    height: 2vw;
     margin-left: 40px;
     margin-top: 20px;
 }
 
 .history-box {
-    border: 3px solid var(--deep-yellow);
-    display: inline-block;
+    border: 2px solid var(--deep-yellow);
+    display: inline-flex;
     float: left;
     position: absolute;
-    top: 50px;
+    top: 70px;
     left: 0;
-    width: 80vw;
-    height: 5vw;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    width: 75vw;
+    height: 40vw;
 }
