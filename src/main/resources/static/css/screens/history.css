@@ -28,6 +28,17 @@ body {
     height: 2vw;
     margin-left: 40px;
     margin-top: 20px;
+
+}
+
+#searchtitle {
+    font-size: large;
+    vertical-align: text-bottom;
+}
+
+#searchline {
+    width: 70vw;
+    text-decoration: none;
 }
 
 .history-box {
@@ -41,4 +52,24 @@ body {
     margin-bottom: 20px;
     width: 75vw;
     height: 40vw;
+}
+
+.after-box {
+    border: 2px solid var(--deep-yellow);
+    display: inline-flex;
+    float: left;
+    width: 15vw;
+    height: 25vw;
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
+
+.to-do-box {
+    border: 2px solid var(--deep-yellow);
+    display: inline-flex;
+    float: left;
+    width: 15vw;
+    height: 25vw;
+    margin-bottom: 1px;
+    margin-top: 1px;
 }
