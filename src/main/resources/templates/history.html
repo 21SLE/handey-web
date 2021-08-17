@@ -5,7 +5,7 @@
 
 <head th:fragment="head">
     <meta charset="UTF-8">
-    <title>과거창</title>
+    <title>history</title>
 </head>
 
 <body th:fragment="body">
@@ -28,22 +28,32 @@
 
     <main class="history-layout">
         <section class="history-search">
-            <h4 id="searchtitle">검색</h4>
             <form>
-                <input id="searchline" type="text" name="search_date" value="">
+                <div class="searchbox">
+                    <span>검색</span>
+                    <input class="search_input" autocomplete="off" autocorrect="off" spellcheck="false" type="text" name="search_date" placeholder="">
+                </div>
             </form>
         </section>
-        <section class="history-box">
-            <article class="after-box">
-                <div class="After-title">
-                    <h4>After List</h4>
-                </div>
-            </article>
-            <article class="to-do-box">
-                <div class="todo-title">
-                    <h4>To Do List</h4>
-                </div>
-            </article>
+        <section class="history-page">
+            <div class="history-box">
+                <article class="to-do-box">
+                    <div class="todo-title">
+                        <h4 class="box-name">TO DO LIST</h4>
+                        <ol>
+                            <li>오늘 머 햇음 </li>
+                        </ol>
+                    </div>
+                </article>
+                <article class="after-box">
+                    <div class="After-title">
+                        <h4 class="box-name">AFTER LIST</h4>
+                        <ol>
+                            <li>오늘 머 햇음 </li>
+                        </ol>
+                    </div>
+                </article>
+            </div>
         </section>
     </main>
 </body>
