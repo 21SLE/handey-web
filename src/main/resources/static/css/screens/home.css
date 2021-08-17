@@ -124,6 +124,7 @@ body {
     display: flex;
     gap: 0;
     flex-wrap: wrap;
+    align-items: baseline;
     overflow-y:scroll;
     width:784px;
     height: 450px;
@@ -135,7 +136,7 @@ body {
     border: 2px solid var(--yellow);
     margin-top: 0;
     margin-right:10px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
 
 .lower-part {
@@ -174,8 +175,14 @@ body {
     bottom: 20px;
     width: 51vw;
     height: 25vh;
+    padding-left: 10px;
 }
 
 .memo-section h4 {
     margin: 10px;
+}
+
+.memo-section textarea {
+    width: 760px;
+    height: 130px;
 }
