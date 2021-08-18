@@ -3,14 +3,16 @@ const weeklyForm = document.querySelector(".js-weeklyForm"),
     weeklyList = document.querySelector(".js-weeklyList");
 
 const addToDoBoxBtn = document.querySelector(".js-addToDoBoxBtn"),
-    toDoListLayout = document.querySelector(".js-toDoListLayout");
+    toDoFlexWrap = document.querySelector(".js-toDoFlexWrap");
+
+const addToDoElementBtn = document.querySelector(".js");
 
 const WEEKLY_LS = 'weeklies'; //LS는 local storage를 말함
 
 let weeklies = [];
 let toDoBoxes =[];
 
-function createWeeklyElement() {
+function addWeeklyElement() {
     const li = document.createElement("li");
     const checkBox = document.createElement("input");
     const checkIcon = document.createElement("i");
@@ -44,7 +46,8 @@ function createToDoBox() {
     toDoList.classList.add("toDoList", "js-toDoList");
     toDoBoxTitle.classList.add("toDoBoxTitle");
     addIcon.classList.add("fas", "fa-plus");
-    addToDoElementBtn.classList.add("addToDoElementBtn");
+    addToDoElementBtn.classList.add("js-addToDoElementBtn", "addToDoElementBtn");
+    addToDoElementBtn.addEventListener("click", function(){handleAddToDoElement(newToDoBoxId)});
     addToDoElementBtn.appendChild(addIcon);
     toDoBoxTitleSection.classList.add("toDoBoxTitleSection");
     toDoBoxTitleSection.appendChild(toDoBoxTitle);
@@ -52,26 +55,60 @@ function createToDoBox() {
     toDoBox.classList.add("toDoBox", "js-toDoBox");
     toDoBox.appendChild(toDoBoxTitleSection);
     toDoBox.appendChild(toDoList);
-    toDoBox.id = newToDoBoxId.toString();
-    toDoListLayout.insertBefore(toDoBox, toDoListLayout.firstChild);
+    toDoBox.id = "toDoBox_" + newToDoBoxId.toString();
+    toDoFlexWrap.appendChild(toDoBox);
+    // toDoFlexWrap.insertBefore(toDoBox, toDoFlexWrap.firstChild);
 
     const toDoBoxData = {
-        id: newToDoBoxId,
-        text: toDoBoxTitle.textContent
+        toDoBoxId: newToDoBoxId,
+        toDoBoxTitle: toDoBoxTitle.textContent,
+        toDoList: []
     };
 
     toDoBoxes.push(toDoBoxData);
 }
 
+function addToDoElement(toDoBoxId) {
+    const toDoBox = document.querySelector("#toDoBox_" + toDoBoxId.toString()),
+        toDoListComponent = toDoBox.querySelector(".js-toDoList");
+
+    const li = document.createElement("li");
+    const checkBox = document.createElement("input");
+    const checkIcon = document.createElement("i");
+    const input = document.createElement("input");
+    const newToDoElementId = toDoBoxes[toDoBoxId-1]["toDoList"].length+1;
+
+    checkBox.type = "checkbox";
+    checkBox.value = newToDoElementId.toString();
+    checkBox.appendChild(checkIcon);
+    li.appendChild(checkBox);
+    li.appendChild(input);
+    li.id = newToDoElementId.toString();
+    toDoListComponent.appendChild(li);
+
+    const toDoElement ={
+        id: newToDoElementId,
+        toDoText: input.textContent
+    };
+
+    toDoBoxes[toDoBoxId-1]["toDoList"].push(toDoElement);
+    console.log(toDoBoxes);
+
+
+}
 
 function handleAddWeeklyElement() {
     // event.preventDefault();
-    createWeeklyElement();
+    addWeeklyElement();
 
 }
 
 function handleAddToDoBoxBtn() {
     createToDoBox();
+}
+
+function handleAddToDoElement(toDoBoxId) {
+    addToDoElement(toDoBoxId);
 }
 
 function init() {
