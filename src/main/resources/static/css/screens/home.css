@@ -185,4 +185,5 @@ body {
 .memo-section textarea {
     width: 760px;
     height: 130px;
+    overflow-y: scroll;
 }
