@@ -1,3 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
 body {
     box-sizing: border-box;
     overflow-x: hidden; overflow-y: hidden;
@@ -11,9 +21,10 @@ body {
     position: relative;
     float: right;
     top: 0;
-    right: 0;
+    right: 0px;
     display: inline-flex;
     flex-direction: row;
+    overflow: auto;
 }
 
 .history-search {
@@ -24,9 +35,10 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 75vw;
-    height: 5vh;
+    width: 1140px;
+    height: 40px;
     margin-left: 40px;
+    margin-right: 40px;
     margin-top: 20px;
 
 }
@@ -49,8 +61,8 @@ body {
     padding: 4.5px;
 }
 
-.search_input {
-    width: 70vw;
+.search_input input[type=text] {
+    width: 80%;
     text-decoration: none;
     margin-right: 1px;
     margin-bottom: 1px;
@@ -60,6 +72,7 @@ body {
     border: none;
     box-shadow: none;
     border-bottom: none;
+    background: none;
 }
 
 .search_input input[type=text]:focus {
@@ -71,16 +84,19 @@ body {
 }
 
 .history-page {
-    border: 2px solid var(--deep-yellow);
+    border: 2px solid white;
     display: inline-flex;
     float: left;
     position: absolute;
     top: 70px;
     left: 0;
     margin-left: 40px;
+    margin-right: 40px;
     margin-bottom: 20px;
-    width: 75vw;
-    height: 40vw;
+    margin-inside: 0px;
+    width: 1140px;
+    height: 630px;
+    overflow: auto;
 }
 
 .history-box{
