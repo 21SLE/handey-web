@@ -42,6 +42,7 @@ body {
     height: 70vh;
 }
 
+/********************** WEEKLY ***********************/
 .weekly-section {
     border: 2px solid var(--deep-yellow);
     display: block;
@@ -54,6 +55,7 @@ body {
     margin-left: 40px;
     margin-top: 20px;
 }
+
 .weekly-title {
     display: flex;
     width: 100%;
@@ -73,6 +75,32 @@ body {
     align-items: center;
 }
 
+.weeklyList input {
+    outline:none;
+    border: none;
+}
+
+.weeklyList input[type="checkbox"] {
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.weeklyList input[type="checkbox"]:checked {
+    background-color: var(--yellow);
+    content: '\f05d';
+}
+
+
+
+
+/********************** TO-DO ***********************/
 .to-do-section {
     display: inline-block;
     text-align: left;
@@ -84,6 +112,33 @@ body {
     height: 25vh;
 }
 
+.todo-title {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--deep-yellow);
+    margin-bottom: 15px;
+}
+
+.toDoListLayout {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    align-items: baseline;
+    overflow-y:scroll;
+    width:784px;
+    height: 450px;
+}
+
+.toDoBox {
+    width: 368px;
+    height: 168px;
+    border: 2px solid var(--yellow);
+    margin-top: 0;
+    margin-right:10px;
+    margin-bottom: 0;
+}
+
 .lower-part {
     display: block;
     position: absolute;
@@ -93,6 +148,7 @@ body {
     height: 30vh;
 }
 
+/********************** AFTER-LIST ***********************/
 .after-list-section {
     border: 2px solid #ccc;
     text-align: left;
@@ -108,6 +164,7 @@ body {
     margin: 10px;
 }
 
+/********************** MEMO ***********************/
 .memo-section {
     border: 2px solid #ccc;
     text-align: left;
@@ -118,8 +175,14 @@ body {
     bottom: 20px;
     width: 51vw;
     height: 25vh;
+    padding-left: 10px;
 }
 
 .memo-section h4 {
     margin: 10px;
+}
+
+.memo-section textarea {
+    width: 760px;
+    height: 130px;
 }

@@ -5,7 +5,7 @@
 
 <head th:fragment="head">
     <meta charset="UTF-8">
-    <title>메인창</title>
+    <title>과거창</title>
 </head>
 
 <body th:fragment="body">
@@ -23,8 +23,27 @@
     </ul>
 </div>
 
-<div>
-    <h1>안녕하세요</h1>
-</div>
+    <div id="memo">
+
+    </div>
+
+    <div class="history-layout">
+        <form class="history-search">
+            <input type="text" name="search_date" value="검색">
+        </form>
+        <div class="history-box">
+            <div class="after-box">
+                <div class="After-title">
+                    <h4>After List</h4>
+                </div>
+            </div>
+            <div class="to-do-box">
+                <div class="todo-title">
+                    <h4>To Do List</h4>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
