@@ -121,22 +121,38 @@ body {
 }
 
 .toDoListLayout {
-    display: flex;
-    gap: 0;
-    flex-wrap: wrap;
-    align-items: baseline;
     overflow-y:scroll;
     width:784px;
     height: 450px;
 }
 
+.toDoFlexWrap {
+    display:flex;
+    gap:0;
+    /*flex-wrap:wrap;*/
+    align-items: flex-start;
+    flex-flow: row wrap;
+
+    /*column-count: 2;*/
+    /*column-gap: 0;*/
+
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 1fr;*/
+    /*grid-template-areas:*/
+    /*      "aside header header"*/
+    /*      "aside content right"*/
+    /*      "left content right";*/
+
+}
+
 .toDoBox {
+
     width: 368px;
-    height: 168px;
+    min-height: 168px;
     border: 2px solid var(--yellow);
     margin-top: 0;
     margin-right:10px;
-    margin-bottom: 0;
+    margin-bottom: 10px;
 }
 
 .lower-part {
@@ -185,4 +201,5 @@ body {
 .memo-section textarea {
     width: 760px;
     height: 130px;
+    resize: none;
 }
