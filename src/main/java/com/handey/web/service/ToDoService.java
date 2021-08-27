@@ -28,7 +28,7 @@ public class ToDoService {
     /**
      * 투두박스 리스트 조회
      */
-    public List<ToDoBox> findToDoBoxes() {
+    public List<ToDoBox> getToDoBoxList() {
         return toDoRepository.findAll();
     }
 

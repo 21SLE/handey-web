@@ -40,7 +40,7 @@ class ToDoServiceTest {
     }
 
     @Test
-    void findToDoBoxes() {
+    void getToDoBoxList() {
     }
 
     @Test
