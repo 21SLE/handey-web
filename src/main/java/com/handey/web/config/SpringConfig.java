@@ -1,4 +1,4 @@
-package com.handey.web;
+package com.handey.web.config;
 
 import com.handey.web.repository.home.JpaToDoRepository;
 import com.handey.web.repository.home.ToDoRepository;
