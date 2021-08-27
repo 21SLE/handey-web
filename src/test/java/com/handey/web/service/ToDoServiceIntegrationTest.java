@@ -21,15 +21,28 @@ class ToDoServiceIntegrationTest {
     @Commit // db에 반영됨
     void createToDoBox() {
         //given
-        ToDoBox toDoBox = new ToDoBox();
-        toDoBox.setTitle("homework");
+        ToDoBox toDoBox1 = new ToDoBox();
+        toDoBox1.setTitle("homework");
+
+        ToDoBox toDoBox2 = new ToDoBox();
+        toDoBox2.setTitle("laundry");
+
+        ToDoBox toDoBox3 = new ToDoBox();
+        toDoBox3.setTitle("work");
 
         //when
-        Long saveId = toDoService.createToDoBox(toDoBox);
+        Long saveId1 = toDoService.createToDoBox(toDoBox1);
+        Long saveId2 = toDoService.createToDoBox(toDoBox2);
+        Long saveId3 = toDoService.createToDoBox(toDoBox3);
 
         //then
-        ToDoBox findMember = toDoService.findOneToDoBox(saveId).get();
-        assertThat(toDoBox.getTitle()).isEqualTo(findMember.getTitle());
+        ToDoBox findMember1 = toDoService.findOneToDoBox(saveId1).get();
+        ToDoBox findMember2 = toDoService.findOneToDoBox(saveId2).get();
+        ToDoBox findMember3 = toDoService.findOneToDoBox(saveId3).get();
+        assertThat(toDoBox1.getTitle()).isEqualTo(findMember1.getTitle());
+        assertThat(toDoBox2.getTitle()).isEqualTo(findMember2.getTitle());
+        assertThat(toDoBox3.getTitle()).isEqualTo(findMember3.getTitle());
+
 
     }
 
