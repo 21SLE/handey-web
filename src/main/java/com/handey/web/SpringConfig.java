@@ -1,5 +1,6 @@
 package com.handey.web;
 
+import com.handey.web.aop.TimeTraceAop;
 import com.handey.web.repository.home.JpaToDoRepository;
 import com.handey.web.repository.home.ToDoRepository;
 import com.handey.web.service.ToDoService;
@@ -45,5 +46,10 @@ public class SpringConfig {
 ////        return new JpaToDoRepository(em);
 ////        return new JdbcTemplateToDoRepository(dataSource);
 ////        return new MemoryToDoRepository();
+//    }
+
+//    @Bean
+//    public TimeTraceAop timeTraceAop() {
+//        return new TimeTraceAop();
 //    }
 }
