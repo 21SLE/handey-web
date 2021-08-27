@@ -1,7 +1,7 @@
 package com.handey.web.service;
 
-import com.handey.web.domain.ToDoBox;
-import com.handey.web.repository.MemoryToDoRepository;
+import com.handey.web.domain.home.ToDoBox;
+import com.handey.web.repository.home.MemoryToDoRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,14 +28,14 @@ class ToDoServiceTest {
     void createToDoBox() {
         //given
         ToDoBox toDoBox = new ToDoBox();
-        toDoBox.setToDoBoxTitle("homework");
+        toDoBox.setTitle("homework");
 
         //when
         Long saveId = toDoService.createToDoBox(toDoBox);
 
         //then
         ToDoBox findMember = toDoService.findOneToDoBox(saveId).get();
-        assertThat(toDoBox.getToDoBoxTitle()).isEqualTo(findMember.getToDoBoxTitle());
+        assertThat(toDoBox.getTitle()).isEqualTo(findMember.getTitle());
 
     }
 

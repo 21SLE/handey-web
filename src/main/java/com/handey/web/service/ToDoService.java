@@ -1,13 +1,13 @@
 package com.handey.web.service;
 
-import com.handey.web.domain.ToDoBox;
-import com.handey.web.repository.ToDoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.handey.web.domain.home.ToDoBox;
+import com.handey.web.repository.home.ToDoRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class ToDoService {
 
     private final ToDoRepository toDoRepository;
@@ -22,7 +22,7 @@ public class ToDoService {
      */
     public Long createToDoBox(ToDoBox toDoBox) {
         toDoRepository.save(toDoBox);
-        return toDoBox.getToDoBoxId();
+        return toDoBox.getId();
     }
 
     /**
@@ -35,8 +35,8 @@ public class ToDoService {
     /**
      * 투두박스 단건 조회
      */
-    public Optional<ToDoBox> findOneToDoBox(Long toDoBoxId) {
-        return toDoRepository.findById(toDoBoxId);
+    public Optional<ToDoBox> findOneToDoBox(Long id) {
+        return toDoRepository.findById(id);
     }
 
 }

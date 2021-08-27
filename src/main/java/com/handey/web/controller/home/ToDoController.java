@@ -1,4 +1,4 @@
-package com.handey.web.controller;
+package com.handey.web.controller.home;
 
 import com.handey.web.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
