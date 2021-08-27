@@ -1,10 +1,15 @@
 package com.handey.web.controller.home;
 
+import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+
+@RestController
 public class ToDoController {
     private final ToDoService toDoService;
 
@@ -12,5 +17,10 @@ public class ToDoController {
     @Autowired // DI(Dependency Injection): Controller -> Service -> Repository
     public ToDoController(ToDoService toDoService) {
         this.toDoService = toDoService;
+    }
+
+    @GetMapping("/toDoBoxList")
+    public List<ToDoBox> getToDoBoxList() {
+        return toDoService.getToDoBoxList();
     }
 }
