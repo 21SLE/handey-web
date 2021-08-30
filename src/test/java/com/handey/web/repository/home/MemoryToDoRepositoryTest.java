@@ -1,4 +1,4 @@
-package com.handey.web.repository;
+package com.handey.web.repository.home;
 
 import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.repository.home.MemoryToDoRepository;

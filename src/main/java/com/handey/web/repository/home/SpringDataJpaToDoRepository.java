@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SpringDataJpaToDoRepository extends JpaRepository<ToDoBox, Long>, ToDoRepository {
+    @Override
+    ToDoBox save(ToDoBox toDoBox);
 
     @Override
     Optional<ToDoBox> findById(Long id);
