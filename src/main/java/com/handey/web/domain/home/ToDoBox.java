@@ -1,10 +1,8 @@
 package com.handey.web.domain.home;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -16,7 +14,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@ToString(exclude = "toDoElmList")
 @Table(name = "todo_box")
 @DynamicInsert
 @DynamicUpdate
@@ -33,7 +30,9 @@ public class ToDoBox {
     private boolean fixed;
 
     @OneToMany(mappedBy = "toDoBox")
+    @JsonManagedReference
     private List<ToDoElm> toDoElmList = new ArrayList<ToDoElm>();
+
 
 //    public Long getId() {
 //        return id;
