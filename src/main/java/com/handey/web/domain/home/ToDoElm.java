@@ -1,8 +1,8 @@
 package com.handey.web.domain.home;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@ToString(exclude = "toDoBox")
 @Table(name = "todo_elm")
 @DynamicInsert
 @DynamicUpdate
@@ -30,7 +29,9 @@ public class ToDoElm {
 
     @ManyToOne
     @JoinColumn(name="to_do_box_id")
+    @JsonBackReference
     private ToDoBox toDoBox;
+
 
 //    public ToDoElm() {
 //    }
