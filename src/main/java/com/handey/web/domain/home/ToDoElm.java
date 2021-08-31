@@ -1,11 +1,8 @@
 package com.handey.web.domain.home;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
-//import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -15,9 +12,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-//@ToString(exclude = "toDoBox")
 @Table(name = "todo_elm")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator::class, property = "id") // 추가
 @DynamicInsert
 @DynamicUpdate
 public class ToDoElm {
