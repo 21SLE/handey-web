@@ -2,9 +2,7 @@ package com.handey.web.domain.home;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonGetter;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -13,14 +11,20 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//@Data
 @Entity
 @Getter
 @Setter
-@ToString(exclude = "toDoElmList")
+//@ToString
+//@ToString(exclude = {"toDoElmList"})
 @Table(name = "todo_box")
 @DynamicInsert
 @DynamicUpdate
 public class ToDoBox {
+//    public static void main(String args[]) {
+//        ToDoBox myClass = new ToDoBox();
+//        System.out.println("ToString::" + myClass);
+//    }
 
     @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY) // db가 자동으로 ++해서 id 생성하는 것 = identity 전략
     private Long id;
@@ -32,38 +36,15 @@ public class ToDoBox {
     @ColumnDefault("0")
     private boolean fixed;
 
+
     @OneToMany(mappedBy = "toDoBox")
+//    @EqualsAndHashCode.Exclude
+//    @ToString.Exclude
     private List<ToDoElm> toDoElmList = new ArrayList<ToDoElm>();
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public String getTitle() {
-//        return title;
-//    }
-//
-//    public void setTitle(String title) {
-//        this.title = title;
-//    }
-//
-//    public boolean isFixed() {
-//        return fixed;
-//    }
-//
-//    public void setFixed(boolean fixed) {
-//        this.fixed = fixed;
-//    }
-//
-//    public List<ToDoElm> getToDoElmList() {
-//        return toDoElmList;
-//    }
-//
-//    public void setToDoElmList(List<ToDoElm> toDoElmList) {
-//        this.toDoElmList = toDoElmList;
-//    }
+
+    @Override public String toString() {
+        return "ToStringExample(" + this.getId() + ", " + this.getTitle()
+                + ", " + ")";
+    }
 }
