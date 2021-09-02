@@ -20,7 +20,7 @@ class WeeklyServiceIntegrationTest {
 
     @Test
     @Commit
-    void createToDoBox() {
+    void createWeeklyBox() {
         //given
         WeeklyBox weeklyBox1 = new WeeklyBox();
         weeklyBox1.setTitle("sprint1");
