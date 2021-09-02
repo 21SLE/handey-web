@@ -1,6 +1,5 @@
-package com.handey.web.config;
+package com.handey.web.common.config;
 
-import com.handey.web.repository.home.JpaToDoRepository;
 import com.handey.web.repository.home.ToDoRepository;
 import com.handey.web.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;

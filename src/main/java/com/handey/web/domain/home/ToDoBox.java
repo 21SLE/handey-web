@@ -8,6 +8,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,26 @@ public class ToDoBox {
     @JsonManagedReference
     private List<ToDoElm> toDoElmList = new ArrayList<ToDoElm>();
 
+   @Transactional
+   public void update(ToDoBox toDoBox) {
+       String newTitle = toDoBox.getTitle();
+       boolean newFixedVal = toDoBox.isFixed();
+
+       if(newTitle != null)
+           this.title = newTitle;
+       this.fixed = newFixedVal;
+   }
+
+    @Transactional
+    public void updateTitle(String newTitle) {
+        if(newTitle != null)
+            this.title = newTitle;
+    }
+
+    @Transactional
+    public void updateFixedYn(boolean newFixedYn) {
+        this.fixed = newFixedYn;
+    }
 
 //    public Long getId() {
 //        return id;

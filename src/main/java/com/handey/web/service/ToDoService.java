@@ -1,6 +1,8 @@
 package com.handey.web.service;
 
+import com.handey.web.controller.home.ToDoBoxParam;
 import com.handey.web.domain.home.ToDoBox;
+import com.handey.web.common.exception.ToDoNoDataFoundException;
 import com.handey.web.repository.home.ToDoRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +28,15 @@ public class ToDoService {
     }
 
     /**
+     * 투두박스 객체 생성
+     */
+    public Long createToDoBoxObj() {
+        ToDoBox toDoBox = new ToDoBox();
+        toDoRepository.save(toDoBox);
+        return toDoBox.getId();
+    }
+
+    /**
      * 투두박스 리스트 조회
      */
     public List<ToDoBox> getToDoBoxList() {
@@ -39,4 +50,12 @@ public class ToDoService {
         return toDoRepository.findById(id);
     }
 
+    /**
+     * 투두박스 타이틀 수정
+     */
+    public boolean updateToDoBoxTitle(Long toDoBoxId, ToDoBoxParam param) {
+        ToDoBox toDoBox = toDoRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
+        toDoBox.updateTitle(param.getTitle());
+        return true;
+    }
 }
