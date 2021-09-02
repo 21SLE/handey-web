@@ -18,18 +18,8 @@ public class JPAToDoElmRepository implements ToDoElmRepository{
     }
 
     @Override
-    public ToDoElm save(ToDoElm toDoElm) {
-//        System.out.println("----------------------------------------------------------------------------------------------------------");
-//        ToDoBox toDoBox = new ToDoBox();
-//
-//
-//        // 테스트 투두박스 타이틀
-//        toDoBox.setTitle("toDoBoxTest");
-//        em.persist(toDoBox);
-//        System.out.println("toDoBoxTest id: " + toDoBox.getId());
-//
-//        toDoElm.setToDoBox(toDoBox);
-
+    public ToDoElm save(ToDoBox toDoBox, ToDoElm toDoElm) {
+        toDoElm.setToDoBox(toDoBox);
         em.persist(toDoElm);
         return toDoElm;
     }

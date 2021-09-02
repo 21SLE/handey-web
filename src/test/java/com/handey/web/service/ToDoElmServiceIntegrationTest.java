@@ -62,10 +62,10 @@ class ToDoElmServiceIntegrationTest {
         toDoBox2.getToDoElmList().add(toDoElm4);
 
         //when
-        Long saveId1 = toDoElmService.createToDoElm(toDoElm1);
-        Long saveId2 = toDoElmService.createToDoElm(toDoElm2);
-        Long saveId3 = toDoElmService.createToDoElm(toDoElm3);
-        Long saveId4 = toDoElmService.createToDoElm(toDoElm4);
+        Long saveId1 = toDoElmService.createToDoElm(toDoBox1.getId(), toDoElm1);
+        Long saveId2 = toDoElmService.createToDoElm(toDoBox1.getId(), toDoElm2);
+        Long saveId3 = toDoElmService.createToDoElm(toDoBox2.getId(), toDoElm3);
+        Long saveId4 = toDoElmService.createToDoElm(toDoBox2.getId(), toDoElm4);
 
         //then
         ToDoElm findToDoElm1 = toDoElmService.findOneToDoElm(saveId1).get();
