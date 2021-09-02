@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class JdbcTemplateToDoRepository implements ToDoRepository{
+public class JdbcTemplateToDoBoxRepository implements ToDoBoxRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
     // 생성자 하나면 @Autowired 생략 가능
-    public JdbcTemplateToDoRepository(DataSource dataSource) {
+    public JdbcTemplateToDoBoxRepository(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

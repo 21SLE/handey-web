@@ -1,7 +1,6 @@
 package com.handey.web.repository.home;
 
 import com.handey.web.domain.home.ToDoBox;
-import com.handey.web.repository.home.MemoryToDoRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,8 +8,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-class MemoryToDoRepositoryTest {
-    MemoryToDoRepository repository = new MemoryToDoRepository();
+class MemoryToDoBoxRepositoryTest {
+    MemoryToDoBoxRepository repository = new MemoryToDoBoxRepository();
 
     @AfterEach
     public void afterEach() {

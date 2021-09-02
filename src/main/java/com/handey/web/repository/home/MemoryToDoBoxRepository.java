@@ -4,7 +4,7 @@ import com.handey.web.domain.home.ToDoBox;
 
 import java.util.*;
 
-public class MemoryToDoRepository implements ToDoRepository {
+public class MemoryToDoBoxRepository implements ToDoBoxRepository {
     private static Map<Long, ToDoBox> store = new HashMap<>();
     private static long sequence =0L;
 

@@ -3,7 +3,7 @@ package com.handey.web.service;
 import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.domain.home.ToDoElm;
 import com.handey.web.repository.home.ToDoElmRepository;
-import com.handey.web.repository.home.ToDoRepository;
+import com.handey.web.repository.home.ToDoBoxRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +12,6 @@ import org.springframework.test.annotation.Commit;
 import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -20,8 +19,10 @@ class ToDoElmServiceIntegrationTest {
 
     @Autowired ToDoElmService toDoElmService;
     @Autowired ToDoElmRepository toDoElmRepository;
-    @Autowired ToDoService toDoService;
-    @Autowired ToDoRepository toDoRepository;
+    @Autowired
+    ToDoBoxService toDoBoxService;
+    @Autowired
+    ToDoBoxRepository toDoBoxRepository;
 
     @Test
     @Commit
@@ -30,7 +31,7 @@ class ToDoElmServiceIntegrationTest {
         //양방향 연관관계에서 주인에만 데이터를 입력하는 것. 주인은 다. 여기서 주인은 toDoElm
         ToDoBox toDoBox1 = new ToDoBox();
         toDoBox1.setTitle("toDoBoxTest 1");
-        toDoService.createToDoBox(toDoBox1);
+        toDoBoxService.createToDoBox(toDoBox1);
 
         ToDoElm toDoElm1 = new ToDoElm();
         toDoElm1.setContent("first todo");
@@ -45,7 +46,7 @@ class ToDoElmServiceIntegrationTest {
 
         ToDoBox toDoBox2 = new ToDoBox();
         toDoBox2.setTitle("투두 박스 테스트 2");
-        toDoService.createToDoBox(toDoBox2);
+        toDoBoxService.createToDoBox(toDoBox2);
 
         ToDoElm toDoElm3 = new ToDoElm();
         toDoElm3.setContent("리액트 공부해서 화면 개발하기");

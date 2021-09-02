@@ -3,19 +3,19 @@ package com.handey.web.service;
 import com.handey.web.controller.home.ToDoBoxParam;
 import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.common.exception.ToDoNoDataFoundException;
-import com.handey.web.repository.home.ToDoRepository;
+import com.handey.web.repository.home.ToDoBoxRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Transactional
-public class ToDoService {
+public class ToDoBoxService {
 
-    private final ToDoRepository toDoRepository;
+    private final ToDoBoxRepository toDoBoxRepository;
 
-    public ToDoService(ToDoRepository toDoRepository) {
-        this.toDoRepository = toDoRepository;
+    public ToDoBoxService(ToDoBoxRepository toDoBoxRepository) {
+        this.toDoBoxRepository = toDoBoxRepository;
         // 외부에서 넣어줌(dependency injection)
     }
 
@@ -23,7 +23,7 @@ public class ToDoService {
      * 투두박스 생성
      */
     public Long createToDoBox(ToDoBox toDoBox) {
-        toDoRepository.save(toDoBox);
+        toDoBoxRepository.save(toDoBox);
         return toDoBox.getId();
     }
 
@@ -32,7 +32,7 @@ public class ToDoService {
      */
     public Long createToDoBoxObj() {
         ToDoBox toDoBox = new ToDoBox();
-        toDoRepository.save(toDoBox);
+        toDoBoxRepository.save(toDoBox);
         return toDoBox.getId();
     }
 
@@ -40,21 +40,21 @@ public class ToDoService {
      * 투두박스 리스트 조회
      */
     public List<ToDoBox> getToDoBoxList() {
-        return toDoRepository.findAll();
+        return toDoBoxRepository.findAll();
     }
 
     /**
      * 투두박스 단건 조회
      */
     public Optional<ToDoBox> findOneToDoBox(Long id) {
-        return toDoRepository.findById(id);
+        return toDoBoxRepository.findById(id);
     }
 
     /**
      * 투두박스 타이틀 수정
      */
     public boolean updateToDoBoxTitle(Long toDoBoxId, ToDoBoxParam param) {
-        ToDoBox toDoBox = toDoRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
+        ToDoBox toDoBox = toDoBoxRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
         toDoBox.updateTitle(param.getTitle());
         return true;
     }

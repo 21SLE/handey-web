@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface SpringDataJpaToDoRepository extends JpaRepository<ToDoBox, Long>, ToDoRepository {
+public interface SpringDataJpaToDoBoxRepository extends JpaRepository<ToDoBox, Long>, ToDoBoxRepository {
     @Override
     ToDoBox save(ToDoBox toDoBox);
 

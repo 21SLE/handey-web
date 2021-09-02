@@ -5,7 +5,7 @@ import com.handey.web.domain.home.ToDoBox;
 import java.util.List;
 import java.util.Optional;
 
-public interface ToDoRepository {
+public interface ToDoBoxRepository {
     ToDoBox save(ToDoBox toDoBox);
     Optional<ToDoBox> findById(Long id);
     Optional<ToDoBox> findByTitle(String title);

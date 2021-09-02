@@ -6,11 +6,11 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class JpaToDoRepository implements ToDoRepository{
+public class JpaToDoBoxRepository implements ToDoBoxRepository {
 
     private final EntityManager em;
 
-    public JpaToDoRepository(EntityManager em) {
+    public JpaToDoBoxRepository(EntityManager em) {
         this.em = em;
     }
 

@@ -1,21 +1,20 @@
 package com.handey.web.controller.home;
 
 import com.handey.web.domain.home.ToDoBox;
-import com.handey.web.service.ToDoService;
+import com.handey.web.service.ToDoBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-public class ToDoController {
-    private final ToDoService toDoService;
+public class ToDoBoxController {
+    private final ToDoBoxService toDoBoxService;
 
                // 스프링 빈 등록 2가지 방법 중: 컴포넌트 스캔과 자동 의존관계 생성
     @Autowired // DI(Dependency Injection): Controller -> Service -> Repository
-    public ToDoController(ToDoService toDoService) {
-        this.toDoService = toDoService;
+    public ToDoBoxController(ToDoBoxService toDoBoxService) {
+        this.toDoBoxService = toDoBoxService;
     }
 
     /**
@@ -23,7 +22,7 @@ public class ToDoController {
      */
     @GetMapping("/toDoBoxList")
     public List<ToDoBox> getToDoBoxList() {
-        return toDoService.getToDoBoxList();
+        return toDoBoxService.getToDoBoxList();
     }
 
     /**
@@ -31,7 +30,7 @@ public class ToDoController {
      */
     @PostMapping("/toDoBox")
     public Long createToDoBoxObj() {
-        return toDoService.createToDoBoxObj();
+        return toDoBoxService.createToDoBoxObj();
     }
 
     /**
@@ -39,6 +38,6 @@ public class ToDoController {
      */
     @PutMapping("/toDoBox/{toDoBoxId}")
     public boolean updateToDoBoxTitle(@PathVariable long toDoBoxId, @RequestBody ToDoBoxParam param) {
-        return toDoService.updateToDoBoxTitle(toDoBoxId, param);
+        return toDoBoxService.updateToDoBoxTitle(toDoBoxId, param);
     }
 }

@@ -1,22 +1,22 @@
 package com.handey.web.service;
 
 import com.handey.web.domain.home.ToDoBox;
-import com.handey.web.repository.home.MemoryToDoRepository;
+import com.handey.web.repository.home.MemoryToDoBoxRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-class ToDoServiceTest {
+class ToDoBoxServiceTest {
 
-    ToDoService toDoService;
-    MemoryToDoRepository toDoRepository;
+    ToDoBoxService toDoBoxService;
+    MemoryToDoBoxRepository toDoRepository;
 
     @BeforeEach
     public void beforeEach() {
-        toDoRepository = new MemoryToDoRepository();
-        toDoService = new ToDoService(toDoRepository);
+        toDoRepository = new MemoryToDoBoxRepository();
+        toDoBoxService = new ToDoBoxService(toDoRepository);
     }
 
     @AfterEach
@@ -31,10 +31,10 @@ class ToDoServiceTest {
         toDoBox.setTitle("homework");
 
         //when
-        Long saveId = toDoService.createToDoBox(toDoBox);
+        Long saveId = toDoBoxService.createToDoBox(toDoBox);
 
         //then
-        ToDoBox findMember = toDoService.findOneToDoBox(saveId).get();
+        ToDoBox findMember = toDoBoxService.findOneToDoBox(saveId).get();
         assertThat(toDoBox.getTitle()).isEqualTo(findMember.getTitle());
 
     }
