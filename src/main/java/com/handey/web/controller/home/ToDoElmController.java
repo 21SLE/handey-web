@@ -1,6 +1,5 @@
 package com.handey.web.controller.home;
 
-import com.handey.web.domain.home.ToDoElm;
 import com.handey.web.service.ToDoElmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +27,15 @@ public class ToDoElmController {
     @PutMapping("/toDoElm/{toDoElmId}")
     public boolean updateToDoElmContent(@PathVariable long toDoElmId, @RequestBody ToDoElmParam param) {
         return toDoElmService.updateToDoElmContent(toDoElmId, param);
+    }
+
+    /**
+     * todoelm 삭제
+     */
+    @DeleteMapping("/toDoElm/{toDoElmId}")
+    public boolean deleteToDoElmContent(@PathVariable long toDoElmId) {
+        toDoElmService.deleteToDoElm(toDoElmId);
+        return true;
     }
 
 }

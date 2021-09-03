@@ -76,4 +76,12 @@ public class ToDoElmService {
         toDoElm.updateContent(param.getContent());
         return true;
     }
+
+    /**
+     * 투두 element 삭제
+     */
+    public void deleteToDoElm(Long toDoElmId) {
+        ToDoElm toDoElm = toDoElmRepository.findById(toDoElmId).orElseThrow(ToDoNoDataFoundException::new);
+        toDoElmRepository.deleteById(toDoElmId);
+    }
 }

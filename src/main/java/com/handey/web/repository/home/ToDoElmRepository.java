@@ -8,7 +8,8 @@ import java.util.Optional;
 
 public interface ToDoElmRepository {
     ToDoElm save(ToDoBox toDoBox, ToDoElm ToDoElm);
-    Optional<ToDoElm> findById(Long id);
+    Optional<ToDoElm> findById(Long toDoElmId);
     List<ToDoElm> findByToDoBoxId(Long toDoBoxId);
     List<ToDoElm> findAll();
+    void deleteById(Long toDoElmId);
 }
