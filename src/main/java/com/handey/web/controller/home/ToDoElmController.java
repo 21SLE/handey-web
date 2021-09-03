@@ -17,7 +17,7 @@ public class ToDoElmController {
      * todoelm 객체 생성
      */
     @PostMapping("/toDoBox/{toDoBoxId}")
-    public Long createToDoBoxObj(@PathVariable long toDoBoxId) {
+    public Long createToDoBoxObj(@PathVariable Long toDoBoxId) {
         return toDoElmService.createToDoElmObj(toDoBoxId);
     }
 
@@ -25,7 +25,7 @@ public class ToDoElmController {
      * todoelm 내용 수정
      */
     @PutMapping("/toDoElm/{toDoElmId}")
-    public boolean updateToDoElmContent(@PathVariable long toDoElmId, @RequestBody ToDoElmParam param) {
+    public boolean updateToDoElmContent(@PathVariable Long toDoElmId, @RequestBody ToDoElmParam param) {
         return toDoElmService.updateToDoElmContent(toDoElmId, param);
     }
 
@@ -33,7 +33,7 @@ public class ToDoElmController {
      * todoelm 삭제
      */
     @DeleteMapping("/toDoElm/{toDoElmId}")
-    public boolean deleteToDoElmContent(@PathVariable long toDoElmId) {
+    public boolean deleteToDoElmContent(@PathVariable Long toDoElmId) {
         toDoElmService.deleteToDoElm(toDoElmId);
         return true;
     }

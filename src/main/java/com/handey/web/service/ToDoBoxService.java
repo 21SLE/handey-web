@@ -58,4 +58,12 @@ public class ToDoBoxService {
         toDoBox.updateTitle(param.getTitle());
         return true;
     }
+
+    /**
+     * 투두박스 삭제
+     */
+    public void deleteToDoBox(Long toDoBoxId) {
+        ToDoBox toDoBox = toDoBoxRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
+        toDoBoxRepository.deleteById(toDoBoxId);
+    }
 }

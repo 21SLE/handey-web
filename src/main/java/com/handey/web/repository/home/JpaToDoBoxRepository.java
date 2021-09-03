@@ -42,4 +42,9 @@ public class JpaToDoBoxRepository implements ToDoBoxRepository {
         return em.createQuery("select m from ToDoBox as m", ToDoBox.class)
                 .getResultList();
     }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
 }

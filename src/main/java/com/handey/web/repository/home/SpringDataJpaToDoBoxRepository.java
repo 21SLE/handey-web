@@ -20,6 +20,9 @@ public interface SpringDataJpaToDoBoxRepository extends JpaRepository<ToDoBox, L
     @Override
     List<ToDoBox> findAll();
 
+    @Override
+    void deleteById(Long id);
+
 //    Optional<Member> findByNameAndId(String name, Long id);
 //    Optional<Member> findByNameOrId(String name, Long id);
 }

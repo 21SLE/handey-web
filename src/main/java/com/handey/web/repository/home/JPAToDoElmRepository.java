@@ -27,8 +27,8 @@ public class JPAToDoElmRepository implements ToDoElmRepository{
     }
 
     @Override
-    public Optional<ToDoElm> findById(Long toDoElmId) {
-        ToDoElm ToDoElm = em.find(ToDoElm.class, toDoElmId);
+    public Optional<ToDoElm> findById(Long id) {
+        ToDoElm ToDoElm = em.find(ToDoElm.class, id);
         return Optional.ofNullable(ToDoElm);
     }
 
@@ -47,8 +47,8 @@ public class JPAToDoElmRepository implements ToDoElmRepository{
 
     @Override
     @Transactional
-    public void deleteById(Long toDoElmId) {
-        ToDoElm toDoElm = em.find(ToDoElm.class, toDoElmId);
+    public void deleteById(Long id) {
+        ToDoElm toDoElm = em.find(ToDoElm.class, id);
         Assert.notNull(toDoElm,"To Do Element must not be null!");
         em.remove(toDoElm);
     }

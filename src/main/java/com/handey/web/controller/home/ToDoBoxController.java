@@ -37,7 +37,16 @@ public class ToDoBoxController {
      * 투두 박스 타이틀 수정
      */
     @PutMapping("/toDoBox/{toDoBoxId}")
-    public boolean updateToDoBoxTitle(@PathVariable long toDoBoxId, @RequestBody ToDoBoxParam param) {
+    public boolean updateToDoBoxTitle(@PathVariable Long toDoBoxId, @RequestBody ToDoBoxParam param) {
         return toDoBoxService.updateToDoBoxTitle(toDoBoxId, param);
+    }
+
+    /**
+     * 투두 박스 삭제
+     */
+    @DeleteMapping("/toDoBox/{toDoBoxId}")
+    public boolean deleteToDoBox(@PathVariable Long toDoBoxId) {
+        toDoBoxService.deleteToDoBox(toDoBoxId);
+        return true;
     }
 }

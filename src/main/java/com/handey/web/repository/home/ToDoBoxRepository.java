@@ -10,5 +10,5 @@ public interface ToDoBoxRepository {
     Optional<ToDoBox> findById(Long id);
     Optional<ToDoBox> findByTitle(String title);
     List<ToDoBox> findAll();
-
+    void deleteById(Long id);
 }

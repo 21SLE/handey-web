@@ -6,7 +6,7 @@ import java.util.*;
 
 public class MemoryToDoBoxRepository implements ToDoBoxRepository {
     private static Map<Long, ToDoBox> store = new HashMap<>();
-    private static long sequence =0L;
+    private static Long sequence =0L;
 
     @Override
     public ToDoBox save(ToDoBox toDoBox) {
@@ -30,6 +30,11 @@ public class MemoryToDoBoxRepository implements ToDoBoxRepository {
     @Override
     public List<ToDoBox> findAll() {
         return new ArrayList<>(store.values());
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        store.remove(id);
     }
 
     public void clearStore() {

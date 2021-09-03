@@ -31,7 +31,7 @@ public class JdbcTemplateToDoBoxRepository implements ToDoBoxRepository {
 
         Number key = jdbcInsert.executeAndReturnKey(new
                 MapSqlParameterSource(parameters));
-        toDoBox.setId(key.longValue());
+//        toDoBox.setId(key.LongValue());
         return toDoBox;
     }
 
@@ -50,6 +50,11 @@ public class JdbcTemplateToDoBoxRepository implements ToDoBoxRepository {
     @Override
     public List<ToDoBox> findAll() {
         return jdbcTemplate.query("select * from todd", toDoBoxRowMapper());
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
     }
 
     private RowMapper<ToDoBox> toDoBoxRowMapper() {
