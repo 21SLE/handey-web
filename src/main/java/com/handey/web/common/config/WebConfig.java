@@ -1,4 +1,4 @@
-package com.handey.web.config;
+package com.handey.web.common.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
