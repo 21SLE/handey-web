@@ -1,10 +1,17 @@
 package com.handey.web.service;
 
+import com.handey.web.common.exception.ToDoNoDataFoundException;
+import com.handey.web.controller.home.ToDoBoxParam;
+import com.handey.web.controller.home.ToDoElmParam;
 import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.domain.home.ToDoElm;
+import com.handey.web.repository.home.ToDoBoxRepository;
 import com.handey.web.repository.home.ToDoElmRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,18 +20,30 @@ import java.util.Optional;
 @Service
 public class ToDoElmService {
     private final ToDoElmRepository toDoElmRepository;
+    private final ToDoBoxRepository toDoBoxRepository;
 
 
-    public ToDoElmService(ToDoElmRepository toDoElmRepository) {
+    public ToDoElmService(ToDoElmRepository toDoElmRepository, ToDoBoxRepository toDoBoxRepository) {
         this.toDoElmRepository = toDoElmRepository;
+        this.toDoBoxRepository = toDoBoxRepository;
     }
 
     /**
      * ToDoElm 생성
      */
-    public Long createToDoElm(ToDoElm toDoElm) {
+    public Long createToDoElm(Long toDoBoxId, ToDoElm toDoElm) {
+        ToDoBox toDoBox = toDoBoxRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
+        toDoElmRepository.save(toDoBox, toDoElm);
+        return toDoElm.getId();
+    }
 
-        toDoElmRepository.save(toDoElm);
+    /**
+     * ToDoElm 객체 생성
+     */
+    public Long createToDoElmObj(Long toDoBoxId) {
+        ToDoElm toDoElm = new ToDoElm();
+        ToDoBox toDoBox = toDoBoxRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
+        toDoElmRepository.save(toDoBox, toDoElm);
         return toDoElm.getId();
     }
 
@@ -47,5 +66,22 @@ public class ToDoElmService {
      */
     public List<ToDoElm> getAllToDoElm() {
         return toDoElmRepository.findAll();
+    }
+
+    /**
+     * 투두 element 내용 수정
+     */
+    public boolean updateToDoElmContent(Long toDoElmId, ToDoElmParam param) {
+        ToDoElm toDoElm = toDoElmRepository.findById(toDoElmId).orElseThrow(ToDoNoDataFoundException::new);
+        toDoElm.updateContent(param.getContent());
+        return true;
+    }
+
+    /**
+     * 투두 element 삭제
+     */
+    public void deleteToDoElm(Long toDoElmId) {
+        ToDoElm toDoElm = toDoElmRepository.findById(toDoElmId).orElseThrow(ToDoNoDataFoundException::new);
+        toDoElmRepository.deleteById(toDoElmId);
     }
 }

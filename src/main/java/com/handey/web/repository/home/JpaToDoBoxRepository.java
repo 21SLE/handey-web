@@ -6,11 +6,11 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class JpaToDoRepository implements ToDoRepository{
+public class JpaToDoBoxRepository implements ToDoBoxRepository {
 
     private final EntityManager em;
 
-    public JpaToDoRepository(EntityManager em) {
+    public JpaToDoBoxRepository(EntityManager em) {
         this.em = em;
     }
 
@@ -41,5 +41,10 @@ public class JpaToDoRepository implements ToDoRepository{
         //객체 자체를 조회
         return em.createQuery("select m from ToDoBox as m", ToDoBox.class)
                 .getResultList();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
     }
 }

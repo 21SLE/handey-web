@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class JdbcTemplateToDoRepository implements ToDoRepository{
+public class JdbcTemplateToDoBoxRepository implements ToDoBoxRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
     // 생성자 하나면 @Autowired 생략 가능
-    public JdbcTemplateToDoRepository(DataSource dataSource) {
+    public JdbcTemplateToDoBoxRepository(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
@@ -31,7 +31,7 @@ public class JdbcTemplateToDoRepository implements ToDoRepository{
 
         Number key = jdbcInsert.executeAndReturnKey(new
                 MapSqlParameterSource(parameters));
-        toDoBox.setId(key.longValue());
+//        toDoBox.setId(key.LongValue());
         return toDoBox;
     }
 
@@ -50,6 +50,11 @@ public class JdbcTemplateToDoRepository implements ToDoRepository{
     @Override
     public List<ToDoBox> findAll() {
         return jdbcTemplate.query("select * from todd", toDoBoxRowMapper());
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
     }
 
     private RowMapper<ToDoBox> toDoBoxRowMapper() {

@@ -1,8 +1,7 @@
-package com.handey.web.config;
+package com.handey.web.common.config;
 
-import com.handey.web.repository.home.JpaToDoRepository;
-import com.handey.web.repository.home.ToDoRepository;
-import com.handey.web.service.ToDoService;
+import com.handey.web.repository.home.ToDoBoxRepository;
+import com.handey.web.service.ToDoBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,11 +10,11 @@ import org.springframework.context.annotation.Configuration;
 public class SpringConfig {
 
     // spring data jpa 방법
-    private final ToDoRepository toDoRepository;
+    private final ToDoBoxRepository toDoBoxRepository;
 
     @Autowired
-    public SpringConfig(ToDoRepository toDoRepository) {
-        this.toDoRepository = toDoRepository;
+    public SpringConfig(ToDoBoxRepository toDoBoxRepository) {
+        this.toDoBoxRepository = toDoBoxRepository;
     }
 
 
@@ -35,8 +34,8 @@ public class SpringConfig {
 //    }
 
     @Bean
-    public ToDoService toDoService() {
-        return new ToDoService(toDoRepository);
+    public ToDoBoxService toDoService() {
+        return new ToDoBoxService(toDoBoxRepository);
 //        return new ToDoService(toDoRepository());
     }
 

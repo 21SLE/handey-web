@@ -8,6 +8,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 @Entity
 @Getter
@@ -32,6 +33,26 @@ public class ToDoElm {
     @JsonBackReference
     private ToDoBox toDoBox;
 
+    @Transactional
+    public void update(ToDoElm toDoElm) {
+        String newContent = toDoElm.getContent();
+        boolean newCompletedYn = toDoElm.isCompleted();
+
+        if(newContent != null)
+            this.content = newContent;
+        this.completed = newCompletedYn;
+    }
+
+    @Transactional
+    public void updateContent(String newContent) {
+        if(newContent != null)
+            this.content = newContent;
+    }
+
+    @Transactional
+    public void updateCompletedYn(boolean newCompletedYn) {
+        this.completed = newCompletedYn;
+    }
 
 //    public ToDoElm() {
 //    }
