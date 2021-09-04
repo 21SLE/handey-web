@@ -1,4 +1,4 @@
-package com.handey.web.controller.home;
+package com.handey.web.controller.history;
 
 import com.handey.web.domain.home.WeeklyBox;
 import com.handey.web.service.WeeklyService;
