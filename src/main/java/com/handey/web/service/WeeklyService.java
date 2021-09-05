@@ -42,4 +42,9 @@ public class WeeklyService {
         return weeklyRepository.findById(id);
     }
 
+    public Long createWeeklyBoxObj() {
+        WeeklyBox weeklyBox = new WeeklyBox();
+        weeklyRepository.save(weeklyBox);
+        return weeklyBox.getId();
+    }
 }

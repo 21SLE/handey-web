@@ -1,5 +1,6 @@
 package com.handey.web.domain.home;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -7,6 +8,8 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,15 +20,16 @@ import javax.persistence.*;
 public class WeeklyBox {
 
     @Id
-    @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title")
     private String title;
 
-    @Column(name = "clear")
-    @ColumnDefault("0")
-    private boolean clear;
+    @OneToMany(mappedBy = "weeklyBox")  //한 title이 여러 elm을 소지해도 된다. 양방향 관계의 주체가 되는 것은 weeklyBox
+    @JsonManagedReference   //양방향에서 주
+    private List<WeeklyElm> weeklyElmList = new ArrayList<WeeklyElm>();
 
 
 //    public Long getId() {

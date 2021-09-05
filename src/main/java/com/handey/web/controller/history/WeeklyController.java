@@ -4,6 +4,7 @@ import com.handey.web.domain.home.WeeklyBox;
 import com.handey.web.service.WeeklyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,4 +22,10 @@ public class WeeklyController {
     public List<WeeklyBox> getWeeklyBoxList() {
         return weeklyService.getWeeklyBoxList();
     }
+
+    @PostMapping("/weeklyBox")
+    public Long createWeeklyBoxObj() {
+        return weeklyService.createWeeklyBoxObj();
+    }
+
 }
