@@ -1,5 +1,8 @@
 package com.handey.web.service;
 
+import com.handey.web.common.exception.ToDoNoDataFoundException;
+import com.handey.web.controller.history.WeeklyParam;
+import com.handey.web.controller.home.ToDoBoxParam;
 import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.domain.home.WeeklyBox;
 import com.handey.web.repository.home.WeeklyRepository;
@@ -46,5 +49,11 @@ public class WeeklyService {
         WeeklyBox weeklyBox = new WeeklyBox();
         weeklyRepository.save(weeklyBox);
         return weeklyBox.getId();
+    }
+
+    public boolean updateWeeklyTitle(Long toDoBoxId, WeeklyParam param) {
+        WeeklyBox weeklyBox = weeklyRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
+        weeklyBox.updateTitle(param.getTitle());
+        return true;
     }
 }

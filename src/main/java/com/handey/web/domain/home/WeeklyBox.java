@@ -8,6 +8,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,12 @@ public class WeeklyBox {
     @OneToMany(mappedBy = "weeklyBox")  //한 title이 여러 elm을 소지해도 된다. 양방향 관계의 주체가 되는 것은 weeklyBox
     @JsonManagedReference   //양방향에서 주
     private List<WeeklyElm> weeklyElmList = new ArrayList<WeeklyElm>();
+
+    @Transactional
+    public void updateTitle(String newTitle) {
+        if(newTitle != null)
+            this.title = newTitle;
+    }
 
 
 //    public Long getId() {

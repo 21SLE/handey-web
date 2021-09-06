@@ -1,11 +1,10 @@
 package com.handey.web.controller.history;
 
+import com.handey.web.controller.home.ToDoBoxParam;
 import com.handey.web.domain.home.WeeklyBox;
 import com.handey.web.service.WeeklyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +25,11 @@ public class WeeklyController {
     @PostMapping("/weeklyBox")
     public Long createWeeklyBoxObj() {
         return weeklyService.createWeeklyBoxObj();
+    }
+
+    @PutMapping("/weeklyBox/{weeklyId}")
+    public boolean updateWeeklyTitle(@PathVariable Long weeklyId, @RequestBody WeeklyParam param) {
+        return weeklyService.updateWeeklyTitle(weeklyId, param);
     }
 
 }
