@@ -1,7 +1,6 @@
 package com.handey.web.common.config;
 
 import com.handey.web.repository.home.ToDoBoxRepository;
-import com.handey.web.repository.home.WeeklyRepository;
 import com.handey.web.service.ToDoBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
