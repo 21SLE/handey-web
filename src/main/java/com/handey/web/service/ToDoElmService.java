@@ -78,6 +78,15 @@ public class ToDoElmService {
     }
 
     /**
+     * 투두 element completedYN 변경
+     */
+    public boolean updateToDoElmCompletedYn(Long toDoElmId) {
+        ToDoElm toDoElm = toDoElmRepository.findById(toDoElmId).orElseThrow(ToDoNoDataFoundException::new);
+        toDoElm.updateCompletedYn(!toDoElm.isCompleted());
+        return true;
+    }
+
+    /**
      * 투두 element 삭제
      */
     public void deleteToDoElm(Long toDoElmId) {

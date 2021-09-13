@@ -30,6 +30,14 @@ public class ToDoElmController {
     }
 
     /**
+     * todoElm completed여부 수정
+     */
+    @PatchMapping("/toDoElm/{toDoElmId}")
+    public boolean updateToDoElmCompletedYn(@PathVariable Long toDoElmId) {
+        return toDoElmService.updateToDoElmCompletedYn(toDoElmId);
+    }
+
+    /**
      * todoelm 삭제
      */
     @DeleteMapping("/toDoElm/{toDoElmId}")
