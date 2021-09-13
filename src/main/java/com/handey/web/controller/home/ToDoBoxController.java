@@ -43,8 +43,9 @@ public class ToDoBoxController {
             Long toDoElmId = toDoElmService.createToDoElmObj(toDoBoxId);
             ToDoElmParam toDoElmParam = new ToDoElmParam();
             toDoElmParam.setContent(toDoElm.getContent());
-            toDoElmParam.setCompleted(toDoElm.isCompleted());
             toDoElmService.updateToDoElmContent(toDoElmId, toDoElmParam);
+            if(toDoElm.isCompleted())
+                toDoElmService.updateToDoElmCompletedYn(toDoElmId);
         });
         return toDoBoxId;
     }
