@@ -60,6 +60,15 @@ public class ToDoBoxService {
     }
 
     /**
+     * 투두박스 고정 상태 변경
+     */
+    public boolean updateToDoBoxFixedYn(Long toDoBoxId) {
+        ToDoBox toDoBox = toDoBoxRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
+        toDoBox.updateFixedYn(!toDoBox.isFixed());
+        return true;
+    }
+
+    /**
      * 투두박스 삭제
      */
     public void deleteToDoBox(Long toDoBoxId) {

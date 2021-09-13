@@ -38,6 +38,7 @@ public class ToDoBoxController {
         toDoBoxParam.setTitle(param.getTitle());
         toDoBoxParam.setFixed(param.isFixed());
         toDoBoxService.updateToDoBoxTitle(toDoBoxId, toDoBoxParam);
+        toDoBoxService.updateToDoBoxFixedYn(toDoBoxId);
         param.getToDoElmList().forEach(toDoElm -> {
             Long toDoElmId = toDoElmService.createToDoElmObj(toDoBoxId);
             ToDoElmParam toDoElmParam = new ToDoElmParam();
@@ -62,6 +63,14 @@ public class ToDoBoxController {
     @PutMapping("/toDoBox/{toDoBoxId}")
     public boolean updateToDoBoxTitle(@PathVariable Long toDoBoxId, @RequestBody ToDoBoxParam param) {
         return toDoBoxService.updateToDoBoxTitle(toDoBoxId, param);
+    }
+
+    /**
+     * 투두 박스 고정상태 수정
+     */
+    @PatchMapping("/toDoBox/{toDoBoxId}")
+    public boolean updateToDoBoxFixedYn(@PathVariable Long toDoBoxId) {
+        return toDoBoxService.updateToDoBoxFixedYn(toDoBoxId);
     }
 
     /**
