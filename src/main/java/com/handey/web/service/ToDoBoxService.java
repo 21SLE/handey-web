@@ -65,7 +65,7 @@ public class ToDoBoxService {
     public boolean updateToDoBoxFixedYn(Long toDoBoxId) {
         ToDoBox toDoBox = toDoBoxRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
         toDoBox.updateFixedYn(!toDoBox.isFixed());
-        return true;
+        return toDoBox.isFixed();
     }
 
     /**
