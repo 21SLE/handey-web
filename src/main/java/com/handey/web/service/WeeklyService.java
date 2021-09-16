@@ -1,8 +1,9 @@
 package com.handey.web.service;
 
-import com.handey.web.domain.home.ToDoBox;
-import com.handey.web.domain.home.WeeklyBox;
-import com.handey.web.repository.home.WeeklyRepository;
+import com.handey.web.common.exception.ToDoNoDataFoundException;
+import com.handey.web.controller.history.WeeklyParam;
+import com.handey.web.domain.history.WeeklyBox;
+import com.handey.web.repository.history.WeeklyRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,4 +43,22 @@ public class WeeklyService {
         return weeklyRepository.findById(id);
     }
 
+    // Weekly
+    public Long createWeeklyBoxObj() {
+        WeeklyBox weeklyBox = new WeeklyBox();
+        weeklyRepository.save(weeklyBox);
+        return weeklyBox.getId();
+    }
+
+    public boolean updateWeeklyTitle(Long weeklyId, WeeklyParam param) {
+        WeeklyBox weeklyBox = weeklyRepository.findById(weeklyId).orElseThrow(ToDoNoDataFoundException::new);
+        weeklyBox.updateTitle(param.getTitle());
+        return true;
+    }
+
+    public boolean deleteWeekly(Long weeklyId) {
+        WeeklyBox weeklyBox = weeklyRepository.findById(weeklyId).orElseThrow(ToDoNoDataFoundException::new);
+        weeklyRepository.deleteById(weeklyId);
+        return true;
+    }
 }
