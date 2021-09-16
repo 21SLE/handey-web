@@ -1,17 +1,15 @@
-package com.handey.web.repository.history;
+package com.handey.web.repository.home;
 
-import com.handey.web.domain.history.WeeklyBox;
-import com.handey.web.domain.home.ToDoElm;
+import com.handey.web.domain.home.ToDoBox;
+import com.handey.web.domain.home.WeeklyBox;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class JpaWeeklyRepository implements WeeklyRepository {
+public class JpaWeeklyRepository implements WeeklyRepository{
 
     private final EntityManager em;
 
@@ -46,13 +44,5 @@ public class JpaWeeklyRepository implements WeeklyRepository {
         //객체 자체를 조회
         return em.createQuery("select m from WeeklyBox as m", WeeklyBox.class)
                 .getResultList();
-    }
-
-    @Override
-    @Transactional
-    public void deleteById(Long id) {
-        WeeklyBox weeklyBox = em.find(WeeklyBox.class, id);
-        Assert.notNull(weeklyBox,"To Do Element must not be null!");
-        em.remove(weeklyBox);
     }
 }
