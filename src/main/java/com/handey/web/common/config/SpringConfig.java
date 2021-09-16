@@ -18,7 +18,6 @@ public class SpringConfig {
     }
 
 
-
     // jpa 방법
 //    private EntityManager em;
 //

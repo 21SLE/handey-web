@@ -1,14 +1,14 @@
-package com.handey.web.repository.history;
+package com.handey.web.repository.home;
 
-import com.handey.web.domain.history.WeeklyBox;
+import com.handey.web.domain.home.WeeklyBox;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface WeeklyRepository {
-    WeeklyBox save(WeeklyBox weeklyBox);
+    WeeklyBox save(WeeklyBox toDoBox);
     Optional<WeeklyBox> findById(Long id);
     Optional<WeeklyBox> findByTitle(String title);
     List<WeeklyBox> findAll();
-    void deleteById(Long id);
+
 }
