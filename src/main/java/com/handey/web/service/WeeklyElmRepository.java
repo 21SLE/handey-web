@@ -1,4 +1,4 @@
-package com.handey.web.repository.history;
+package com.handey.web.service;
 
 import com.handey.web.domain.history.WeeklyBox;
 import com.handey.web.domain.history.WeeklyElm;

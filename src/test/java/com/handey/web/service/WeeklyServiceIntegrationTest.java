@@ -15,7 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class WeeklyServiceIntegrationTest {
 
     @Autowired WeeklyService weeklyService;
-    @Autowired WeeklyRepository weeklyRepository;
+    @Autowired
+    WeeklyRepository weeklyRepository;
 
     @Test
     @Commit
