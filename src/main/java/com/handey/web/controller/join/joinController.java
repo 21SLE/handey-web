@@ -43,7 +43,7 @@ public class joinController {
 
     }
 
-    public class Hashing{
+    public static class Hashing{
 
         public static final String must = "~!@#$%^&*";
 
