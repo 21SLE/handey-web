@@ -83,7 +83,7 @@ public class ToDoElmService {
     public boolean updateToDoElmCompletedYn(Long toDoElmId) {
         ToDoElm toDoElm = toDoElmRepository.findById(toDoElmId).orElseThrow(ToDoNoDataFoundException::new);
         toDoElm.updateCompletedYn(!toDoElm.isCompleted());
-        return true;
+        return toDoElm.isCompleted();
     }
 
     /**
