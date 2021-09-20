@@ -13,20 +13,22 @@ import org.springframework.transaction.annotation.Transactional;
 public class WeeklyElmService {
 
     private final WeeklyElmRepository weeklyElmRepository;
+    private final WeeklyRepository weeklyRepository;
 
-    public WeeklyElmService(WeeklyElmRepository weeklyElmRepository) {
+    public WeeklyElmService(WeeklyElmRepository weeklyElmRepository, WeeklyRepository weeklyRepository) {
         this.weeklyElmRepository = weeklyElmRepository;
+        this.weeklyRepository = weeklyRepository;
     }
 
     public Long createWeeklyElm(Long weeklyId, WeeklyElm weeklyElm) {
-        WeeklyBox weeklyBox = WeeklyRepository.findById(weeklyId).orElseThrow(ToDoNoDataFoundException::new);
+        //WeeklyBox weeklyBox = WeeklyRepository.findById(weeklyId).orElseThrow(ToDoNoDataFoundException::new);
         weeklyElmRepository.save(weeklyElm);
         return weeklyElm.getId();
     }
 
     public Long createWeeklyElmObj(Long weeklyId) {
         WeeklyElm weeklyElm = new WeeklyElm();
-        WeeklyBox weeklyBox = WeeklyRepository.findById(weeklyId).orElseThrow(ToDoNoDataFoundException::new);
+        //WeeklyBox weeklyBox = WeeklyRepository.findById(weeklyId).orElseThrow(ToDoNoDataFoundException::new);
         weeklyElmRepository.save(weeklyElm);
         return weeklyElm.getId();
     }
