@@ -1,7 +1,9 @@
 package com.handey.web.common.config;
 
+import com.handey.web.repository.history.WeeklyElmRepository;
 import com.handey.web.repository.home.ToDoBoxRepository;
 import com.handey.web.service.ToDoBoxService;
+import com.handey.web.service.WeeklyElmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,5 +46,10 @@ public class SpringConfig {
 ////        return new JpaToDoRepository(em);
 ////        return new JdbcTemplateToDoRepository(dataSource);
 ////        return new MemoryToDoRepository();
+//    }
+
+//    @Bean
+//    public WeeklyElmRepository weeklyElmRepository() {
+//        return new WeeklyElmRepository();
 //    }
 }
