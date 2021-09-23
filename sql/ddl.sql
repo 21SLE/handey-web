@@ -34,6 +34,6 @@ drop table if exists memo CASCADE;
 create table memo
 (
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
-    content varchar(255),
+    content varchar(2000),
     primary key (id)
 );
