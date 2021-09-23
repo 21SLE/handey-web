@@ -8,6 +8,8 @@ import com.handey.web.repository.history.WeeklyRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Transactional
 @Service
 public class WeeklyElmService {
@@ -35,6 +37,10 @@ public class WeeklyElmService {
 
     public boolean updateWeeklyElmContent(Long weeklyElmId) {
         return true;
+    }
+
+    public Optional<WeeklyElm> findOneWeeklyElm(Long id) {
+        return weeklyElmRepository.findById(id);
     }
 
 }

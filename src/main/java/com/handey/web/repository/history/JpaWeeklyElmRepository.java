@@ -32,7 +32,7 @@ public class JpaWeeklyElmRepository implements WeeklyElmRepository{
     }
 
     @Override
-    public Optional<WeeklyElm> findByTitle(Long weeklyBoxId) {
+    public Optional<WeeklyElm> findBySubtitle(Long weeklyBoxId) {
         return Optional.empty();
     }
 
