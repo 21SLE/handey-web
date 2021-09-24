@@ -14,25 +14,43 @@ public class WeeklyElmIntergrationTest {
     @Autowired
     WeeklyElmService weeklyElmService;
     @Autowired
+    WeeklyService weeklyService;
+    @Autowired
+    WeeklyElmRepository weeklyRepository;
+    @Autowired
     WeeklyElmRepository weeklyElmRepository;
 
     @Test
     @Commit
     void createWeeklyElmBox() {
         //given
+        WeeklyBox weeklyBox1 = new WeeklyBox();
+        weeklyBox1.setTitle("weekly1");
+
+        WeeklyBox weeklyBox2 = new WeeklyBox();
+        weeklyBox2.setTitle("weekly2");
+
+        WeeklyBox weeklyBox3 = new WeeklyBox();
+        weeklyBox3.setTitle("weekly3");
+
+        weeklyService.createWeeklyBox(weeklyBox1);
+        weeklyService.createWeeklyBox(weeklyBox2);
+        weeklyService.createWeeklyBox(weeklyBox3);
+
         WeeklyElm weeklyElm1 = new WeeklyElm();
-        weeklyElm1.setSubtitle("sprint1");
+        weeklyElm1.setSubtitle("elm1");
 
         WeeklyElm weeklyElm2 = new WeeklyElm();
-        weeklyElm2.setSubtitle("sprint2");
+        weeklyElm2.setSubtitle("elm2");
 
         WeeklyElm weeklyElm3 = new WeeklyElm();
-        weeklyElm3.setSubtitle("sprint3");
+        weeklyElm3.setSubtitle("elm3");
+
 
         //when
-        Long saveId1 = weeklyElmService.createWeeklyElm(,weeklyElm1);
-        Long saveId2 = weeklyElmService.createWeeklyElm(,weeklyElm2);
-        Long saveId3 = weeklyElmService.createWeeklyElm(,weeklyElm3);
+        Long saveId1 = weeklyElmService.createWeeklyElm(weeklyBox1.getId(),weeklyElm1);
+        Long saveId2 = weeklyElmService.createWeeklyElm(weeklyBox2.getId(),weeklyElm2);
+        Long saveId3 = weeklyElmService.createWeeklyElm(weeklyBox3.getId(),weeklyElm3);
 
         //then
         WeeklyElm findWeeklyElm1 = weeklyElmService.findOneWeeklyElm(saveId1).get();
@@ -51,5 +69,4 @@ public class WeeklyElmIntergrationTest {
     @Test
     void findOneWeeklyElm() {
     }
-}
 }

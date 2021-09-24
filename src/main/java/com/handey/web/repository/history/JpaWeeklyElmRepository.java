@@ -38,7 +38,7 @@ public class JpaWeeklyElmRepository implements WeeklyElmRepository{
 
     @Override
     public List<WeeklyElm> findAll() {
-        return em.createQuery("select m from ToDoElm m", WeeklyElm.class)
+        return em.createQuery("select m from WeeklyElm m", WeeklyElm.class)
                 .getResultList();
     }
 
@@ -46,7 +46,7 @@ public class JpaWeeklyElmRepository implements WeeklyElmRepository{
     @Transactional
     public void deleteById(Long id) {
         WeeklyElm weeklyElm = em.find(WeeklyElm.class, id);
-        Assert.notNull(weeklyElm,"To Do Element must not be null!");
+        Assert.notNull(weeklyElm,"WeeklyElm Element must not be null!");
         em.remove(weeklyElm);
     }
 }
