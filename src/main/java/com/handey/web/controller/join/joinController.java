@@ -19,9 +19,9 @@ public class joinController {
     MemberRepository memberRepository;
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PostMapping("/register")
+    @PostMapping("/register/{Id}")
     @ResponseBody
-    public String registerUser(@RequestBody member newMember){
+    public String registerUser(@PathVariable Long Id, @RequestBody member newMember){
 
         String username = newMember.getUsername();
         String password = Hashing.hashingPassword(newMember.getPassword());

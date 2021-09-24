@@ -10,8 +10,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "join")
-@DynamicInsert
-@DynamicUpdate
 
 public class member {
     @Id @GeneratedValue
@@ -69,14 +67,15 @@ public class member {
         if(ob==null || getClass() != ob.getClass())
             return false;
         member member = (member)ob;
-        return username.equals(member.username)&&
+        return  id.equals(member.id)&&
+                username.equals(member.username)&&
                 email.equals(member.email)&&
                 password.equals(member.password);
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(username, email, password);
+        return Objects.hash(id, username, email, password);
     }
 
 }
