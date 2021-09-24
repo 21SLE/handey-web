@@ -1,5 +1,4 @@
 package com.handey.web.controller.history;
-
 import com.handey.web.service.WeeklyElmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,5 +26,4 @@ public class WeeklyElmController {
     public void deleteWeeklyElm(@PathVariable Long weeklyElmId) {
         weeklyElmService.deleteWeeklyElm(weeklyElmId);
     }
-
 }

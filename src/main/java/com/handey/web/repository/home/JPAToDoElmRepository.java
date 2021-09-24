@@ -28,8 +28,8 @@ public class JPAToDoElmRepository implements ToDoElmRepository{
 
     @Override
     public Optional<ToDoElm> findById(Long id) {
-        ToDoElm ToDoElm = em.find(ToDoElm.class, id);
-        return Optional.ofNullable(ToDoElm);
+        ToDoElm toDoElm = em.find(ToDoElm.class, id);
+        return Optional.ofNullable(toDoElm);
     }
 
     @Override
