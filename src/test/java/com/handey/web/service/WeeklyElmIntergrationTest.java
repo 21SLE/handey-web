@@ -27,6 +27,9 @@ public class WeeklyElmIntergrationTest {
         WeeklyBox weeklyBox1 = new WeeklyBox();
         weeklyBox1.setTitle("weekly1");
 
+        WeeklyElm weeklyElm1 = new WeeklyElm();
+        weeklyElm1.setSubtitle("elm1");
+
         WeeklyBox weeklyBox2 = new WeeklyBox();
         weeklyBox2.setTitle("weekly2");
 
@@ -37,8 +40,7 @@ public class WeeklyElmIntergrationTest {
         weeklyService.createWeeklyBox(weeklyBox2);
         weeklyService.createWeeklyBox(weeklyBox3);
 
-        WeeklyElm weeklyElm1 = new WeeklyElm();
-        weeklyElm1.setSubtitle("elm1");
+
 
         WeeklyElm weeklyElm2 = new WeeklyElm();
         weeklyElm2.setSubtitle("elm2");

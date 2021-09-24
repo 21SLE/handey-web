@@ -24,14 +24,14 @@ public class WeeklyElmService {
     }
 
     public Long createWeeklyElm(Long weeklyId, WeeklyElm weeklyElm) {
-        WeeklyBox weeklyBox = WeeklyRepository.findById(weeklyId);
+        Optional<WeeklyBox> weeklyBox = weeklyRepository.findById(weeklyId);
         weeklyElmRepository.save(weeklyElm);
         return weeklyElm.getId();
     }
 
     public Long createWeeklyElmObj(Long weeklyId) {
         WeeklyElm weeklyElm = new WeeklyElm();
-        WeeklyBox weeklyBox = WeeklyRepository.findById(weeklyId);
+        Optional<WeeklyBox> weeklyBox = weeklyRepository.findById(weeklyId);
         weeklyElmRepository.save(weeklyElm);
         return weeklyElm.getId();
     }
@@ -45,7 +45,7 @@ public class WeeklyElmService {
     }
 
     public void deleteWeeklyElm(Long weeklyElmId) {
-        WeeklyElm weeklyElm = weeklyElmRepository.findById(weeklyElmId);
+        Optional<WeeklyElm> weeklyElm = weeklyElmRepository.findById(weeklyElmId);
         weeklyElmRepository.deleteById(weeklyElmId);
     }
 
