@@ -1,4 +1,52 @@
 package com.handey.web.service;
 
+import com.handey.web.common.exception.ToDoNoDataFoundException;
+import com.handey.web.domain.history.WeeklyBox;
+import com.handey.web.domain.history.WeeklyElm;
+import com.handey.web.domain.home.ToDoElm;
+import com.handey.web.repository.history.WeeklyElmRepository;
+import com.handey.web.repository.history.WeeklyRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+
+@Transactional
+@Service
 public class WeeklyElmService {
+
+    private final WeeklyElmRepository weeklyElmRepository;
+    private final WeeklyRepository weeklyRepository;
+
+    public WeeklyElmService(WeeklyElmRepository weeklyElmRepository, WeeklyRepository weeklyRepository) {
+        this.weeklyElmRepository = weeklyElmRepository;
+        this.weeklyRepository = weeklyRepository;
+    }
+
+    public Long createWeeklyElm(Long weeklyId, WeeklyElm weeklyElm) {
+        Optional<WeeklyBox> weeklyBox = weeklyRepository.findById(weeklyId);
+        weeklyElmRepository.save(weeklyElm);
+        return weeklyElm.getId();
+    }
+
+    public Long createWeeklyElmObj(Long weeklyId) {
+        WeeklyElm weeklyElm = new WeeklyElm();
+        Optional<WeeklyBox> weeklyBox = weeklyRepository.findById(weeklyId);
+        weeklyElmRepository.save(weeklyElm);
+        return weeklyElm.getId();
+    }
+
+    public boolean updateWeeklyElmContent(Long weeklyElmId) {
+        return true;
+    }
+
+    public Optional<WeeklyElm> findOneWeeklyElm(Long id) {
+        return weeklyElmRepository.findById(id);
+    }
+
+    public void deleteWeeklyElm(Long weeklyElmId) {
+        Optional<WeeklyElm> weeklyElm = weeklyElmRepository.findById(weeklyElmId);
+        weeklyElmRepository.deleteById(weeklyElmId);
+    }
+
 }

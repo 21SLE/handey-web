@@ -18,7 +18,6 @@ import java.util.List;
 @DynamicInsert
 @DynamicUpdate
 public class WeeklyBox {
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
