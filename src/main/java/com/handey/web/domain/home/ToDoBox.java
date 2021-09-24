@@ -54,36 +54,4 @@ public class ToDoBox {
     public void updateFixedYn(boolean newFixedYn) {
         this.fixed = newFixedYn;
     }
-
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public String getTitle() {
-//        return title;
-//    }
-//
-//    public void setTitle(String title) {
-//        this.title = title;
-//    }
-//
-//    public boolean isFixed() {
-//        return fixed;
-//    }
-//
-//    public void setFixed(boolean fixed) {
-//        this.fixed = fixed;
-//    }
-//
-//    public List<ToDoElm> getToDoElmList() {
-//        return toDoElmList;
-//    }
-//
-//    public void setToDoElmList(List<ToDoElm> toDoElmList) {
-//        this.toDoElmList = toDoElmList;
-//    }
 }
