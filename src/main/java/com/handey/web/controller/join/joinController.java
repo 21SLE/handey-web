@@ -19,13 +19,13 @@ public class joinController {
     MemberRepository memberRepository;
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PostMapping("")
+    @PostMapping("/register/{Id}")
     @ResponseBody
-    public String registerUser(@RequestBody member newmember){
+    public String registerUser(@PathVariable Long Id, @RequestBody member newMember){
 
-        String username = newmember.getUsername();
-        String password = Hashing.hashingpassword(newmember.getPassword());
-        String email = newmember.getEmail();
+        String username = newMember.getUsername();
+        String password = Hashing.hashingPassword(newMember.getPassword());
+        String email = newMember.getEmail();
 
         if(username.equals("")||password.equals("")||email.equals(""))
             return "fail";
@@ -35,7 +35,7 @@ public class joinController {
         member.setPassword(password);
         member.setEmail(email);
 
-        if (memberRepository.findByUsername(username) != null)
+        if (memberRepository.findByUsername(email) != null)
             return "fail";
 
         memberRepository.save(member);
@@ -45,11 +45,11 @@ public class joinController {
 
     public static class Hashing{
 
-        public static final String must = "~!@#$%^&*";
+        public static final String HASH = "~!@#$%^&*";
 
-        public static String hashingpassword(String input){
+        public static String hashingPassword(String input){
             try{
-                MessageDigest md = MessageDigest.getInstance("sHA-256");
+                MessageDigest md = MessageDigest.getInstance("SHA-256");
                 byte[] hashData = md.digest(input.getBytes(StandardCharsets.UTF_8));
                 BigInteger number = new BigInteger(1, hashData);
                 StringBuilder hexString = new StringBuilder(number.toString(16));//글자수
