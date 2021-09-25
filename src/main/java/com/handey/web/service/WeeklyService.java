@@ -62,4 +62,10 @@ public class WeeklyService {
         weeklyRepository.deleteById(weeklyId);
         return true;
     }
+
+    public boolean updateWeeklyClear(Long weeklyId) {
+        WeeklyBox weeklyBox = weeklyRepository.findById(weeklyId).orElseThrow(WeeklyNoDataFoundException::new);
+        weeklyBox.updateClear(!weeklyBox.getClear());
+        return weeklyBox.getClear();
+    }
 }
