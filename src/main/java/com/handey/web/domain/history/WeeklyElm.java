@@ -23,8 +23,8 @@ public class WeeklyElm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "subtitle")
-    private String Subtitle;
+    @Column(name = "content")
+    private String content;
 
     @Column(name = "completed")
     @ColumnDefault("0")
