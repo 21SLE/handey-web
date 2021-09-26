@@ -51,7 +51,7 @@ create table todo_box_hst
 (
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
     title varchar(255),
-    saveDt DATE,
+    saveDt datetime,
     primary key (id)
 );
 

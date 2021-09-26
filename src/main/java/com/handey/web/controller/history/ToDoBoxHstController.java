@@ -25,10 +25,12 @@ public class ToDoBoxHstController {
         return toDoBoxHstService.getToDoBoxHstList();
     }
 
+    /**
+     * 테스트용 api (백엔드에서 매일 이 작업 반복되게 개발될 예정)
+     */
     @PostMapping("/history/toDoBox")
     public Long createToDoBoxHst(@RequestBody ToDoBoxHst toDoBoxHst) {
         Long toDoBoxHstId = toDoBoxHstService.createToDoBoxHst(toDoBoxHst);
-        toDoBoxHst.getToDoElmHstList().forEach(toDoElmHstService::createToElmHst);
 
         toDoBoxHst.getToDoElmHstList().forEach(toDoElmHst -> {
             toDoElmHst.setToDoBoxHst(toDoBoxHst);
