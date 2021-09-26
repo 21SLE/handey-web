@@ -36,14 +36,6 @@ public class WeeklyController {
         return weeklyService.updateWeeklyClear(weeklyId);
     }
 
-    @PostMapping("/weeklyBox/{weeklyId}")
-    public boolean updateWeeklyBox(@PathVariable Long weeklyId, @RequestBody WeeklyParam title) {
-        boolean t;
-        boolean c;
-        t = weeklyService.updateWeeklyTitle(weeklyId, title);
-        c = weeklyService.updateWeeklyClear(weeklyId);
-        return t;
-    }
 
     @DeleteMapping("/weeklyBox/{weeklyId}")
     public boolean deleteWeekly(@PathVariable Long weeklyId) {

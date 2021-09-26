@@ -1,8 +1,7 @@
 package com.handey.web.repository.history;
 
+import com.handey.web.domain.history.WeeklyBox;
 import com.handey.web.domain.history.WeeklyElm;
-import com.handey.web.domain.home.ToDoBox;
-import com.handey.web.domain.home.ToDoElm;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
@@ -20,20 +19,23 @@ public class JpaWeeklyElmRepository implements WeeklyElmRepository{
     }
 
     @Override
-    public WeeklyElm save(WeeklyElm weeklyElm) {
+    public WeeklyElm save(WeeklyElm weeklyElm, WeeklyBox weeklyBox) {
+        weeklyElm.setWeeklyBox(weeklyBox);
         em.persist(weeklyElm);
         return weeklyElm;
+    }
+
+    @Override
+    public List<WeeklyElm> findByWeeklyId(Long weeklyId) {
+        return em.createQuery("select m from WeeklyElm m where m.weeklyBox.id = :weeklyId", WeeklyElm.class)
+                .setParameter("weeklyId", weeklyId)
+                .getResultList();
     }
 
     @Override
     public Optional<WeeklyElm> findById(Long id) {
         WeeklyElm weeklyElm = em.find(WeeklyElm.class, id);
         return Optional.ofNullable(weeklyElm);
-    }
-
-    @Override
-    public Optional<WeeklyElm> findBySubtitle(Long weeklyBoxId) {
-        return Optional.empty();
     }
 
     @Override

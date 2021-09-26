@@ -9,6 +9,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 @Entity
 @Getter
@@ -34,5 +35,23 @@ public class WeeklyElm {
     @JoinColumn(name="weekly_box_id")
     @JsonBackReference  //양방향 관계에서 종
     private WeeklyBox weeklyBox;
+
+    public void update(String newContent, boolean newCompleted) {
+        this.completed = newCompleted;
+        if(newContent != null)
+            this.content = newContent;
+    }
+
+    @Transactional
+    public void updateContent(String newContent) {
+        if(newContent != null)
+            this.content = newContent;
+    }
+
+    @Transactional
+    public void updateCompleted(boolean newCompleted) {
+        this.completed = newCompleted;
+    }
+
 
 }
