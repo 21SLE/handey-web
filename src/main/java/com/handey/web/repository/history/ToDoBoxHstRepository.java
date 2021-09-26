@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ToDoBoxHstRepository {
-    ToDoBoxHst save(ToDoBoxHst ToDoBoxHst);
+    ToDoBoxHst save(ToDoBoxHst toDoBoxHst);
     Optional<ToDoBoxHst> findById(Long id);
     List<ToDoBoxHst> findByDate(String saveDt);
     List<ToDoBoxHst> findAll();

@@ -1,0 +1,49 @@
+package com.handey.web.repository.history;
+
+import com.handey.web.domain.history.ToDoBoxHst;
+import com.handey.web.domain.history.ToDoElmHst;
+import com.handey.web.domain.home.ToDoElm;
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public class JPAToDoElmHstRepository implements ToDoElmHstRepository{
+    private final EntityManager em;
+
+    public JPAToDoElmHstRepository(EntityManager em) {
+        this.em = em;
+    }
+
+
+    @Override
+    public ToDoElmHst save(ToDoElmHst toDoElmHst) {
+        em.persist(toDoElmHst);
+        return toDoElmHst;
+    }
+
+    @Override
+    public Optional<ToDoElmHst> findById(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public List<ToDoElmHst> findByToDoBoxHstId(String toDoBoxHstId) {
+        return em.createQuery("select m from ToDoElmHst m where m.toDoBoxHst.id = :todoBoxHstId", ToDoElmHst.class)
+                .setParameter("todoBoxHstId", toDoBoxHstId)
+                .getResultList();
+    }
+
+    @Override
+    public List<ToDoElmHst> findAll() {
+        return em.createQuery("select m from ToDoElmHst m", ToDoElmHst.class)
+                .getResultList();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
+}
