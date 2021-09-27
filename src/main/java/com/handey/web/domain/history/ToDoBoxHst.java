@@ -2,7 +2,6 @@ package com.handey.web.domain.history;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.handey.web.domain.home.ToDoElm;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
@@ -10,7 +9,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,11 +28,11 @@ public class ToDoBoxHst {
     private String title;
 
     @Column(name = "savedt")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private LocalDateTime saveDt;
+    private LocalDate saveDt;
 
     @OneToMany(mappedBy = "toDoBoxHst")
     @JsonManagedReference
-    private List<ToDoElmHst> toDoElmHstList = new ArrayList<ToDoElmHst>();
+    private List<ToDoElmHst> toDoElmHstList = new ArrayList<>();
 }
