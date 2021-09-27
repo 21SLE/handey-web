@@ -12,14 +12,19 @@ public class WeeklyElmController {
         this.weeklyElmService = weeklyElmService;
     }
 
-    @PostMapping("/weeklyBox/{weeklyBoxId}")
+    @PostMapping("/weeklyBox/{weeklyId}")
     public Long createWeeklyElmObj(@PathVariable Long weeklyId) {
         return weeklyElmService.createWeeklyElmObj(weeklyId);
     }
 
     @PutMapping("/weeklyElm/{weeklyElmId}")
     public boolean updateWeeklyElmContent(@PathVariable Long weeklyElmId, @RequestBody WeeklyElmParam param) {
-        return weeklyElmService.updateWeeklyElmContent(weeklyElmId);
+        return weeklyElmService.updateWeeklyElmContent(weeklyElmId,param);
+    }
+
+    @PatchMapping("/weeklyElm/{weeklyElmId}")
+    public boolean updateWeeklyElmContent(@PathVariable Long weeklyElmId) {
+        return weeklyElmService.updateWeeklyElmCompleted(weeklyElmId);
     }
 
     @DeleteMapping("/weeklyElm/{weeklyElmId}")

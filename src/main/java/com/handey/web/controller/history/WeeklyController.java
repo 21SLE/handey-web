@@ -27,9 +27,15 @@ public class WeeklyController {
     }
 
     @PutMapping("/weeklyBox/{weeklyId}")
-    public boolean updateWeeklyTitle(@PathVariable Long weeklyId, @RequestBody WeeklyParam param) {
-        return weeklyService.updateWeeklyTitle(weeklyId, param);
+    public boolean updateWeeklyTitle(@PathVariable Long weeklyId, @RequestBody WeeklyParam title) {
+        return weeklyService.updateWeeklyTitle(weeklyId, title);
     }
+
+    @PatchMapping("/weeklyBox/{weeklyId}")
+    public boolean updateWeeklyClear(@PathVariable Long weeklyId) {
+        return weeklyService.updateWeeklyClear(weeklyId);
+    }
+
 
     @DeleteMapping("/weeklyBox/{weeklyId}")
     public boolean deleteWeekly(@PathVariable Long weeklyId) {
