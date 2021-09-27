@@ -4,6 +4,7 @@ import com.handey.web.domain.history.ToDoBoxHst;
 import com.handey.web.domain.history.ToDoElmHst;
 import com.handey.web.domain.home.ToDoElm;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -17,7 +18,6 @@ public class JPAToDoElmHstRepository implements ToDoElmHstRepository{
         this.em = em;
     }
 
-
     @Override
     public ToDoElmHst save(ToDoElmHst toDoElmHst) {
         em.persist(toDoElmHst);
@@ -26,7 +26,8 @@ public class JPAToDoElmHstRepository implements ToDoElmHstRepository{
 
     @Override
     public Optional<ToDoElmHst> findById(Long id) {
-        return Optional.empty();
+        ToDoElmHst toDoElmHst = em.find(ToDoElmHst.class, id);
+        return Optional.ofNullable(toDoElmHst);
     }
 
     @Override
@@ -44,6 +45,8 @@ public class JPAToDoElmHstRepository implements ToDoElmHstRepository{
 
     @Override
     public void deleteById(Long id) {
-
+        ToDoElmHst toDoElmHst = em.find(ToDoElmHst.class, id);
+        Assert.notNull(toDoElmHst,"To Do Element History must not be null!");
+        em.remove(toDoElmHst);
     }
 }

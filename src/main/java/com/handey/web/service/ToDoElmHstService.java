@@ -1,6 +1,7 @@
 package com.handey.web.service;
 
 
+import com.handey.web.common.exception.ToDoNoDataFoundException;
 import com.handey.web.domain.history.ToDoBoxHst;
 import com.handey.web.domain.history.ToDoElmHst;
 import com.handey.web.repository.history.ToDoBoxHstRepository;
@@ -28,4 +29,8 @@ public class ToDoElmHstService {
         return toDoElmHstRepository.findAll();
     }
 
+    public void deleteToDoElmHst(Long toDoElmHstId) {
+        ToDoElmHst toDoElmHst = toDoElmHstRepository.findById(toDoElmHstId).orElseThrow(ToDoNoDataFoundException::new);
+        toDoElmHstRepository.deleteById(toDoElmHstId);
+    }
 }
