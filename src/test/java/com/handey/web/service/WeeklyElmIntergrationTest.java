@@ -1,5 +1,6 @@
 package com.handey.web.service;
 
+import com.handey.web.controller.history.WeeklyParam;
 import com.handey.web.domain.history.WeeklyBox;
 import com.handey.web.domain.history.WeeklyElm;
 import com.handey.web.repository.history.WeeklyElmRepository;
@@ -41,12 +42,12 @@ public class WeeklyElmIntergrationTest {
         weeklyService.createWeeklyBox(weeklyBox3);
 
 
-
         WeeklyElm weeklyElm2 = new WeeklyElm();
         weeklyElm2.setContent("elm2");
 
         WeeklyElm weeklyElm3 = new WeeklyElm();
         weeklyElm3.setContent("elm3");
+
 
 
         //when
