@@ -6,16 +6,13 @@ import com.handey.web.domain.home.ToDoElm;
 import com.handey.web.service.ToDoBoxHstService;
 import com.handey.web.service.ToDoBoxService;
 import com.handey.web.service.ToDoElmHstService;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -32,8 +29,27 @@ public class ToDoReset {
         this.toDoElmHstService = toDoElmHstService;
     }
 
-    //fixedDelay마다 실행 5000 = 5초
-    @Scheduled(fixedDelay=1000000)
+    // 초, 분, 시, 일, 월, 요일
+    @Scheduled(cron="0 0 0 * * *")
+    @Transactional
+    public void resetToDoAt00() {
+        resetToDo();
+    }
+
+    @Scheduled(cron="0 0 01 * * *")
+    @Transactional
+    public void resetToDoAt01() {
+
+    }
+
+    @Scheduled(cron="0 0 02 * * *")
+    @Transactional
+    public void resetToDoAt02() {
+
+    }
+
+    // fixedDelay마다 실행 5000 = 5초
+//    @Scheduled(fixedDelay=1000000)
     @Transactional
     public void resetToDo(){
         System.out.println("스케줄링 테스트");
@@ -64,25 +80,6 @@ public class ToDoReset {
 
     }
 
-    // 초, 분, 시, 일, 월, 요일
-    @Scheduled(cron="0 0 0 * * *")
-    @Transactional
-    public void resetToDoAt00() {
-
-    }
-
-    @Scheduled(cron="0 0 01 * * *")
-    @Transactional
-    public void resetToDoAt01() {
-
-    }
-
-    @Scheduled(cron="0 0 02 * * *")
-    @Transactional
-    public void resetToDoAt02() {
-
-    }
-
     public boolean checkCompletedAll(List<ToDoElm> toDoElmList) {
         AtomicBoolean allTrue = new AtomicBoolean(true);
         toDoElmList.forEach(toDoElm -> {
@@ -96,11 +93,6 @@ public class ToDoReset {
     public LocalDate getYesterdayDate() {
         LocalDate today = LocalDate.now();
         return today.minus(Period.ofDays(1));
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        Calendar cal = Calendar.getInstance();
-//        cal.add(Calendar.DATE, -1);
-//        return sdf.format(cal.getTime());
-
     }
 
 }
