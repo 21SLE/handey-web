@@ -27,11 +27,11 @@ public class WeeklyElmService {
         this.weeklyRepository = weeklyRepository;
     }
 
-//    public Long createWeeklyElm(Long weeklyId, WeeklyElm weeklyElm) {
-//        WeeklyBox weeklyBox = weeklyRepository.findById(weeklyId).orElseThrow(WeeklyNoDataFoundException::new);
-//        weeklyElmRepository.save(weeklyElm, weeklyBox);
-//        return weeklyElm.getId();
-//    }
+    public Long createWeeklyElm(Long weeklyId, WeeklyElm weeklyElm) {
+        WeeklyBox weeklyBox = weeklyRepository.findById(weeklyId).orElseThrow(WeeklyNoDataFoundException::new);
+        weeklyElmRepository.save(weeklyElm, weeklyBox);
+        return weeklyElm.getId();
+    }
 
     public List<WeeklyElm> getWeeklyElmList(Long weeklyId) {
         return weeklyElmRepository.findByWeeklyId(weeklyId);
