@@ -67,6 +67,14 @@ public class ToDoBoxController {
     }
 
     /**
+     * 투두 박스 타이틀 유무 변경
+     */
+    @PatchMapping("/toDoBox/{toDoBoxId}/title")
+    public boolean updateToDoBoxNoTitleYn(@PathVariable Long toDoBoxId) {
+        return toDoBoxService.updateToDoBoxNoTitleYn(toDoBoxId);
+    }
+
+    /**
      * 투두 박스 고정상태 수정
      */
     @PatchMapping("/toDoBox/{toDoBoxId}")

@@ -3,6 +3,7 @@ create table todo_box
 (
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
     title varchar(255),
+    notitle boolean default 0,
     fixed boolean default 0,
     primary key (id)
 );
@@ -78,3 +79,23 @@ create table todo_elm_hst
     foreign key (todo_box_hst_id) references todo_box_hst(id) on delete cascade
 );
 
+drop table if exists trash CASCADE;
+create table trash_box
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
+    title varchar(255),
+    notitle boolean,
+    saveDt date,
+    primary key (id)
+);
+
+drop table if exists trash CASCADE;
+create table trash_elm
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
+    content varchar(255),
+    completed boolean,
+    trash_box_id bigint not null,
+    primary key (id),
+    foreign key (trash_box_id) references trash_box(id) on delete cascade
+);

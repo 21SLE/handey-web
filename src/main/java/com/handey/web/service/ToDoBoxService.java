@@ -60,6 +60,15 @@ public class ToDoBoxService {
     }
 
     /**
+     * 투두박스 타이틀 유무 변경
+     */
+    public boolean updateToDoBoxNoTitleYn(Long toDoBoxId) {
+        ToDoBox toDoBox = toDoBoxRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
+        toDoBox.updateNoTitle(!toDoBox.isNoTitle());
+        return toDoBox.isNoTitle();
+    }
+
+    /**
      * 투두박스 고정 상태 변경
      */
     public boolean updateToDoBoxFixedYn(Long toDoBoxId) {
