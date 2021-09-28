@@ -1,9 +1,12 @@
 package com.handey.web.controller.home;
 
+import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.service.ToDoBoxService;
 import com.handey.web.service.ToDoElmService;
+import com.handey.web.service.TrashBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,12 +15,14 @@ import java.util.List;
 public class ToDoBoxController {
     private final ToDoBoxService toDoBoxService;
     private final ToDoElmService toDoElmService;
+    private final TrashBoxService trashBoxService;
 
                // 스프링 빈 등록 2가지 방법 중: 컴포넌트 스캔과 자동 의존관계 생성
     @Autowired // DI(Dependency Injection): Controller -> Service -> Repository
-    public ToDoBoxController(ToDoBoxService toDoBoxService, ToDoElmService toDoElmService) {
+    public ToDoBoxController(ToDoBoxService toDoBoxService, ToDoElmService toDoElmService, TrashBoxService trashBoxService) {
         this.toDoBoxService = toDoBoxService;
         this.toDoElmService = toDoElmService;
+        this.trashBoxService = trashBoxService;
     }
 
     /**
@@ -86,7 +91,10 @@ public class ToDoBoxController {
      * 투두 박스 삭제
      */
     @DeleteMapping("/toDoBox/{toDoBoxId}")
+    @Transactional
     public boolean deleteToDoBox(@PathVariable Long toDoBoxId) {
+        // 투두 박스 삭제시 휴지통으로 이동
+        trashBoxService.createTrashBox(toDoBoxService.findOneToDoBox(toDoBoxId).orElseThrow(WeeklyNoDataFoundException::new));
         toDoBoxService.deleteToDoBox(toDoBoxId);
         return true;
     }
