@@ -12,4 +12,5 @@ public interface TrashBoxRepository {
     Optional<TrashBox> findById(Long id);
     List<TrashBox> findAll();
     void deleteByDate(LocalDate endDt);
+    void deleteById(Long id);
 }

@@ -1,23 +1,28 @@
 package com.handey.web.service;
 
+import com.handey.web.common.exception.ToDoNoDataFoundException;
 import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.domain.trash.TrashBox;
 import com.handey.web.domain.trash.TrashElm;
 import com.handey.web.repository.trash.TrashBoxRepository;
+import com.handey.web.repository.trash.TrashElmRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
 public class TrashBoxService {
     private final TrashBoxRepository trashBoxRepository;
+    private final TrashElmRepository trashElmRepository;
 
-    public TrashBoxService(TrashBoxRepository trashBoxRepository) {
+    public TrashBoxService(TrashBoxRepository trashBoxRepository, TrashElmRepository trashElmRepository) {
         this.trashBoxRepository = trashBoxRepository;
+        this.trashElmRepository = trashElmRepository;
     }
 
     public Long createTrashBox(ToDoBox toDoBox) {
@@ -36,11 +41,15 @@ public class TrashBoxService {
             trashElm.setCompleted(toDoElm.isCompleted());
             trashElm.setTrashBox(trashBox);
 
-
+            trashElmRepository.save(trashElm);
         });
 
         trashBoxRepository.save(trashBox);
         return trashBox.getId();
+    }
+
+    public Optional<TrashBox> getOneTrashBox(Long trashBoxId) {
+        return trashBoxRepository.findById(trashBoxId);
     }
 
     public List<TrashBox> getTrashBoxList() {
@@ -51,8 +60,7 @@ public class TrashBoxService {
         trashBoxRepository.deleteByDate(trashBoxDate);
     }
 
-    public LocalDate getYesterdayDate() {
-        LocalDate today = LocalDate.now();
-        return today.minus(Period.ofDays(1));
+    public void deleteTrashBox(Long trashBoxId) {
+        trashBoxRepository.deleteById(trashBoxId);
     }
 }

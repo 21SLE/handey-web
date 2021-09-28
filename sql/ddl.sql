@@ -85,7 +85,8 @@ create table trash_box
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
     title varchar(255),
     notitle boolean,
-    saveDt date,
+    registerDt date,
+    endDt date,
     primary key (id)
 );
 
