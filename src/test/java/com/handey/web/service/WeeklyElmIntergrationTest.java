@@ -1,5 +1,6 @@
 package com.handey.web.service;
 
+import com.handey.web.controller.history.WeeklyParam;
 import com.handey.web.domain.history.WeeklyBox;
 import com.handey.web.domain.history.WeeklyElm;
 import com.handey.web.repository.history.WeeklyElmRepository;
@@ -28,7 +29,7 @@ public class WeeklyElmIntergrationTest {
         weeklyBox1.setTitle("weekly1");
 
         WeeklyElm weeklyElm1 = new WeeklyElm();
-        weeklyElm1.setSubtitle("elm1");
+        weeklyElm1.setContent("elm1");
 
         WeeklyBox weeklyBox2 = new WeeklyBox();
         weeklyBox2.setTitle("weekly2");
@@ -41,12 +42,12 @@ public class WeeklyElmIntergrationTest {
         weeklyService.createWeeklyBox(weeklyBox3);
 
 
-
         WeeklyElm weeklyElm2 = new WeeklyElm();
-        weeklyElm2.setSubtitle("elm2");
+        weeklyElm2.setContent("elm2");
 
         WeeklyElm weeklyElm3 = new WeeklyElm();
-        weeklyElm3.setSubtitle("elm3");
+        weeklyElm3.setContent("elm3");
+
 
 
         //when
@@ -58,9 +59,9 @@ public class WeeklyElmIntergrationTest {
         WeeklyElm findWeeklyElm1 = weeklyElmService.findOneWeeklyElm(saveId1).get();
         WeeklyElm findWeeklyElm2 = weeklyElmService.findOneWeeklyElm(saveId2).get();
         WeeklyElm findWeeklyElm3 = weeklyElmService.findOneWeeklyElm(saveId3).get();
-        assertThat(findWeeklyElm1.getSubtitle()).isEqualTo(findWeeklyElm1.getSubtitle());
-        assertThat(findWeeklyElm2.getSubtitle()).isEqualTo(findWeeklyElm2.getSubtitle());
-        assertThat(findWeeklyElm3.getSubtitle()).isEqualTo(findWeeklyElm3.getSubtitle());
+        assertThat(findWeeklyElm1.getContent()).isEqualTo(findWeeklyElm1.getContent());
+        assertThat(findWeeklyElm2.getContent()).isEqualTo(findWeeklyElm2.getContent());
+        assertThat(findWeeklyElm3.getContent()).isEqualTo(findWeeklyElm3.getContent());
 
     }
 
