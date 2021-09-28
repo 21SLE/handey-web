@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class JpaTrashRepository implements TrashBoxRepository{
+public class JpaTrashBoxRepository implements TrashBoxRepository{
     private final EntityManager em;
 
-    public JpaTrashRepository(EntityManager em) {
+    public JpaTrashBoxRepository(EntityManager em) {
         this.em = em;
     }
 
@@ -42,9 +42,16 @@ public class JpaTrashRepository implements TrashBoxRepository{
         List<TrashBox> trashBoxList = em.createQuery("select m from TrashBox m where m.endDt = :endDt", TrashBox.class)
                 .setParameter("endDt", endDt)
                 .getResultList();
-        //Assert.notNull(trashBoxList, "Trash Box must not be null!");
+        //Assert.notNull(trashBoxList, "Trash Box List must not be null!");
         if(trashBoxList != null && trashBoxList.size() != 0)
             em.createQuery("delete from TrashBox where TrashBox.endDt = :endDt", TrashBox.class)
                 .setParameter("endDt", endDt);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        TrashBox trashBox = em.find(TrashBox.class, id);
+        Assert.notNull(trashBox,"Trash Box must not be null!");
+        em.remove(trashBox);
     }
 }
