@@ -4,6 +4,7 @@ import com.handey.web.domain.history.ToDoBoxHst;
 import com.handey.web.domain.history.ToDoElmHst;
 import com.handey.web.domain.trash.TrashBox;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -38,14 +39,18 @@ public class JpaTrashBoxRepository implements TrashBoxRepository{
     }
 
     @Override
+    @Transactional
     public void deleteByDate(LocalDate endDt) {
         List<TrashBox> trashBoxList = em.createQuery("select m from TrashBox m where m.endDt = :endDt", TrashBox.class)
                 .setParameter("endDt", endDt)
                 .getResultList();
-        //Assert.notNull(trashBoxList, "Trash Box List must not be null!");
-        if(trashBoxList != null && trashBoxList.size() != 0)
-            em.createQuery("delete from TrashBox where TrashBox.endDt = :endDt", TrashBox.class)
-                .setParameter("endDt", endDt);
+//        Assert.notNull(trashBoxList, "Trash Box List must not be null!");
+
+        if(trashBoxList != null && trashBoxList.size() != 0) {
+            em.createQuery("delete from TrashBox m where m.endDt = :endDt")
+                    .setParameter("endDt", endDt)
+                    .executeUpdate();
+        }
     }
 
     @Override

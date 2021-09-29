@@ -39,7 +39,7 @@ public class ToDoReset {
     }
 
     // fixedDelay마다 실행 5000 = 5초
-    @Scheduled(fixedDelay=1000000)
+//    @Scheduled(fixedDelay=1000000)
     @Transactional
     public void resetToDo(){
         System.out.println("스케줄링 테스트");
