@@ -1,18 +1,12 @@
 package com.handey.web.domain.join;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Generated;
-
 import javax.persistence.*;
-import java.lang.reflect.Member;
 import java.util.Objects;
 
 @Entity
-@Table(name = "join")
-
-public class member {
-    @Id @GeneratedValue
+@Table(name = "join_mem")
+public class Member {
+    @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "username")
@@ -66,7 +60,7 @@ public class member {
             return true;
         if(ob==null || getClass() != ob.getClass())
             return false;
-        member member = (member)ob;
+        Member member = (Member)ob;
         return  id.equals(member.id)&&
                 username.equals(member.username)&&
                 email.equals(member.email)&&

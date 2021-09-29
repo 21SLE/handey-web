@@ -1,58 +1,54 @@
 package com.handey.web.service;
 
-import com.handey.web.controller.join.joinController;
-import com.handey.web.domain.join.member;
+import com.handey.web.controller.join.JoinController;
+import com.handey.web.domain.join.Member;
 import com.handey.web.repository.join.MemberRepository;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
 @Transactional
-
-public class Joinservice {
+@Service
+public class JoinService {
 
     private final MemberRepository memberRepository;
 
-    public Joinservice(MemberRepository memberRepository) {
+    public JoinService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
-    public String join(member newMember) {
+    public String join(Member newMember) {
         //같은 email 중복회원은 안된다.
 
         String username = newMember.getUsername();
-        String password = joinController.Hashing.hashingPassword(newMember.getPassword());
+        String password = JoinController.Hashing.hashingPassword(newMember.getPassword());
         String email = newMember.getEmail();
 
         if(username.equals("")||password.equals("")||email.equals(""))
             return "fail";
 
-        member member = new member();
+        Member member = new Member();
         member.setUsername(username);
         member.setPassword(password);
         member.setEmail(email);
 
-        if (memberRepository.findByUsername(username) != null)
-            return "fail";
+//        if (memberRepository.findByUsername(username) != null)
+//            return "fail";
 
         memberRepository.save(member);
         return "success";
-
     }
 
     /**
      * 전체 회원 조회
      */
-    public List<member> findMembers(){
+    public List<Member> findMembers(){
         return memberRepository.findAll();
     }
 
-    public Optional<member> findOne(String memberUsername){
+    public Optional<Member> findOne(String memberUsername){
         return memberRepository.findByUsername(memberUsername);
     }
  }

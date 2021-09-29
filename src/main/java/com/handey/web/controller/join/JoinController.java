@@ -1,9 +1,8 @@
 package com.handey.web.controller.join;
 
-import com.handey.web.domain.join.member;
-import com.handey.web.service.Joinservice;
+import com.handey.web.domain.join.Member;
+import com.handey.web.service.JoinService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -11,24 +10,20 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-@Controller
-public class joinController {
+@RestController
+public class JoinController {
 
-    private final Joinservice joinservice;
+    private final JoinService joinService;
 
     @Autowired
-    public joinController(Joinservice joinservice) {
-        this.joinservice = joinservice;
+    public JoinController(JoinService joinservice) {
+        this.joinService = joinservice;
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PostMapping("/register/{Id}")
-    @ResponseBody
-
-    public String registerUser(@PathVariable Long Id, @RequestBody member newMember){
-
-        return joinservice.join(newMember);
-}
+    @PostMapping("/register")
+    public String registerUser(@RequestBody Member newMember){
+        return joinService.join(newMember);
+    }
 
     public static class Hashing {
         public static final String SALT = "!@salt$%^&";
@@ -49,4 +44,4 @@ public class joinController {
             }
         }
     }
-    }
+}
