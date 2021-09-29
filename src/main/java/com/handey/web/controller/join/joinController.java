@@ -1,7 +1,6 @@
 package com.handey.web.controller.join;
 
 import com.handey.web.domain.join.member;
-import com.handey.web.repository.join.MemberRepository;
 import com.handey.web.service.Joinservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,37 +14,24 @@ import java.security.NoSuchAlgorithmException;
 @Controller
 public class joinController {
 
+    private final Joinservice joinservice;
+
     @Autowired
-    MemberRepository memberRepository;
+    public joinController(Joinservice joinservice) {
+        this.joinservice = joinservice;
+    }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/register/{Id}")
     @ResponseBody
+
     public String registerUser(@PathVariable Long Id, @RequestBody member newMember){
 
-        String username = newMember.getUsername();
-        String password = Hashing.hashingPassword(newMember.getPassword());
-        String email = newMember.getEmail();
+        return joinservice.join(newMember);
+}
 
-        if(username.equals("")||password.equals("")||email.equals(""))
-            return "fail";
-
-        member member = new member();
-        member.setUsername(username);
-        member.setPassword(password);
-        member.setEmail(email);
-
-        if (memberRepository.findByUsername(email) != null)
-            return "fail";
-
-        memberRepository.save(member);
-        return "success";
-
-    }
-
-    public static class Hashing{
-
-        public static final String HASH = "~!@#$%^&*";
+    public static class Hashing {
+        public static final String SALT = "!@salt$%^&";
 
         public static String hashingPassword(String input){
             try{
@@ -59,10 +45,8 @@ public class joinController {
                 }
                 return hexString.toString();
             } catch (NoSuchAlgorithmException e){
-               return input;
+                return input;
             }
         }
     }
-
-
-}
+    }
