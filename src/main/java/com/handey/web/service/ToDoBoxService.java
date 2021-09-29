@@ -99,6 +99,8 @@ public class ToDoBoxService {
         toDoBox.setTitle(trashBox.getTitle());
         toDoBox.setNoTitle(trashBox.isNoTitle());
 
+        toDoBoxRepository.save(toDoBox);
+
         trashBox.getTrashElmList().forEach(trashElm -> {
             ToDoElm toDoElm = new ToDoElm();
 
@@ -108,7 +110,6 @@ public class ToDoBoxService {
             toDoElmRepository.save(toDoBox, toDoElm);
         });
 
-        toDoBoxRepository.save(toDoBox);
         return toDoBox.getId();
     }
 }

@@ -44,4 +44,13 @@ public class TrashController {
         trashBoxService.deleteTrashBox(trashBoxId);
         return true;
     }
+
+    /**
+     * Only for test
+     */
+    @PostMapping("/trash")
+    public boolean createTrash(@RequestBody TrashBox trashBox) {
+        trashBoxService.createTrashBoxWithElms(trashBox);
+        return true;
+    }
 }

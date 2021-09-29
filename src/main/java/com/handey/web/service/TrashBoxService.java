@@ -1,6 +1,5 @@
 package com.handey.web.service;
 
-import com.handey.web.common.exception.ToDoNoDataFoundException;
 import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.domain.trash.TrashBox;
 import com.handey.web.domain.trash.TrashElm;
@@ -35,6 +34,8 @@ public class TrashBoxService {
         trashBox.setRegisterDt(today);
         trashBox.setEndDt(today.plus(Period.ofDays(7)));
 
+        trashBoxRepository.save(trashBox);
+
         toDoBox.getToDoElmList().forEach(toDoElm -> {
             TrashElm trashElm = new TrashElm();
             trashElm.setContent(toDoElm.getContent());
@@ -44,8 +45,15 @@ public class TrashBoxService {
             trashElmRepository.save(trashElm);
         });
 
-        trashBoxRepository.save(trashBox);
         return trashBox.getId();
+    }
+
+    /**
+     * only for test
+     */
+    public void createTrashBoxWithElms(TrashBox trashBox) {
+        trashBoxRepository.save(trashBox);
+        trashBox.getTrashElmList().forEach(trashElmRepository::save);
     }
 
     public Optional<TrashBox> getOneTrashBox(Long trashBoxId) {
