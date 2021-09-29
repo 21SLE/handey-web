@@ -4,7 +4,6 @@ import com.handey.web.domain.history.ToDoBoxHst;
 import com.handey.web.domain.history.ToDoElmHst;
 import com.handey.web.service.ToDoBoxHstService;
 import com.handey.web.service.ToDoElmHstService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,21 +41,5 @@ public class ToDoHstController {
     public boolean deleteToDoElmHst(@PathVariable Long toDoElmHstId) {
         toDoElmHstService.deleteToDoElmHst(toDoElmHstId);
         return true;
-    }
-
-    /**
-     * 테스트용 api (백엔드에서 매일 이 작업 반복되게 개발될 예정)
-     */
-    @PostMapping("/history/toDoBox")
-    public Long createToDoBoxHst(@RequestBody ToDoBoxHst toDoBoxHst) {
-        Long toDoBoxHstId = toDoBoxHstService.createToDoBoxHst(toDoBoxHst);
-
-        toDoBoxHst.getToDoElmHstList().forEach(toDoElmHst -> {
-            toDoElmHst.setToDoBoxHst(toDoBoxHst);
-            toDoElmHstService.createToElmHst(toDoElmHst);
-        });
-
-        return toDoBoxHstId;
-
     }
 }
