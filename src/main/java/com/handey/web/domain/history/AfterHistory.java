@@ -32,7 +32,7 @@ public class AfterHistory {
     private java.sql.Timestamp dateField;
 
     @Column(name = "user_id")
-    private String user_id;
+    private Long user_id;
 
     @Column(name = "subtitle")
     @ColumnDefault("0")
