@@ -19,15 +19,11 @@ public class JoinService {
         this.memberRepository = memberRepository;
     }
 
-    public String join(Member newMember) {
+    public Member join(Member newMember) {
         //같은 email 중복회원은 안된다.
-
         String username = newMember.getUsername();
         String password = JoinController.Hashing.hashingPassword(newMember.getPassword());
         String email = newMember.getEmail();
-
-        if(username.equals("")||password.equals("")||email.equals(""))
-            return "fail";
 
         Member member = new Member();
         member.setUsername(username);
@@ -37,8 +33,7 @@ public class JoinService {
 //        if (memberRepository.findByUsername(username) != null)
 //            return "fail";
 
-        memberRepository.save(member);
-        return "success";
+        return memberRepository.save(member);
     }
 
     /**
