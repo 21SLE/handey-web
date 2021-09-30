@@ -11,14 +11,14 @@ import org.springframework.context.annotation.Configuration;
 public class SpringConfig {
 
     // spring data jpa 방법
-    private final ToDoBoxRepository toDoBoxRepository;
-    private final ToDoElmRepository toDoElmRepository;
-
-    @Autowired
-    public SpringConfig(ToDoBoxRepository toDoBoxRepository, ToDoElmRepository toDoElmRepository) {
-        this.toDoBoxRepository = toDoBoxRepository;
-        this.toDoElmRepository = toDoElmRepository;
-    }
+//    private final ToDoBoxRepository toDoBoxRepository;
+//    private final ToDoElmRepository toDoElmRepository;
+//
+//    @Autowired
+//    public SpringConfig(ToDoBoxRepository toDoBoxRepository, ToDoElmRepository toDoElmRepository) {
+//        this.toDoBoxRepository = toDoBoxRepository;
+//        this.toDoElmRepository = toDoElmRepository;
+//    }
 
 
     // jpa 방법
@@ -36,11 +36,11 @@ public class SpringConfig {
 //        this.dataSource = dataSource;
 //    }
 
-    @Bean
-    public ToDoBoxService toDoService() {
-        return new ToDoBoxService(toDoBoxRepository, toDoElmRepository);
-//        return new ToDoService(toDoRepository());
-    }
+//    @Bean
+//    public ToDoBoxService toDoService() {
+//        return new ToDoBoxService(toDoBoxRepository, toDoElmRepository);
+////        return new ToDoService(toDoRepository());
+//    }
 
 //    @Bean
 //    public ToDoRepository toDoRepository() {

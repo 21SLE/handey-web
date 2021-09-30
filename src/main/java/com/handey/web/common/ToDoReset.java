@@ -42,7 +42,7 @@ public class ToDoReset {
 //    @Scheduled(fixedDelay=1000000)
     @Transactional
     public void resetToDo(){
-        System.out.println("스케줄링 테스트");
+        System.out.println("resetToDo 테스트");
         toDoBoxService.getToDoBoxList().forEach(toDoBox -> {
             // history table로 복사
             boolean doesToDoBoxNeedToBeDeleted = toDoBoxHstService.createToDoBoxHst(toDoBox);

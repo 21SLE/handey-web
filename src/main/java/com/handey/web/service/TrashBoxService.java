@@ -1,8 +1,11 @@
 package com.handey.web.service;
 
+import com.handey.web.common.exception.ToDoNoDataFoundException;
 import com.handey.web.domain.home.ToDoBox;
+import com.handey.web.domain.join.Member;
 import com.handey.web.domain.trash.TrashBox;
 import com.handey.web.domain.trash.TrashElm;
+import com.handey.web.repository.join.MemberRepository;
 import com.handey.web.repository.trash.TrashBoxRepository;
 import com.handey.web.repository.trash.TrashElmRepository;
 import org.springframework.stereotype.Service;
@@ -18,16 +21,19 @@ import java.util.Optional;
 public class TrashBoxService {
     private final TrashBoxRepository trashBoxRepository;
     private final TrashElmRepository trashElmRepository;
+    private final MemberRepository memberRepository;
 
-    public TrashBoxService(TrashBoxRepository trashBoxRepository, TrashElmRepository trashElmRepository) {
+    public TrashBoxService(TrashBoxRepository trashBoxRepository, TrashElmRepository trashElmRepository, MemberRepository memberRepository) {
         this.trashBoxRepository = trashBoxRepository;
         this.trashElmRepository = trashElmRepository;
+        this.memberRepository = memberRepository;
     }
 
-    public Long createTrashBox(ToDoBox toDoBox) {
+    public Long createTrashBox(Long userId, ToDoBox toDoBox) {
         TrashBox trashBox = new TrashBox();
         trashBox.setTitle(toDoBox.getTitle());
         trashBox.setNoTitle(toDoBox.isNoTitle());
+        trashBox.setMember(memberRepository.findById(userId).orElseThrow(ToDoNoDataFoundException::new));
 
         LocalDate today = LocalDate.now();
 
