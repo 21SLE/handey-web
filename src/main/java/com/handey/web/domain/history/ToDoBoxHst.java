@@ -1,7 +1,9 @@
 package com.handey.web.domain.history;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.handey.web.domain.join.Member;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
@@ -35,4 +37,9 @@ public class ToDoBoxHst {
     @OneToMany(mappedBy = "toDoBoxHst")
     @JsonManagedReference
     private List<ToDoElmHst> toDoElmHstList = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private Member member;
 }

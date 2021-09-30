@@ -17,24 +17,16 @@ public class MemoController {
     /**
      * 메모 조회
      */
-    @GetMapping("/memo/{memoId}")
-    public Optional<Memo> getMemo(@PathVariable Long memoId) {
-        return memoService.getMemo(memoId);
-    }
-
-    /**
-     * 메모 생성
-     */
-    @PostMapping("/memo")
-    public Long createMemo() {
-        return memoService.createMemo();
+    @GetMapping("/user/{userId}/memo")
+    public Optional<Memo> getMemoByUserId(@PathVariable Long userId) {
+        return memoService.getMemoByUserId(userId);
     }
 
     /**
      * 메모 수정
      */
-    @PutMapping("/memo/{memoId}")
-    public boolean updateMemoContent(@PathVariable Long memoId, @RequestBody MemoParam param) {
-        return memoService.updateMemoContent(memoId, param);
+    @PutMapping("/user/{userId}/memo")
+    public boolean updateMemoContent(@PathVariable Long userId, @RequestBody MemoParam param) {
+        return memoService.updateMemoContent(userId, param);
     }
 }

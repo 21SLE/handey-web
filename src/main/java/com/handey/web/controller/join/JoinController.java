@@ -2,9 +2,9 @@ package com.handey.web.controller.join;
 
 import com.handey.web.domain.join.Member;
 import com.handey.web.service.JoinService;
+import com.handey.web.service.MemoService;
 import com.handey.web.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +18,13 @@ public class JoinController {
 
     private final JoinService joinService;
     private final UserInfoService userInfoService;
+    private final MemoService memoService;
 
     @Autowired
-    public JoinController(JoinService joinservice, UserInfoService userInfoService) {
+    public JoinController(JoinService joinservice, UserInfoService userInfoService, MemoService memoService) {
         this.joinService = joinservice;
         this.userInfoService = userInfoService;
+        this.memoService = memoService;
     }
 
     @PostMapping("/register")
@@ -37,6 +39,8 @@ public class JoinController {
 
         Member savedMember = joinService.join(newMember);
         userInfoService.createDefaultUserInfo(savedMember);
+        memoService.createMemo(savedMember);
+
         return "success";
     }
 

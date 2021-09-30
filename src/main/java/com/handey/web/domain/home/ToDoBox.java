@@ -1,6 +1,7 @@
 package com.handey.web.domain.home;
 
 import com.fasterxml.jackson.annotation.*;
+import com.handey.web.domain.join.Member;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -36,6 +37,11 @@ public class ToDoBox {
     @OneToMany(mappedBy = "toDoBox")
     @JsonManagedReference
     private List<ToDoElm> toDoElmList = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private Member member;
 
    @Transactional
    public void update(ToDoBox toDoBox) {
