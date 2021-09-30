@@ -1,8 +1,7 @@
 package com.handey.web.service;
 
-import com.handey.web.common.exception.ToDoNoDataFoundException;
+import com.handey.web.common.exception.MemberNoDataFoundException;
 import com.handey.web.domain.home.ToDoBox;
-import com.handey.web.domain.join.Member;
 import com.handey.web.domain.trash.TrashBox;
 import com.handey.web.domain.trash.TrashElm;
 import com.handey.web.repository.join.MemberRepository;
@@ -33,7 +32,7 @@ public class TrashBoxService {
         TrashBox trashBox = new TrashBox();
         trashBox.setTitle(toDoBox.getTitle());
         trashBox.setNoTitle(toDoBox.isNoTitle());
-        trashBox.setMember(memberRepository.findById(userId).orElseThrow(ToDoNoDataFoundException::new));
+        trashBox.setMember(memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new));
 
         LocalDate today = LocalDate.now();
 
@@ -57,7 +56,8 @@ public class TrashBoxService {
     /**
      * only for test
      */
-    public void createTrashBoxWithElms(TrashBox trashBox) {
+    public void createTrashBoxWithElms(Long userId, TrashBox trashBox) {
+        trashBox.setMember(memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new));
         trashBoxRepository.save(trashBox);
         trashBox.getTrashElmList().forEach(trashElmRepository::save);
     }
@@ -68,6 +68,10 @@ public class TrashBoxService {
 
     public List<TrashBox> getTrashBoxList() {
         return trashBoxRepository.findAll();
+    }
+
+    public List<TrashBox> getTrashBoxListByUserId(Long userId) {
+        return trashBoxRepository.findByUserId(userId);
     }
 
     public void deleteTrashBoxListByDate(LocalDate trashBoxDate) {
