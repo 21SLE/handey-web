@@ -17,12 +17,12 @@ public class AfterHistoryController {
         this.afterHistoryService = afterHistoryService;
     }
 
-    @GetMapping("/history/afterList")
+    @GetMapping("/user/{userId}/history/afterList")
     public List<AfterHistory> getAfterList() {
         return afterHistoryService.getAfterList();
     }
 
-    @DeleteMapping("history/afterList/{afterId}")
+    @DeleteMapping("/user/{userId}/history/afterList/{afterId}")
     public boolean deleteAfter(@PathVariable Long afterId) {
         afterHistoryService.deleteAfter(afterId);
         return true;

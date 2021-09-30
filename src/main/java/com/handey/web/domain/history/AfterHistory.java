@@ -28,7 +28,7 @@ public class AfterHistory {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "date")
+    @Column(name = "hist_date")
     private java.sql.Timestamp dateField;
 
     @Column(name = "user_id")
