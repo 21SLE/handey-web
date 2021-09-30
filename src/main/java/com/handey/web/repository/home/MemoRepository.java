@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface MemoRepository {
     Memo save(Memo memo);
-    Optional<Memo> findById(Long id);
+    Optional<Memo> findByUserId(Long id);
 }

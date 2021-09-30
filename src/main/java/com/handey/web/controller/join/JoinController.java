@@ -2,7 +2,10 @@ package com.handey.web.controller.join;
 
 import com.handey.web.domain.join.Member;
 import com.handey.web.service.JoinService;
+import com.handey.web.service.MemoService;
+import com.handey.web.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -14,15 +17,31 @@ import java.security.NoSuchAlgorithmException;
 public class JoinController {
 
     private final JoinService joinService;
+    private final UserInfoService userInfoService;
+    private final MemoService memoService;
 
     @Autowired
-    public JoinController(JoinService joinservice) {
+    public JoinController(JoinService joinservice, UserInfoService userInfoService, MemoService memoService) {
         this.joinService = joinservice;
+        this.userInfoService = userInfoService;
+        this.memoService = memoService;
     }
 
     @PostMapping("/register")
+    @Transactional
     public String registerUser(@RequestBody Member newMember){
-        return joinService.join(newMember);
+        String username = newMember.getUsername();
+        String password = JoinController.Hashing.hashingPassword(newMember.getPassword());
+        String email = newMember.getEmail();
+
+        if(username.equals("")||password.equals("")||email.equals(""))
+            return "fail";
+
+        Member savedMember = joinService.join(newMember);
+        userInfoService.createDefaultUserInfo(savedMember);
+        memoService.createMemo(savedMember);
+
+        return "success";
     }
 
     public static class Hashing {

@@ -20,8 +20,8 @@ public class JPAMemoRepository implements MemoRepository{
     }
 
     @Override
-    public Optional<Memo> findById(Long id) {
-        Memo memo = em.find(Memo.class, id);
+    public Optional<Memo> findByUserId(Long userId) {
+        Memo memo = em.find(Memo.class, userId);
         return Optional.ofNullable(memo);
     }
 }

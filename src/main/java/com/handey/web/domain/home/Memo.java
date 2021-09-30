@@ -1,5 +1,7 @@
 package com.handey.web.domain.home;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.handey.web.domain.join.Member;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
@@ -20,6 +22,11 @@ public class Memo {
 
     @Column(name = "content")
     private String content;
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private Member member;
 
     @Transactional
     public void updateMemo(String newContent) {
