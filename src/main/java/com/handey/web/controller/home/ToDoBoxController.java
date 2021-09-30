@@ -76,11 +76,11 @@ public class ToDoBoxController {
     /**
      * 투두 박스 삭제
      */
-    @DeleteMapping("user/toDoBox/{toDoBoxId}")
+    @DeleteMapping("user/{userId}/toDoBox/{toDoBoxId}")
     @Transactional
-    public boolean deleteToDoBox(@PathVariable Long toDoBoxId) {
+    public boolean deleteToDoBox(@PathVariable Long userId, @PathVariable Long toDoBoxId) {
         // 투두 박스 삭제시 휴지통으로 이동
-        trashBoxService.createTrashBox(toDoBoxService.findOneToDoBox(toDoBoxId).orElseThrow(WeeklyNoDataFoundException::new));
+        trashBoxService.createTrashBox(userId, toDoBoxService.findOneToDoBox(toDoBoxId).orElseThrow(WeeklyNoDataFoundException::new));
         toDoBoxService.deleteToDoBox(toDoBoxId);
         return true;
     }
