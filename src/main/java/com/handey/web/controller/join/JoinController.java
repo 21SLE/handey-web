@@ -1,10 +1,11 @@
 package com.handey.web.controller.join;
 
-import com.handey.web.domain.join.member;
-import com.handey.web.repository.join.MemberRepository;
-import com.handey.web.service.Joinservice;
+import com.handey.web.domain.join.Member;
+import com.handey.web.service.JoinService;
+import com.handey.web.service.MemoService;
+import com.handey.web.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -12,40 +13,39 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-@Controller
-public class joinController {
+@RestController
+public class JoinController {
+
+    private final JoinService joinService;
+    private final UserInfoService userInfoService;
+    private final MemoService memoService;
 
     @Autowired
-    MemberRepository memberRepository;
+    public JoinController(JoinService joinservice, UserInfoService userInfoService, MemoService memoService) {
+        this.joinService = joinservice;
+        this.userInfoService = userInfoService;
+        this.memoService = memoService;
+    }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PostMapping("/register/{Id}")
-    @ResponseBody
-    public String registerUser(@PathVariable Long Id, @RequestBody member newMember){
-
+    @PostMapping("/register")
+    @Transactional
+    public String registerUser(@RequestBody Member newMember){
         String username = newMember.getUsername();
-        String password = Hashing.hashingPassword(newMember.getPassword());
+        String password = JoinController.Hashing.hashingPassword(newMember.getPassword());
         String email = newMember.getEmail();
 
         if(username.equals("")||password.equals("")||email.equals(""))
             return "fail";
 
-        member member = new member();
-        member.setUsername(username);
-        member.setPassword(password);
-        member.setEmail(email);
+        Member savedMember = joinService.join(newMember);
+        userInfoService.createDefaultUserInfo(savedMember);
+        memoService.createMemo(savedMember);
 
-        if (memberRepository.findByUsername(email) != null)
-            return "fail";
-
-        memberRepository.save(member);
         return "success";
-
     }
 
-    public static class Hashing{
-
-        public static final String HASH = "~!@#$%^&*";
+    public static class Hashing {
+        public static final String SALT = "!@salt$%^&";
 
         public static String hashingPassword(String input){
             try{
@@ -59,10 +59,8 @@ public class joinController {
                 }
                 return hexString.toString();
             } catch (NoSuchAlgorithmException e){
-               return input;
+                return input;
             }
         }
     }
-
-
 }

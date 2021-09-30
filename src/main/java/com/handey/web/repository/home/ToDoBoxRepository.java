@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface ToDoBoxRepository {
     ToDoBox save(ToDoBox toDoBox);
     Optional<ToDoBox> findById(Long id);
-    Optional<ToDoBox> findByTitle(String title);
     List<ToDoBox> findAll();
+    List<ToDoBox> findAllByUserId(Long userId);
     void deleteById(Long id);
 }
