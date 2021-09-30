@@ -45,7 +45,7 @@ public class ToDoReset {
         System.out.println("resetToDo 테스트");
         toDoBoxService.getToDoBoxList().forEach(toDoBox -> {
             // history table로 복사
-            boolean doesToDoBoxNeedToBeDeleted = toDoBoxHstService.createToDoBoxHst(toDoBox);
+            boolean doesToDoBoxNeedToBeDeleted = toDoBoxHstService.createToDoBoxHst(toDoBox.getMember(), toDoBox);
 
             // todoelm 모두 completed이면 todobox 삭제
             if(doesToDoBoxNeedToBeDeleted) {

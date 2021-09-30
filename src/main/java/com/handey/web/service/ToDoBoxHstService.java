@@ -6,6 +6,7 @@ import com.handey.web.domain.history.ToDoBoxHst;
 import com.handey.web.domain.history.ToDoElmHst;
 import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.domain.home.ToDoElm;
+import com.handey.web.domain.join.Member;
 import com.handey.web.repository.history.ToDoBoxHstRepository;
 import com.handey.web.repository.history.ToDoElmHstRepository;
 import org.springframework.stereotype.Service;
@@ -27,13 +28,14 @@ public class ToDoBoxHstService {
         this.toDoElmHstRepository = toDoElmHstRepository;
     }
 
-    public boolean createToDoBoxHst(ToDoBox toDoBox) {
+    public boolean createToDoBoxHst(Member member, ToDoBox toDoBox) {
         ToDoBoxHst toDoBoxHst = new ToDoBoxHst();
 
         // 어제 날짜로 저장
         toDoBoxHst.setSaveDt(LocalDate.now().minus(Period.ofDays(1)));
         toDoBoxHst.setTitle(toDoBox.getTitle());
 
+        toDoBoxHst.setMember(member);
         toDoBoxHstRepository.save(toDoBoxHst);
 
         List<ToDoElm> toDoElmList = toDoBox.getToDoElmList();
@@ -63,5 +65,19 @@ public class ToDoBoxHstService {
 
     public List<ToDoBoxHst> getToDoBoxHstListByDate(LocalDate searchDt) {
         return toDoBoxHstRepository.findByDate(searchDt);
+    }
+
+    /**
+     * 회원 투두 히스토리 박스 전체 조회
+     */
+    public List<ToDoBoxHst> getToDoBoxHstListByUserId(Long userId) {
+        return toDoBoxHstRepository.findByUserId(userId);
+    }
+
+    /**
+     * 회원 투두 히스토리 박스 날짜별 조회
+     */
+    public List<ToDoBoxHst> getToDoBoxHstListByUserIdAndDate(Long userId, LocalDate searchDt) {
+        return toDoBoxHstRepository.findByUserIdAndDate(userId, searchDt);
     }
 }

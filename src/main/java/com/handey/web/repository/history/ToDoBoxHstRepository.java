@@ -12,5 +12,7 @@ public interface ToDoBoxHstRepository {
     Optional<ToDoBoxHst> findById(Long id);
     List<ToDoBoxHst> findByDate(LocalDate saveDt);
     List<ToDoBoxHst> findAll();
+    List<ToDoBoxHst> findByUserId(Long userId);
+    List<ToDoBoxHst> findByUserIdAndDate(Long userId, LocalDate saveDt);
     void deleteById(Long id);
 }

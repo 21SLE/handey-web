@@ -46,6 +46,20 @@ public class JPAToDoBoxHstRepository implements ToDoBoxHstRepository{
     }
 
     @Override
+    public List<ToDoBoxHst> findByUserId(Long userId) {
+        return em.createQuery("select m from ToDoBoxHst m where m.member.id = :userId", ToDoBoxHst.class)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
+
+    @Override
+    public List<ToDoBoxHst> findByUserIdAndDate(Long userId, LocalDate saveDt) {
+        return em.createQuery("select m from ToDoBoxHst m where m.member.id = :userId and m.saveDt = :saveDt", ToDoBoxHst.class)
+                .setParameter("userId", userId).setParameter("saveDt", saveDt)
+                .getResultList();
+    }
+
+    @Override
     public void deleteById(Long id) {
         ToDoBoxHst toDoboxHst = em.find(ToDoBoxHst.class, id);
         Assert.notNull(toDoboxHst,"To Do Box History must not be null!");
