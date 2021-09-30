@@ -100,3 +100,14 @@ create table trash_elm
     primary key (id),
     foreign key (trash_box_id) references trash_box(id) on delete cascade
 );
+
+drop table if exists user_info CASCADE;
+create table user_info
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
+    resetTime bigint default 0,
+    theme bigint default 1,
+    user_id bigint not null,
+    primary key (id),
+    foreign key (user_id) references join_mem(id) on delete cascade
+);
