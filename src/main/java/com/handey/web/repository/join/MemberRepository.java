@@ -1,11 +1,16 @@
 package com.handey.web.repository.join;
 
 
-import com.handey.web.domain.join.member;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.handey.web.domain.join.Member;
 
-public interface MemberRepository extends JpaRepository<member,Long> {
+import java.util.List;
+import java.util.Optional;
 
-    public member findByUsername(String username);
-    public member findByUsernameAndPassword(String username, String password);
+public interface MemberRepository{
+
+    Member save(Member member);//회원이 저장소에 저장됨
+    Optional<Member> findById(Long id);
+    Optional <Member> findByUsername(String username);
+    Optional <Member> findByUsernameAndPassword(String username, String password);
+    List<Member> findAll();//저장된 모든 회원 list 반환
 }
