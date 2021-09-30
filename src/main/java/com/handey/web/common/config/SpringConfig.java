@@ -1,7 +1,7 @@
 package com.handey.web.common.config;
 
 import com.handey.web.repository.home.ToDoBoxRepository;
-//import com.handey.web.repository.join.MemberRepository;
+import com.handey.web.repository.home.ToDoElmRepository;
 import com.handey.web.service.ToDoBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,11 +12,12 @@ public class SpringConfig {
 
     // spring data jpa 방법
     private final ToDoBoxRepository toDoBoxRepository;
-//    private final MemberRepository memberRepository;
+    private final ToDoElmRepository toDoElmRepository;
 
     @Autowired
-    public SpringConfig(ToDoBoxRepository toDoBoxRepository) {
+    public SpringConfig(ToDoBoxRepository toDoBoxRepository, ToDoElmRepository toDoElmRepository) {
         this.toDoBoxRepository = toDoBoxRepository;
+        this.toDoElmRepository = toDoElmRepository;
     }
 
 
@@ -37,7 +38,7 @@ public class SpringConfig {
 
     @Bean
     public ToDoBoxService toDoService() {
-        return new ToDoBoxService(toDoBoxRepository);
+        return new ToDoBoxService(toDoBoxRepository, toDoElmRepository);
 //        return new ToDoService(toDoRepository());
     }
 
@@ -52,10 +53,4 @@ public class SpringConfig {
 //    public WeeklyElmRepository weeklyElmRepository() {
 //        return new WeeklyElmRepository();
 //    }
-
-//    @Bean
-//    public JoinService joinService(){
-//        return new JoinService(memberRepository);
-//    }
-
 }
