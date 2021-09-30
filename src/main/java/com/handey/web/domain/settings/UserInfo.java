@@ -1,5 +1,6 @@
 package com.handey.web.domain.settings;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.handey.web.controller.settings.UserInfoParam;
 import com.handey.web.domain.join.Member;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class UserInfo {
     @Column(name = "theme", length = 1)
     private String theme;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "userId")
     private Member member;

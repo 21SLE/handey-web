@@ -40,12 +40,13 @@ public class UserInfoController {
         return true;
     }
 
-    /**
-     * user info 삭제 by userId
-     */
-    @DeleteMapping("/user/{userId}/info")
-    public boolean deleteUserInfoByUserId(@PathVariable Long userId) {
-        userInfoService.deleteUserInfoByUserId(userId);
-        return true;
-    }
+    // user 탈퇴시 삭제되는걸로...
+//    /**
+//     * user info 삭제 by userId
+//     */
+//    @DeleteMapping("/user/{userId}/info")
+//    public boolean deleteUserInfoByUserId(@PathVariable Long userId) {
+//        userInfoService.deleteUserInfoByUserId(userId);
+//        return true;
+//    }
 }
