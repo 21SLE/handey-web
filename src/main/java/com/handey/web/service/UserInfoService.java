@@ -1,7 +1,6 @@
 package com.handey.web.service;
 
 import com.handey.web.common.exception.UserInfoNoDataFoundException;
-import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.controller.settings.UserInfoParam;
 import com.handey.web.domain.join.Member;
 import com.handey.web.domain.settings.UserInfo;
@@ -42,6 +41,10 @@ public class UserInfoService {
 
     public List<UserInfo> getUserInfoList() {
         return userInfoRepository.findAll();
+    }
+
+    public List<Member> getUserListByResetTime(String resetTime) {
+        return userInfoRepository.findMembersByResetTime(resetTime);
     }
 
     public void deleteUserInfoByUserInfoId(Long id) {

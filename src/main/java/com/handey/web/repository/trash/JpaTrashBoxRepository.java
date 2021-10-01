@@ -1,7 +1,5 @@
 package com.handey.web.repository.trash;
 
-import com.handey.web.domain.history.ToDoBoxHst;
-import com.handey.web.domain.history.ToDoElmHst;
 import com.handey.web.domain.trash.TrashBox;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +28,13 @@ public class JpaTrashBoxRepository implements TrashBoxRepository{
     public Optional<TrashBox> findById(Long id) {
         TrashBox trashBox = em.find(TrashBox.class, id);
         return Optional.ofNullable(trashBox);
+    }
+
+    @Override
+    public List<TrashBox> findByUserId(Long userId) {
+        return em.createQuery("select m from TrashBox m where m.member.id = :userId", TrashBox.class)
+                .setParameter("userId", userId)
+                .getResultList();
     }
 
     @Override

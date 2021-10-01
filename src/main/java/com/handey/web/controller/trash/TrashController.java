@@ -1,6 +1,6 @@
 package com.handey.web.controller.trash;
 
-import com.handey.web.common.exception.WeeklyNoDataFoundException;
+import com.handey.web.common.exception.TrashNoDataFoundException;
 import com.handey.web.domain.trash.TrashBox;
 import com.handey.web.service.ToDoBoxService;
 import com.handey.web.service.TrashBoxService;
@@ -27,9 +27,17 @@ public class TrashController {
     }
 
     /**
+     * 회원 휴지통 조회
+     */
+    @GetMapping("/user/{userId}/trashBoxList")
+    public List<TrashBox> getTrashBoxListByUserId(@PathVariable Long userId) {
+        return trashBoxService.getTrashBoxListByUserId(userId);
+    }
+
+    /**
      * 휴지통에서 삭제
      */
-    @DeleteMapping("/trashBox/{trashBoxId}")
+    @DeleteMapping("/user/trashBox/{trashBoxId}")
     public boolean deleteTrashBox(@PathVariable Long trashBoxId) {
         trashBoxService.deleteTrashBox(trashBoxId);
         return true;
@@ -38,9 +46,9 @@ public class TrashController {
     /**
      * 휴지통 -> 투두 복구
      */
-    @PutMapping("/trashBox/{trashBoxId}")
-    public boolean restoreFromTrashToToDo(@PathVariable Long trashBoxId) {
-        toDoBoxService.restoreToDo(trashBoxService.getOneTrashBox(trashBoxId).orElseThrow(WeeklyNoDataFoundException::new));
+    @PutMapping("/user/{userId}/trashBox/{trashBoxId}")
+    public boolean restoreFromTrashToToDo(@PathVariable Long userId, @PathVariable Long trashBoxId) {
+        toDoBoxService.restoreToDo(userId, trashBoxService.getOneTrashBox(trashBoxId).orElseThrow(TrashNoDataFoundException::new));
         trashBoxService.deleteTrashBox(trashBoxId);
         return true;
     }
@@ -48,9 +56,9 @@ public class TrashController {
     /**
      * Only for test
      */
-    @PostMapping("/trash")
-    public boolean createTrash(@RequestBody TrashBox trashBox) {
-        trashBoxService.createTrashBoxWithElms(trashBox);
+    @PostMapping("/user/{userId}/trash")
+    public boolean createTrash(@PathVariable Long userId, @RequestBody TrashBox trashBox) {
+        trashBoxService.createTrashBoxWithElms(userId, trashBox);
         return true;
     }
 }
