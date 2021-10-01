@@ -1,6 +1,6 @@
 package com.handey.web.controller.home;
 
-import com.handey.web.common.exception.WeeklyNoDataFoundException;
+import com.handey.web.common.exception.ToDoNoDataFoundException;
 import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.service.ToDoBoxService;
 import com.handey.web.service.ToDoElmService;
@@ -80,7 +80,7 @@ public class ToDoBoxController {
     @Transactional
     public boolean deleteToDoBox(@PathVariable Long userId, @PathVariable Long toDoBoxId) {
         // 투두 박스 삭제시 휴지통으로 이동
-        trashBoxService.createTrashBox(userId, toDoBoxService.findOneToDoBox(toDoBoxId).orElseThrow(WeeklyNoDataFoundException::new));
+        trashBoxService.createTrashBox(userId, toDoBoxService.findOneToDoBox(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new));
         toDoBoxService.deleteToDoBox(toDoBoxId);
         return true;
     }
@@ -88,9 +88,9 @@ public class ToDoBoxController {
     /**
      * create toDoBox with todoElms only for tests
      */
-    @PostMapping("/toDo")
-    public Long createToDoBox(@RequestBody ToDoParam param) {
-        Long toDoBoxId = toDoBoxService.createToDoBoxObj(param.getUserId());
+    @PostMapping("/user/{userId}/toDo")
+    public Long createToDoBox(@PathVariable Long userId, @RequestBody ToDoParam param) {
+        Long toDoBoxId = toDoBoxService.createToDoBoxObj(userId);
         ToDoBoxParam toDoBoxParam = new ToDoBoxParam();
         toDoBoxParam.setTitle(param.getTitle());
         toDoBoxParam.setFixed(param.isFixed());

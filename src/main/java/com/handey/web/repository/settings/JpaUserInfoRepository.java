@@ -1,7 +1,7 @@
 package com.handey.web.repository.settings;
 
+import com.handey.web.domain.join.Member;
 import com.handey.web.domain.settings.UserInfo;
-import com.handey.web.domain.trash.TrashBox;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
@@ -27,6 +27,13 @@ public class JpaUserInfoRepository implements UserInfoRepository{
     public Optional<UserInfo> findByUserId(Long userId) {
         UserInfo userInfo = em.find(UserInfo.class, userId);
         return Optional.ofNullable(userInfo);
+    }
+
+    @Override
+    public List<Member> findMembersByResetTime(String resetTime) {
+        return em.createQuery("select m.member from UserInfo m where m.resetTime = :resetTime", Member.class)
+                .setParameter("resetTime", resetTime)
+                .getResultList();
     }
 
     @Override

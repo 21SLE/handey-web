@@ -1,12 +1,10 @@
 package com.handey.web.service;
 
 import com.handey.web.common.exception.MemberNoDataFoundException;
-import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.controller.home.ToDoBoxParam;
 import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.common.exception.ToDoNoDataFoundException;
 import com.handey.web.domain.home.ToDoElm;
-import com.handey.web.domain.join.Member;
 import com.handey.web.domain.trash.TrashBox;
 import com.handey.web.repository.home.ToDoBoxRepository;
 import com.handey.web.repository.home.ToDoElmRepository;
@@ -44,7 +42,6 @@ public class ToDoBoxService {
      * 투두박스 객체 생성
      */
     public Long createToDoBoxObj(Long userId) {
-        Member member = memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new);
         ToDoBox toDoBox = new ToDoBox();
         toDoBox.setMember(memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new));
         toDoBoxRepository.save(toDoBox);
@@ -110,12 +107,12 @@ public class ToDoBoxService {
     /**
      * 휴지통 -> 투두
      */
-    public Long restoreToDo(TrashBox trashBox) {
+    public Long restoreToDo(Long userId, TrashBox trashBox) {
         ToDoBox toDoBox = new ToDoBox();
 
         toDoBox.setTitle(trashBox.getTitle());
         toDoBox.setNoTitle(trashBox.isNoTitle());
-
+        toDoBox.setMember(memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new));
         toDoBoxRepository.save(toDoBox);
 
         trashBox.getTrashElmList().forEach(trashElm -> {
