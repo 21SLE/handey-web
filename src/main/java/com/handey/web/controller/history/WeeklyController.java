@@ -1,6 +1,7 @@
 package com.handey.web.controller.history;
 
 import com.handey.web.domain.history.WeeklyBox;
+import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.service.WeeklyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,12 @@ public class WeeklyController {
     public List<WeeklyBox> getWeeklyBoxList() {
         return weeklyService.getWeeklyBoxList();
     }
+
+    @GetMapping("/user/{userId}/weeklyBoxList")
+    public List<ToDoBox> getToDoBoxListByUserId(@PathVariable Long userId) {
+        return weeklyService.getWeeklyBoxListByUserId(userId);
+    }
+
 
     @PostMapping("/weeklyBox")
     public Long createWeeklyBoxObj() {

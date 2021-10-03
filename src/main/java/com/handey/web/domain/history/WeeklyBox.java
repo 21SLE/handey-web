@@ -1,6 +1,8 @@
 package com.handey.web.domain.history;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.handey.web.domain.join.Member;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -30,6 +32,11 @@ public class WeeklyBox {
     @Column(name = "clear")
     @ColumnDefault("0")
     private boolean clear;
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private Member member;
 
     @OneToMany(mappedBy = "weeklyBox")  //한 title이 여러 elm을 소지해도 된다. 양방향 관계의 주체가 되는 것은 weeklyBox
     @JsonManagedReference   //양방향에서 주

@@ -4,6 +4,7 @@ import com.handey.web.common.exception.ToDoNoDataFoundException;
 import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.controller.history.WeeklyParam;
 import com.handey.web.domain.history.WeeklyBox;
+import com.handey.web.domain.home.ToDoBox;
 import com.handey.web.repository.history.WeeklyRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +38,10 @@ public class WeeklyService {
         return weeklyRepository.findAll();
     }
 
+    public List<ToDoBox> getWeeklyBoxListByUserId(Long userId) {
+        return weeklyRepository.findByUserId(userId);
+    }
+
     /**
      * WeeklyBox 단건 조회
      */
@@ -68,4 +73,6 @@ public class WeeklyService {
         weeklyBox.updateClear(!weeklyBox.getClear());
         return weeklyBox.getClear();
     }
+
+
 }
