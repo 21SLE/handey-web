@@ -23,12 +23,11 @@ public class WeeklyController {
     }
 
     @GetMapping("/user/{userId}/weeklyBoxList")
-    public List<ToDoBox> getToDoBoxListByUserId(@PathVariable Long userId) {
+    public List<WeeklyBox> getWeeklyBoxListByUserId(@PathVariable Long userId) {
         return weeklyService.getWeeklyBoxListByUserId(userId);
     }
 
-
-    @PostMapping("/weeklyBox")
+    @PostMapping("/user/{userId}/weeklyBox")
     public Long createWeeklyBoxObj() {
         return weeklyService.createWeeklyBoxObj();
     }

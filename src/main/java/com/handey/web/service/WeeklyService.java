@@ -38,7 +38,7 @@ public class WeeklyService {
         return weeklyRepository.findAll();
     }
 
-    public List<ToDoBox> getWeeklyBoxListByUserId(Long userId) {
+    public List<WeeklyBox> getWeeklyBoxListByUserId(Long userId) {
         return weeklyRepository.findByUserId(userId);
     }
 
