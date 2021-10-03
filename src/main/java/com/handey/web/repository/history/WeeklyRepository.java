@@ -12,5 +12,5 @@ public interface WeeklyRepository {
     Optional<WeeklyBox> findByTitle(String title);
     List<WeeklyBox> findAll();
     void deleteById(Long id);
-    List<ToDoBox> findByUserId(Long userId);
+    List<WeeklyBox> findByUserId(Long userId);
 }

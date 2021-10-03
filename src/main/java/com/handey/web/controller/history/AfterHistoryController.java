@@ -1,11 +1,9 @@
 package com.handey.web.controller.history;
 
 import com.handey.web.domain.history.AfterHistory;
+import com.handey.web.domain.history.ToDoBoxHst;
 import com.handey.web.service.AfterHistoryService;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,9 +15,19 @@ public class AfterHistoryController {
         this.afterHistoryService = afterHistoryService;
     }
 
-    @GetMapping("/user/{userId}/history/afterList")
+    @GetMapping("/history/afterList")
     public List<AfterHistory> getAfterList() {
         return afterHistoryService.getAfterList();
+    }
+
+    @GetMapping("/history/after/date")
+    public List<AfterHistory> getAfterListByDate(@RequestBody ToDoHstParam param) {
+        return afterHistoryService.getAfterListByDate(param.getSearchDt());
+    }
+
+    @GetMapping("/user/{userId}/history/afterList")
+    public List<AfterHistory> getAfterListByUserId(@PathVariable Long userId) {
+        return afterHistoryService.getAfterListByUserId(userId);
     }
 
     @DeleteMapping("/user/{userId}/history/afterList/{afterId}")

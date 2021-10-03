@@ -7,6 +7,7 @@ import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +31,16 @@ public class JpaAfterHistoryRepository implements AfterHistoryRepository{
     }
 
     @Override
-    public List<AfterHistory> findByDate(String date) {
-        return em.createQuery("select m from AfterHistory m where m.dateField = :date", AfterHistory.class)
+    public List<AfterHistory> findByDate(LocalDate date) {
+        return em.createQuery("select m from AfterHistory m where m.hist_date = :date", AfterHistory.class)
                 .setParameter("date", date)
+                .getResultList();
+    }
+
+    @Override
+    public List<AfterHistory> findByUserId(Long userId) {
+        return em.createQuery("select m from AfterHistory m where m.member.id = :userId", AfterHistory.class)
+                .setParameter("userId", userId)
                 .getResultList();
     }
 
