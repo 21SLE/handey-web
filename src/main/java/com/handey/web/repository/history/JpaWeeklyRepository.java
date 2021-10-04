@@ -1,5 +1,6 @@
 package com.handey.web.repository.history;
 
+import com.handey.web.domain.history.AfterHistory;
 import com.handey.web.domain.history.WeeklyBox;
 import com.handey.web.domain.home.ToDoElm;
 import org.springframework.stereotype.Repository;
@@ -41,8 +42,14 @@ public class JpaWeeklyRepository implements WeeklyRepository {
     }
 
     @Override
-    public List<WeeklyBox> findAll() {
+    public List<WeeklyBox> findByUserId(Long userId) {
+        return em.createQuery("select m from WeeklyBox m where m.member.id = :userId", WeeklyBox.class)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
 
+    @Override
+    public List<WeeklyBox> findAll() {
         //객체 자체를 조회
         return em.createQuery("select m from WeeklyBox as m", WeeklyBox.class)
                 .getResultList();

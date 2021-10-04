@@ -1,10 +1,11 @@
 package com.handey.web.service;
 
-import com.handey.web.common.exception.ToDoNoDataFoundException;
+import com.handey.web.common.exception.MemberNoDataFoundException;
 import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.controller.history.WeeklyParam;
 import com.handey.web.domain.history.WeeklyBox;
 import com.handey.web.repository.history.WeeklyRepository;
+import com.handey.web.repository.join.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,10 +17,12 @@ import java.util.Optional;
 public class WeeklyService {
 
     private final WeeklyRepository weeklyRepository;
+    private final MemberRepository memberRepository;
 
 
-    public WeeklyService(WeeklyRepository weeklyRepository) {
+    public WeeklyService(WeeklyRepository weeklyRepository, MemberRepository memberRepository) {
         this.weeklyRepository = weeklyRepository;
+        this.memberRepository = memberRepository;
     }
 
     /**
@@ -37,6 +40,10 @@ public class WeeklyService {
         return weeklyRepository.findAll();
     }
 
+    public List<WeeklyBox> getWeeklyBoxListByUserId(Long userId) {
+        return weeklyRepository.findByUserId(userId);
+    }
+
     /**
      * WeeklyBox 단건 조회
      */
@@ -45,8 +52,9 @@ public class WeeklyService {
     }
 
     // Weekly
-    public Long createWeeklyBoxObj() {
+    public Long createWeeklyBoxObj(Long userId) {
         WeeklyBox weeklyBox = new WeeklyBox();
+        weeklyBox.setMember(memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new));
         weeklyRepository.save(weeklyBox);
         return weeklyBox.getId();
     }
@@ -68,4 +76,6 @@ public class WeeklyService {
         weeklyBox.updateClear(!weeklyBox.getClear());
         return weeklyBox.getClear();
     }
+
+
 }
