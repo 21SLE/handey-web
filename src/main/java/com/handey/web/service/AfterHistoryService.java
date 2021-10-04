@@ -37,7 +37,7 @@ public class AfterHistoryService {
         afterHistoryRepository.deleteById(afterId);
     }
 
-    public List<AfterHistory> getAfterListByDate(LocalDate date) {
-        return afterHistoryRepository.findByDate(date);
+    public List<AfterHistory> getAfterListByDate(Long userId, LocalDate date) {
+        return afterHistoryRepository.findByDate(userId, date);
     }
 }

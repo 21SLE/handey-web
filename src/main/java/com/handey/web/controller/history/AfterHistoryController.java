@@ -20,9 +20,9 @@ public class AfterHistoryController {
         return afterHistoryService.getAfterList();
     }
 
-    @GetMapping("/history/after/date")
-    public List<AfterHistory> getAfterListByDate(@RequestBody ToDoHstParam param) {
-        return afterHistoryService.getAfterListByDate(param.getSearchDt());
+    @GetMapping("/user/{userId}/history/after/date")
+    public List<AfterHistory> getAfterListByDate(@PathVariable Long userId, @RequestBody AfterHistoryParam param) {
+        return afterHistoryService.getAfterListByDate(userId, param.getSearchDt());
     }
 
     @GetMapping("/user/{userId}/history/afterList")
@@ -31,7 +31,7 @@ public class AfterHistoryController {
     }
 
     @DeleteMapping("/user/{userId}/history/afterList/{afterId}")
-    public boolean deleteAfter(@PathVariable Long afterId) {
+    public boolean deleteAfter(@PathVariable Long userId, @PathVariable Long afterId) {
         afterHistoryService.deleteAfter(afterId);
         return true;
     }

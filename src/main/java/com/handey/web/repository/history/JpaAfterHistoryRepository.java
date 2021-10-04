@@ -31,15 +31,15 @@ public class JpaAfterHistoryRepository implements AfterHistoryRepository{
     }
 
     @Override
-    public List<AfterHistory> findByDate(LocalDate date) {
-        return em.createQuery("select m from AfterHistory m where m.hist_date = :date", AfterHistory.class)
+    public List<AfterHistory> findByDate(Long userId, LocalDate date) {
+        return em.createQuery("select m from AfterHistory m where m.member.id =: userId and m.hist_date = :date", AfterHistory.class)
                 .setParameter("date", date)
                 .getResultList();
     }
 
     @Override
     public List<AfterHistory> findByUserId(Long userId) {
-        return em.createQuery("select m from AfterHistory m where m.member.id = :userId", AfterHistory.class)
+        return em.createQuery("select m from AfterHistory m where m.member.id =: userId", AfterHistory.class)
                 .setParameter("userId", userId)
                 .getResultList();
     }
