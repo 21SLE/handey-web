@@ -28,8 +28,8 @@ public class WeeklyController {
     }
 
     @PostMapping("/user/{userId}/weeklyBox")
-    public Long createWeeklyBoxObj() {
-        return weeklyService.createWeeklyBoxObj();
+    public Long createWeeklyBoxObj(@PathVariable Long userId) {
+        return weeklyService.createWeeklyBoxObj(userId);
     }
 
     @PutMapping("/weeklyBox/{weeklyId}")
