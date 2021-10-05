@@ -56,23 +56,31 @@ public class MemberService {
                         .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
         AuthEntity authEntity =
                 authRepository
-                        .findByMember(findMem)
+                        .findByUserId(findMem.getId())
                         .orElseThrow(() -> new IllegalArgumentException("Token 이 존재하지 않습니다."));
         String accessToken = "";
         String refreshToken= authEntity.getRefreshToken();
 
+        // refresh token이 유효하다면
         if (tokenUtils.isValidRefreshToken(refreshToken)) {
+            // access token 재발급
+            System.out.println("refresh token이 유효합니다");
             accessToken = tokenUtils.generateJwtToken(authEntity.getMember());
             return TokenResponse.builder()
+                    .userId(findMem.getId())
                     .accessToken(accessToken)
                     .refreshToken(authEntity.getRefreshToken())
+                    .isSucceed(true)
                     .build();
         } else {
+            // refresh 토큰 유효기간 지난경우 refresh token, access token 재발급
+            System.out.println("refresh token이 유효하지 않습니다");
             refreshToken = tokenUtils.saveRefreshToken(findMem);
+            accessToken = tokenUtils.generateJwtToken(authEntity.getMember());
             authEntity.refreshUpdate(refreshToken);
         }
 
-        return TokenResponse.builder().accessToken(accessToken).refreshToken(refreshToken).build();
+        return TokenResponse.builder().userId(findMem.getId()).accessToken(accessToken).refreshToken(refreshToken).isSucceed(true).build();
     }
 
     /**

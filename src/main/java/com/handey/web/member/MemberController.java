@@ -1,11 +1,9 @@
 package com.handey.web.member;
 
 import com.handey.web.common.exception.MemberNoDataFoundException;
-import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.common.security.TokenResponse;
 import com.handey.web.memo.MemoService;
 import com.handey.web.userinfo.UserInfoService;
-import ognl.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +44,13 @@ public class MemberController {
         memoService.createMemo(findMem);
 
         return tokenResponse;
+    }
+
+    @GetMapping("/login")
+    public TokenResponse login(@RequestBody Member member) {
+        String password = MemberController.Hashing.hashingPassword(member.getPassword());
+        member.setPassword(password);
+        return memberService.signIn(member);
     }
 
     public static class Hashing {

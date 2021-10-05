@@ -1,6 +1,5 @@
 package com.handey.web.auth;
 
-import com.handey.web.member.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -15,9 +14,10 @@ public class JpaAuthRepository implements AuthRepository{
     }
 
     @Override
-    public Optional<AuthEntity> findByMember(Member member) {
-        AuthEntity AuthEntity = em.find(AuthEntity.class, member);
-        return Optional.ofNullable(AuthEntity);
+    public Optional<AuthEntity> findByUserId(Long userId) {
+        return Optional.ofNullable(em.createQuery("select m from AuthEntity m where m.member.id =: userId", AuthEntity.class)
+                .setParameter("userId", userId)
+                .getSingleResult());
     }
 
     @Override
