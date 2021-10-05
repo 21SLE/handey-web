@@ -2,6 +2,7 @@ package com.handey.web.weekly;
 
 import com.handey.web.common.exception.MemberNoDataFoundException;
 import com.handey.web.common.exception.WeeklyNoDataFoundException;
+import com.handey.web.member.Member;
 import com.handey.web.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,4 +76,6 @@ public class WeeklyService {
     }
 
 
+    public void createAfter(Member member, WeeklyBox weeklyBox) {
+    }
 }
