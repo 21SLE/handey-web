@@ -1,7 +1,11 @@
 package com.handey.web.member;
 
+import com.handey.web.common.exception.MemberNoDataFoundException;
+import com.handey.web.common.exception.WeeklyNoDataFoundException;
+import com.handey.web.common.security.TokenResponse;
 import com.handey.web.memo.MemoService;
 import com.handey.web.userinfo.UserInfoService;
+import ognl.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -12,34 +16,36 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 @RestController
-public class JoinController {
+public class MemberController {
 
-    private final JoinService joinService;
+    private final MemberService memberService;
     private final UserInfoService userInfoService;
     private final MemoService memoService;
 
     @Autowired
-    public JoinController(JoinService joinservice, UserInfoService userInfoService, MemoService memoService) {
-        this.joinService = joinservice;
+    public MemberController(MemberService memberService, UserInfoService userInfoService, MemoService memoService) {
+        this.memberService = memberService;
         this.userInfoService = userInfoService;
         this.memoService = memoService;
     }
 
     @PostMapping("/register")
     @Transactional
-    public String registerUser(@RequestBody Member newMember){
+    public TokenResponse registerUser(@RequestBody Member newMember){
         String username = newMember.getUsername();
-        String password = JoinController.Hashing.hashingPassword(newMember.getPassword());
+        String password = MemberController.Hashing.hashingPassword(newMember.getPassword());
         String email = newMember.getEmail();
 
-        if(username.equals("")||password.equals("")||email.equals(""))
-            return "fail";
+        if(username.equals("")||password.equals("")||email.equals("")) {
+            return TokenResponse.builder().isSucceed(false).build();
+        }
 
-        Member savedMember = joinService.join(newMember);
-        userInfoService.createDefaultUserInfo(savedMember);
-        memoService.createMemo(savedMember);
+        TokenResponse tokenResponse = memberService.join(newMember);
+        Member findMem = memberService.findByUserId(tokenResponse.getUserId()).orElseThrow(MemberNoDataFoundException::new);
+        userInfoService.createDefaultUserInfo(findMem);
+        memoService.createMemo(findMem);
 
-        return "success";
+        return tokenResponse;
     }
 
     public static class Hashing {
