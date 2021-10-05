@@ -1,7 +1,7 @@
 package com.handey.web.member;
 
-import com.handey.web.trash.TrashElm;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -34,17 +34,23 @@ public class JpaMemberRepository implements MemberRepository{
     }
 
     @Override
-    public Optional<Member> findByUsername(String username) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Member> findByUsernameAndPassword(String username, String password) {
-        return Optional.empty();
+    public Optional<Member> findByEmail(String email) {
+        Member member = em.find(Member.class, email);
+        return Optional.ofNullable(member);
     }
 
     @Override
     public List<Member> findAll() {
-        return null;
+        return em.createQuery("select m from Member m", Member.class)
+                .getResultList();
     }
+
+    @Override
+    public void deleteByUserEmailAndPw(String email, String password) {
+        Member member = em.createQuery("select m from Member m where m.email = :email and m.password = :password", Member.class)
+                .setParameter("email", email).setParameter("password", password).getSingleResult();
+        Assert.notNull(member,"Member must not be null!");
+        em.remove(member);
+    }
+
 }

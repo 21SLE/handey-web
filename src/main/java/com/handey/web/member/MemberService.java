@@ -2,6 +2,8 @@ package com.handey.web.member;
 
 import com.handey.web.auth.AuthEntity;
 import com.handey.web.auth.AuthRepository;
+import com.handey.web.common.exception.MemberNoDataFoundException;
+import com.handey.web.common.exception.ToDoNoDataFoundException;
 import com.handey.web.common.security.TokenResponse;
 import com.handey.web.common.security.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +94,19 @@ public class MemberService {
 
     public Optional<Member> findByUserId(Long userId){
         return memberRepository.findById(userId);
+    }
+
+    public Optional<Member> findByUserEmail(String email){
+        return memberRepository.findByEmail(email);
+    }
+
+    public void deleteByUserEmailAndPassword(String email, String password) {
+        memberRepository.deleteByUserEmailAndPw(email, password);
+    }
+
+    public void updatePassword(Long userId, String password) {
+        Member member = memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new);
+        member.updatePassword(password);
     }
  }
 

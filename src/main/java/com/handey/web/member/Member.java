@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Objects;
 
 @Entity
@@ -42,10 +43,9 @@ public class Member {
         return Objects.hash(id, username, email, password);
     }
 
-//    @Builder
-//    public Member(String email, String password) {
-//        this.email = email;
-//        this.password = password;
-//    }
+    @Transactional
+    public void updatePassword(String newPassword) {
+        this.password = newPassword;
+    }
 
 }
