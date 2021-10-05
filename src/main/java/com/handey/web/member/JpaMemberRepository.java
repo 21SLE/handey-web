@@ -1,5 +1,6 @@
 package com.handey.web.member;
 
+import com.handey.web.trash.TrashElm;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -24,6 +25,12 @@ public class JpaMemberRepository implements MemberRepository{
     public Optional<Member> findById(Long id) {
         Member member = em.find(Member.class, id);
         return Optional.ofNullable(member);
+    }
+
+    @Override
+    public Optional<Member> findByUserIdAndPw(String email, String password) {
+        return Optional.ofNullable(em.createQuery("select m from Member m where m.email = :email and m.password = :password", Member.class)
+                .setParameter("email", email).setParameter("password", password).getSingleResult());
     }
 
     @Override
