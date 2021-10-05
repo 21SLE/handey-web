@@ -1,7 +1,8 @@
 package com.handey.web.service;
 
-import com.handey.web.domain.history.WeeklyBox;
-import com.handey.web.repository.history.WeeklyRepository;
+import com.handey.web.weekly.WeeklyBox;
+import com.handey.web.weekly.WeeklyRepository;
+import com.handey.web.weekly.WeeklyService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 class WeeklyServiceIntegrationTest {
 
-    @Autowired WeeklyService weeklyService;
+    @Autowired
+    WeeklyService weeklyService;
     @Autowired
     WeeklyRepository weeklyRepository;
 

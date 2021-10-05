@@ -1,9 +1,11 @@
 package com.handey.web.service;
 
-import com.handey.web.domain.home.ToDoBox;
-import com.handey.web.domain.home.ToDoElm;
-import com.handey.web.repository.home.ToDoElmRepository;
-import com.handey.web.repository.home.ToDoBoxRepository;
+import com.handey.web.todo.ToDoBox;
+import com.handey.web.todo.ToDoElm;
+import com.handey.web.todo.ToDoElmRepository;
+import com.handey.web.todo.ToDoBoxRepository;
+import com.handey.web.todo.ToDoBoxService;
+import com.handey.web.todo.ToDoElmService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +19,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 class ToDoElmServiceIntegrationTest {
 
-    @Autowired ToDoElmService toDoElmService;
+    @Autowired
+    ToDoElmService toDoElmService;
     @Autowired ToDoElmRepository toDoElmRepository;
     @Autowired
     ToDoBoxService toDoBoxService;

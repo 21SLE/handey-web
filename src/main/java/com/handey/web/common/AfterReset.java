@@ -1,9 +1,8 @@
 package com.handey.web.common;
 
-import com.handey.web.domain.join.Member;
-import com.handey.web.service.AfterHistoryService;
-import com.handey.web.service.UserInfoService;
-import com.handey.web.service.WeeklyService;
+import com.handey.web.member.Member;
+import com.handey.web.afterhistory.AfterHistoryService;
+import com.handey.web.userinfo.UserInfoService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

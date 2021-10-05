@@ -1,10 +1,5 @@
 package com.handey.web.common.config;
 
-import com.handey.web.repository.home.ToDoBoxRepository;
-import com.handey.web.repository.home.ToDoElmRepository;
-import com.handey.web.service.ToDoBoxService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration

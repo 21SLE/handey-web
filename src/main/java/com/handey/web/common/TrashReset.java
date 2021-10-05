@@ -1,6 +1,6 @@
 package com.handey.web.common;
 
-import com.handey.web.service.TrashBoxService;
+import com.handey.web.trash.TrashBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

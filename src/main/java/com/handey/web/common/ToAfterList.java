@@ -1,7 +1,7 @@
 package com.handey.web.common;
 
-import com.handey.web.service.AfterHistoryService;
-import com.handey.web.service.WeeklyService;
+import com.handey.web.afterhistory.AfterHistoryService;
+import com.handey.web.weekly.WeeklyService;
 import org.springframework.stereotype.Component;
 
 //clear가 1되면 바로 afterList로 이동하도록

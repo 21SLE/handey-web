@@ -1,9 +1,9 @@
 package com.handey.web.common;
 
-import com.handey.web.domain.join.Member;
-import com.handey.web.service.ToDoBoxHstService;
-import com.handey.web.service.ToDoBoxService;
-import com.handey.web.service.UserInfoService;
+import com.handey.web.member.Member;
+import com.handey.web.todohistory.ToDoBoxHstService;
+import com.handey.web.todo.ToDoBoxService;
+import com.handey.web.userinfo.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
