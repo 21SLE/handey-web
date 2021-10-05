@@ -53,6 +53,19 @@ public class MemberController {
         return memberService.signIn(member);
     }
 
+    @DeleteMapping("/withdrawal")
+    public boolean userWithdrawal(@RequestBody Member member) {
+        memberService.deleteByUserEmailAndPassword(member.getEmail(), MemberController.Hashing.hashingPassword(member.getPassword()));
+        return true;
+    }
+
+    @PutMapping("/user/{userId}/changepassword")
+    public boolean changePassword(@PathVariable Long userId, @RequestBody MemberParam param) {
+        memberService.updatePassword(userId, MemberController.Hashing.hashingPassword(param.getPassword()));
+        return true;
+    }
+
+
     public static class Hashing {
         public static final String SALT = "!@salt$%^&";
 
