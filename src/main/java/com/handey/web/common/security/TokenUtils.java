@@ -21,11 +21,15 @@ public class TokenUtils {   // 토큰 생성 클래스
 
     // Access Token 생성
     public String generateJwtToken(Member member) {
+//      1000L * 60 * 60; // 1시간만 토큰 유효
+//      1000L * 60 * 60 * 48; // 48시간만 토큰 유효
+
         return Jwts.builder()
                 .setSubject(member.getEmail())
                 .setHeader(createHeader())
                 .setClaims(createClaims(member))
-                .setExpiration(createExpireDate(1000 * 60 * 5))
+//                .setExpiration(createExpireDate(1000 * 60 * 5))
+                .setExpiration(createExpireDate(1000L * 60 * 60 * 48))
                 .signWith(SignatureAlgorithm.HS256, createSigningKey(SECRET_KEY))
                 .compact();
     }
