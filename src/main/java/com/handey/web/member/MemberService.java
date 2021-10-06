@@ -3,7 +3,6 @@ package com.handey.web.member;
 import com.handey.web.auth.AuthEntity;
 import com.handey.web.auth.AuthRepository;
 import com.handey.web.common.exception.MemberNoDataFoundException;
-import com.handey.web.common.exception.ToDoNoDataFoundException;
 import com.handey.web.common.security.TokenResponse;
 import com.handey.web.common.security.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ public class MemberService {
     }
 
     @Transactional
-    public TokenResponse join(Member newMember) {
+    public TokenResponse join(MemberParam newMember) {
         String username = newMember.getUsername();
         String password = MemberController.Hashing.hashingPassword(newMember.getPassword());
         String email = newMember.getEmail();
@@ -52,7 +51,7 @@ public class MemberService {
     }
 
     @Transactional
-    public TokenResponse signIn(Member member) {
+    public TokenResponse signIn(MemberParam member) {
         Member findMem = memberRepository
                         .findByUserIdAndPw(member.getEmail(), member.getPassword())
                         .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
@@ -104,9 +103,15 @@ public class MemberService {
         memberRepository.deleteByUserEmailAndPw(email, password);
     }
 
-    public void updatePassword(Long userId, String password) {
+
+    public void changeUserName(Long userId, MemberParam param) {
         Member member = memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new);
-        member.updatePassword(password);
+        member.updateUserName(param);
+    }
+
+    public void changePassword(Long userId, MemberParam param) {
+        Member member = memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new);
+        member.updatePassword(param);
     }
  }
 

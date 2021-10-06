@@ -29,7 +29,7 @@ public class MemberController {
 
     @PostMapping("/register")
     @Transactional
-    public TokenResponse registerUser(@RequestBody Member newMember){
+    public TokenResponse registerUser(@RequestBody MemberParam newMember){
         String username = newMember.getUsername();
         String password = MemberController.Hashing.hashingPassword(newMember.getPassword());
         String email = newMember.getEmail();
@@ -47,21 +47,32 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public TokenResponse login(@RequestBody Member member) {
+    public TokenResponse login(@RequestBody MemberParam member) {
         String password = MemberController.Hashing.hashingPassword(member.getPassword());
         member.setPassword(password);
         return memberService.signIn(member);
     }
 
+    @Transactional
     @DeleteMapping("/withdrawal")
-    public boolean userWithdrawal(@RequestBody Member member) {
+    public boolean userWithdrawal(@RequestBody MemberParam member) {
         memberService.deleteByUserEmailAndPassword(member.getEmail(), MemberController.Hashing.hashingPassword(member.getPassword()));
         return true;
     }
 
-    @PutMapping("/user/{userId}/changepassword")
+    @Transactional
+    @PutMapping("/user/{userId}/username")
+    public boolean changeUserName(@PathVariable Long userId, @RequestBody MemberParam param) {
+        memberService.changeUserName(userId, param);
+        return true;
+    }
+
+    @Transactional
+    @PutMapping("/user/{userId}/password")
     public boolean changePassword(@PathVariable Long userId, @RequestBody MemberParam param) {
-        memberService.updatePassword(userId, MemberController.Hashing.hashingPassword(param.getPassword()));
+        String newPw = MemberController.Hashing.hashingPassword(param.getPassword());
+        param.setPassword(newPw);
+        memberService.changePassword(userId, param);
         return true;
     }
 

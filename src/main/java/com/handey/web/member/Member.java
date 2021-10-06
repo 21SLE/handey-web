@@ -1,6 +1,5 @@
 package com.handey.web.member;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,8 +43,18 @@ public class Member {
     }
 
     @Transactional
-    public void updatePassword(String newPassword) {
-        this.password = newPassword;
+    public void updateUserName(MemberParam memberDTO) {
+        String newUserName = memberDTO.getUsername();
+
+        if(newUserName != null)
+            this.username = newUserName;
     }
 
+    @Transactional
+    public void updatePassword(MemberParam memberDTO) {
+        String newPassword = memberDTO.getPassword();
+
+        if(newPassword != null)
+            this.password = newPassword;
+    }
 }
