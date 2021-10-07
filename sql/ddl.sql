@@ -103,6 +103,7 @@ create table after_box
     content varchar(255),
     user_id bigint not null,
     subtitle boolean default 0,
+    clear boolean default 0,
     primary key (id),
     foreign key (user_id) references join_mem(id) on delete cascade
 );
