@@ -5,13 +5,20 @@ import com.handey.web.common.exception.MemberNoDataFoundException;
 import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.member.Member;
 import com.handey.web.member.MemberRepository;
+import com.handey.web.todo.ToDoElm;
+import com.handey.web.todohistory.ToDoBoxHst;
+import com.handey.web.todohistory.ToDoElmHst;
 import com.handey.web.weekly.WeeklyBox;
+import com.handey.web.weekly.WeeklyElm;
 import com.handey.web.weekly.WeeklyParam;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Transactional
 @Service
@@ -24,10 +31,10 @@ public class AfterService {
         this.memberRepository = memberRepository;
     }
 
-    public Long createAfterBox(AfterBox afterBox) {
-        afterRepository.save(afterBox);
-        return afterBox.getId();
-    }
+//    public Long createAfterBox(AfterBox afterBox) {
+//        afterRepository.save(afterBox);
+//        return afterBox.getId();
+//    }
 
     public List<AfterBox> getAfterBoxList() {
         return afterRepository.findAll();
@@ -68,6 +75,27 @@ public class AfterService {
         return afterBox.isSubtitle();
     }
 
-    public void createAfterHistory(Member member, AfterBox afterBox) {
+    /**
+     weeklyBox afterBox로 복사
+     */
+    public void createAfterBox(Member member, WeeklyBox weeklyBox) {
+        AfterBox afterBox = new AfterBox();
+        afterBox.setContent(weeklyBox.getTitle());
+        updateAfterSubtitle(afterBox.getId());
+        updateAfterClear(afterBox.getId());
+
+        afterBox.setMember(member);
+        afterRepository.save(afterBox);
+
+        List<WeeklyElm> weeklyElmList = weeklyBox.getWeeklyElmList();
+        AtomicBoolean allWeeklyElmCompleted = new AtomicBoolean(true);
+
+        weeklyElmList.forEach(weeklyElm -> {
+            if (!weeklyElm.isCompleted()) afterBox.setClear(true);
+            afterBox.setContent(weeklyElm.getContent());
+            afterRepository.save(afterBox);
+
+        });
     }
+
 }

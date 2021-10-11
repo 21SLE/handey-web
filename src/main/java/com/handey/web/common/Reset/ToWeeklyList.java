@@ -1,4 +1,4 @@
-package com.handey.web.common;
+package com.handey.web.common.Reset;
 
 //afterbox에 있던 일을 다시 weekly로 옮길 때 사용.
 

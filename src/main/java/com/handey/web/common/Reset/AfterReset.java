@@ -1,4 +1,4 @@
-package com.handey.web.common;
+package com.handey.web.common.Reset;
 
 import com.handey.web.member.Member;
 import com.handey.web.afterhistory.AfterHistoryService;
@@ -19,11 +19,50 @@ public class AfterReset {
         this.userInfoService = userInfoService;
     }
 
+    // 초, 분, 시, 일, 월, 요일
     @Scheduled(cron="0 0 0 * * *")
     @Transactional
     public void resetAfterAt00() {
         resetAfter("0");
     }
+
+
+    @Scheduled(cron="0 0 01 * * *")
+    @Transactional
+    public void resetToDoAt01() {
+        resetAfter("1");
+    }
+
+    @Scheduled(cron="0 0 02 * * *")
+    @Transactional
+    public void resetToDoAt02() {
+        resetAfter("2");
+    }
+
+    @Scheduled(cron="0 0 03 * * *")
+    @Transactional
+    public void resetToDoAt03() {
+        resetAfter("3");
+    }
+
+    @Scheduled(cron="0 0 04 * * *")
+    @Transactional
+    public void resetToDoAt04() {
+        resetAfter("4");
+    }
+
+    @Scheduled(cron="0 0 05 * * *")
+    @Transactional
+    public void resetToDoAt05() {
+        resetAfter("5");
+    }
+
+    @Scheduled(cron="0 0 06 * * *")
+    @Transactional
+    public void resetToDoAt06() {
+        resetAfter("6");
+    }
+
 
     @Transactional
     public void resetAfter(String resetTime){
