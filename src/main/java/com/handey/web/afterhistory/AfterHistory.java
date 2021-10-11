@@ -43,4 +43,6 @@ public class AfterHistory {
     @ColumnDefault("0")
     private boolean subtitle;
 
+    public void setSaveDt(LocalDate minus) {
+    }
 }

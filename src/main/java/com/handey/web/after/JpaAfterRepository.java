@@ -1,5 +1,6 @@
 package com.handey.web.after;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -7,6 +8,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class JpaAfterRepository implements AfterRepository{
     private final EntityManager em;
 

@@ -1,5 +1,6 @@
 package com.handey.web.common.Reset;
 
+import com.handey.web.after.AfterService;
 import com.handey.web.member.Member;
 import com.handey.web.afterhistory.AfterHistoryService;
 import com.handey.web.userinfo.UserInfoService;
@@ -11,10 +12,12 @@ import java.util.List;
 
 @Component
 public class AfterReset {
+    private final AfterService afterService;
     private final AfterHistoryService afterHistoryService;
     private final UserInfoService userInfoService;
 
-    public AfterReset(AfterHistoryService afterHistoryService, UserInfoService userInfoService) {
+    public AfterReset(AfterService afterService, AfterHistoryService afterHistoryService, UserInfoService userInfoService) {
+        this.afterService = afterService;
         this.afterHistoryService = afterHistoryService;
         this.userInfoService = userInfoService;
     }
@@ -68,6 +71,14 @@ public class AfterReset {
     public void resetAfter(String resetTime){
         // 0시엔 user_info 테이블에서 reset_time == 0 인 user 리스트 조회
         List<Member> memberList = userInfoService.getUserListByResetTime(resetTime);
+
+        memberList.forEach(member ->
+                afterService.getAfterBoxListByUserId(member.getId()).forEach(afterBox -> {
+                    // history로 복사
+                    afterHistoryService.createAfterHistory(afterBox.getMember(), afterBox);
+
+                    afterService.deleteAfterBox(afterBox.getId());
+                }));
 
     }
 }
