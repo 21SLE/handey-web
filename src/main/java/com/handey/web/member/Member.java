@@ -1,10 +1,16 @@
 package com.handey.web.member;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Objects;
 
 @Entity
 @Table(name = "join_mem")
+@Getter
+@Setter
 public class Member {
     @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,42 +23,6 @@ public class Member {
 
     @Column(name = "password")
     private String password;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-
-        return email;
-    }
-
-    public void setEmail(String email) {
-
-        this.email = email;
-    }
-
-    public String getPassword() {
-
-        return password;
-    }
-
-    public void setPassword(String password) {
-
-        this.password = password;
-    }
 
     @Override
     public boolean equals(Object ob){
@@ -72,4 +42,19 @@ public class Member {
         return Objects.hash(id, username, email, password);
     }
 
+    @Transactional
+    public void updateUserName(MemberParam memberDTO) {
+        String newUserName = memberDTO.getUsername();
+
+        if(newUserName != null)
+            this.username = newUserName;
+    }
+
+    @Transactional
+    public void updatePassword(MemberParam memberDTO) {
+        String newPassword = memberDTO.getPassword();
+
+        if(newPassword != null)
+            this.password = newPassword;
+    }
 }

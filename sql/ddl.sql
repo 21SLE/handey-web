@@ -142,3 +142,25 @@ create table user_info
     primary key (id),
     foreign key (user_id) references join_mem(id) on delete cascade
 );
+
+drop table if exists auth CASCADE;
+create table auth
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
+    refresh_token varchar(1000),
+    user_id bigint not null,
+    primary key (id),
+    foreign key (user_id) references join_mem(id) on delete cascade
+);
+
+drop table if exists schedule CASCADE;
+create table schedule
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
+    content varchar(255),
+    start_dt datetime,
+    end_dt datetime,
+    user_id bigint not null,
+    primary key (id),
+    foreign key (user_id) references join_mem(id) on delete cascade
+);
