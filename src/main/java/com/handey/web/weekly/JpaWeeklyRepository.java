@@ -46,6 +46,13 @@ public class JpaWeeklyRepository implements WeeklyRepository {
     }
 
     @Override
+    public List<WeeklyBox> findByClear(boolean clear){
+        return em.createQuery("select m from WeeklyBox m where m.clear = :clear", WeeklyBox.class)
+                .setParameter("clear", clear)
+                .getResultList();
+    }
+
+    @Override
     public List<WeeklyBox> findAll() {
         //객체 자체를 조회
         return em.createQuery("select m from WeeklyBox as m", WeeklyBox.class)
@@ -56,7 +63,7 @@ public class JpaWeeklyRepository implements WeeklyRepository {
     @Transactional
     public void deleteById(Long id) {
         WeeklyBox weeklyBox = em.find(WeeklyBox.class, id);
-        Assert.notNull(weeklyBox,"Weekly Element must not be null!");
+        Assert.notNull(weeklyBox,"WeeklyBox must not be null!");
         em.remove(weeklyBox);
     }
 }

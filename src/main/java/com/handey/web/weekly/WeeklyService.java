@@ -1,13 +1,18 @@
 package com.handey.web.weekly;
 
+import com.handey.web.after.AfterBox;
 import com.handey.web.common.exception.MemberNoDataFoundException;
 import com.handey.web.common.exception.WeeklyNoDataFoundException;
+import com.handey.web.member.Member;
 import com.handey.web.member.MemberRepository;
+import com.handey.web.todo.ToDoElm;
+import com.handey.web.todohistory.ToDoElmHst;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Transactional
 @Service
@@ -41,6 +46,8 @@ public class WeeklyService {
         return weeklyRepository.findByUserId(userId);
     }
 
+    public List<WeeklyBox> getWeeklyBoxListCleared() {return weeklyRepository.findByClear(true);}
+
     /**
      * WeeklyBox 단건 조회
      */
@@ -48,7 +55,7 @@ public class WeeklyService {
         return weeklyRepository.findById(id);
     }
 
-    // Weekly
+    // Weekly 객체 생성
     public Long createWeeklyBoxObj(Long userId) {
         WeeklyBox weeklyBox = new WeeklyBox();
         weeklyBox.setMember(memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new));
@@ -56,23 +63,31 @@ public class WeeklyService {
         return weeklyBox.getId();
     }
 
+    /**
+    weekly title 수정
+     */
     public boolean updateWeeklyTitle(Long weeklyId, WeeklyParam param) {
         WeeklyBox weeklyBox = weeklyRepository.findById(weeklyId).orElseThrow(WeeklyNoDataFoundException::new);
         weeklyBox.updateTitle(param.getTitle());
         return true;
     }
 
+    /**
+    weeklyBox 삭제
+    */
     public boolean deleteWeekly(Long weeklyId) {
         WeeklyBox weeklyBox = weeklyRepository.findById(weeklyId).orElseThrow(WeeklyNoDataFoundException::new);
         weeklyRepository.deleteById(weeklyId);
         return true;
     }
 
+    /**
+     weeklyBox clear 상태변경
+     */
     public boolean updateWeeklyClear(Long weeklyId) {
         WeeklyBox weeklyBox = weeklyRepository.findById(weeklyId).orElseThrow(WeeklyNoDataFoundException::new);
         weeklyBox.updateClear(!weeklyBox.getClear());
         return weeklyBox.getClear();
     }
-
 
 }

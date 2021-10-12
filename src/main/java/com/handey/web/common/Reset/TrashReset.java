@@ -1,4 +1,4 @@
-package com.handey.web.common;
+package com.handey.web.common.Reset;
 
 import com.handey.web.trash.TrashBoxService;
 import org.springframework.beans.factory.annotation.Autowired;

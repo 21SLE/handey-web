@@ -92,7 +92,18 @@ create table after_history
     content varchar(255),
     hist_date date,
     user_id bigint not null,
+    primary key (id),
+    foreign key (user_id) references join_mem(id) on delete cascade
+);
+
+drop table if exists after_box CASCADE;
+create table after_box
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
+    content varchar(255),
+    user_id bigint not null,
     subtitle boolean default 0,
+    clear boolean default 0,
     primary key (id),
     foreign key (user_id) references join_mem(id) on delete cascade
 );
