@@ -28,10 +28,10 @@ public class AfterController {
         return afterService.updateAfterClear(afterId);
     }
 
-    @PatchMapping("/afterBox/{afterId}")
-    public boolean updateSubtitleClear(@PathVariable Long afterId) {
-        return afterService.updateAfterSubtitle(afterId);
-    }
+//    @PatchMapping("/afterBox/{afterId}")
+//    public boolean updateSubtitleClear(@PathVariable Long afterId) {
+//        return afterService.updateAfterSubtitle(afterId);
+//    }
 
 
     @DeleteMapping("/afterBox/{afterId}")
