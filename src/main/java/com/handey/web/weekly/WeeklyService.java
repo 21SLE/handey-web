@@ -1,6 +1,7 @@
 package com.handey.web.weekly;
 
 import com.handey.web.after.AfterBox;
+import com.handey.web.afterhistory.AfterHistory;
 import com.handey.web.common.exception.MemberNoDataFoundException;
 import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.member.Member;
@@ -10,6 +11,8 @@ import com.handey.web.todohistory.ToDoElmHst;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;

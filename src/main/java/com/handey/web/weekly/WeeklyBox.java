@@ -60,26 +60,9 @@ public class WeeklyBox {
         this.clear = newClear;
     }
 
-
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public String getTitle() {
-//        return title;
-//    }
-//
-//    public void setTitle(String title) {
-//        this.title = title;
-//    }
-//
     public boolean getClear() {
         return clear;
     }
-//
+
     public void setClear(boolean clear) { this.clear = clear; }
 }

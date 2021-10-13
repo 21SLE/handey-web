@@ -1,11 +1,11 @@
 package com.handey.web.afterhistory;
 
 import com.handey.web.after.AfterBox;
+import com.handey.web.common.exception.AfterNoDataFoundException;
 import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.member.Member;
-import com.handey.web.todo.ToDoElm;
-import com.handey.web.todohistory.ToDoBoxHst;
-import com.handey.web.todohistory.ToDoElmHst;
+import com.handey.web.weekly.WeeklyBox;
+import com.handey.web.weekly.WeeklyElm;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -41,17 +41,32 @@ public class AfterHistoryService {
         return afterHistoryRepository.findByDate(userId, date);
     }
 
-    public void createAfterHistory(Member member, AfterBox afterBox) {
+    public void updateAfterSubtitleT(Long Id) {
+        AfterHistory afterHistory = afterHistoryRepository.findById(Id).orElseThrow(AfterNoDataFoundException::new);
+        afterHistory.setSubtitle(true);
+    }
+
+    public boolean createAfterHistory(Member member, WeeklyBox weeklyBox) {
         AfterHistory afterHistory = new AfterHistory();
 
         // 어제 날짜로 저장
         afterHistory.setSaveDt(LocalDate.now().minus(Period.ofDays(1)));
-        afterHistory.setContent(afterBox.getContent());
+        afterHistory.setContent(weeklyBox.getTitle());
 
         afterHistory.setMember(member);
         afterHistoryRepository.save(afterHistory);
 
-        //List<AfterBox> afterHistoryList = afterBox.
+        List<WeeklyElm> weeklyElmList = weeklyBox.getWeeklyElmList();
+        AtomicBoolean allWeeklyElmCompleted = new AtomicBoolean(true);
+
+        weeklyElmList.forEach(weeklyElm -> {
+            if(!weeklyElm.isCompleted()) allWeeklyElmCompleted.set(false);
+            afterHistory.setContent(weeklyElm.getContent());
+            updateAfterSubtitleT(afterHistory.getId());
+            afterHistoryRepository.save(afterHistory);
+        });
+
+        return allWeeklyElmCompleted.get();
 
     }
 }
