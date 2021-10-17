@@ -1,5 +1,8 @@
 package com.handey.web.afterhistory;
 
+import com.handey.web.common.exception.AfterNoDataFoundException;
+import com.handey.web.common.exception.WeeklyNoDataFoundException;
+import com.handey.web.weekly.WeeklyBox;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
@@ -55,4 +58,5 @@ public class JpaAfterHistoryRepository implements AfterHistoryRepository{
         Assert.notNull(afterHistory,"AfterHistory Element must not be null!");
         em.remove(afterHistory);
     }
+
 }

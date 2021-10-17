@@ -1,9 +1,9 @@
 package com.handey.web.common.Reset;
 
-import com.handey.web.after.AfterService;
 import com.handey.web.member.Member;
 import com.handey.web.afterhistory.AfterHistoryService;
 import com.handey.web.userinfo.UserInfoService;
+import com.handey.web.weekly.WeeklyService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,12 +12,12 @@ import java.util.List;
 
 @Component
 public class AfterReset {
-    private final AfterService afterService;
+    private final WeeklyService weeklyService;
     private final AfterHistoryService afterHistoryService;
     private final UserInfoService userInfoService;
 
-    public AfterReset(AfterService afterService, AfterHistoryService afterHistoryService, UserInfoService userInfoService) {
-        this.afterService = afterService;
+    public AfterReset(WeeklyService weeklyService, AfterHistoryService afterHistoryService, UserInfoService userInfoService) {
+        this.weeklyService = weeklyService;
         this.afterHistoryService = afterHistoryService;
         this.userInfoService = userInfoService;
     }
@@ -73,11 +73,9 @@ public class AfterReset {
         List<Member> memberList = userInfoService.getUserListByResetTime(resetTime);
 
         memberList.forEach(member ->
-                afterService.getAfterBoxListByUserId(member.getId()).forEach(afterBox -> {
+                weeklyService.getWeeklyBoxListByUserId(member.getId()).forEach(weeklyBox -> {
                     // history로 복사
-                    afterHistoryService.createAfterHistory(afterBox.getMember(), afterBox);
-
-                    afterService.deleteAfterBox(afterBox.getId());
+                    afterHistoryService.createAfterHistory(weeklyBox.getMember(), weeklyBox);
                 }));
 
     }
