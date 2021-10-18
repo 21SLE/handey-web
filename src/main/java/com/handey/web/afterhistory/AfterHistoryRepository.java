@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface AfterHistoryRepository {
     AfterHistory save(AfterHistory afterHistory);
     Optional<AfterHistory> findById(Long id);
-    List<AfterHistory> findByDate(Long userId, LocalDate date);
+    List<AfterHistory> findByDate(LocalDate date);
     List<AfterHistory> findAll();
     void deleteById(Long id);
     List<AfterHistory> findByUserId(Long userId);

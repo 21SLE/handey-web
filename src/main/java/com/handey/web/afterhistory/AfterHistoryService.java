@@ -23,37 +23,15 @@ public class AfterHistoryService {
         this.afterHistoryRepository = afterHistoryRepository;
     }
 
-    public List<AfterHistory> getAfterList() {
-        return afterHistoryRepository.findAll();
-    }
-
-    public List<AfterHistory> getAfterListByUserId(Long userId) {
-        return afterHistoryRepository.findByUserId(userId);
-    }
-
-
-    public void deleteAfter(Long afterId) {
-        AfterHistory afterHistory = afterHistoryRepository.findById(afterId).orElseThrow(WeeklyNoDataFoundException::new);
-        afterHistoryRepository.deleteById(afterId);
-    }
-
-    public List<AfterHistory> getAfterListByDate(Long userId, LocalDate date) {
-        return afterHistoryRepository.findByDate(userId, date);
-    }
-
-    public void updateAfterSubtitleT(Long Id) {
-        AfterHistory afterHistory = afterHistoryRepository.findById(Id).orElseThrow(AfterNoDataFoundException::new);
-        afterHistory.setSubtitle(true);
-    }
-
     public boolean createAfterHistory(Member member, WeeklyBox weeklyBox) {
         AfterHistory afterHistory1 = new AfterHistory();
 
         // 어제 날짜로 저장
-        afterHistory1.setSaveDt(LocalDate.now().minus(Period.ofDays(1)));
+        afterHistory1.setHist_date(LocalDate.now().minus(Period.ofDays(1)));
         afterHistory1.setContent(weeklyBox.getTitle());
 
         afterHistory1.setMember(member);
+        updateAfterSubtitleT(afterHistory1.getId());
         afterHistoryRepository.save(afterHistory1);
 
         AfterHistory afterHistory2 = new AfterHistory();
@@ -64,11 +42,33 @@ public class AfterHistoryService {
         weeklyElmList.forEach(weeklyElm -> {
             if(!weeklyElm.isCompleted()) allWeeklyElmCompleted.set(false);
             afterHistory2.setContent(weeklyElm.getContent());
-            updateAfterSubtitleT(afterHistory2.getId());
             afterHistoryRepository.save(afterHistory2);
         });
 
         return allWeeklyElmCompleted.get();
 
+    }
+
+    public List<AfterHistory> getAfterList() {
+        return afterHistoryRepository.findAll();
+    }
+
+    public List<AfterHistory> getAfterListByUserId(Long userId) {
+        return afterHistoryRepository.findByUserId(userId);
+    }
+
+
+    public void deleteAfter(Long afterId) {
+        AfterHistory afterHistory = afterHistoryRepository.findById(afterId).orElseThrow(AfterNoDataFoundException::new);
+        afterHistoryRepository.deleteById(afterId);
+    }
+
+    public List<AfterHistory> getAfterListByDate(Long userId, LocalDate date) {
+        return afterHistoryRepository.findByDate(date);
+    }
+
+    public void updateAfterSubtitleT(Long Id) {
+        AfterHistory afterHistory = afterHistoryRepository.findById(Id).orElseThrow(AfterNoDataFoundException::new);
+        afterHistory.setSubtitle(true);
     }
 }

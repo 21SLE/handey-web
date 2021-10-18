@@ -12,6 +12,9 @@ public class AfterHistoryController {
         this.afterHistoryService = afterHistoryService;
     }
 
+    /**
+     *  afterhistory 전체 조회
+     */
     @GetMapping("/history/afterList")
     public List<AfterHistory> getAfterList() {
         return afterHistoryService.getAfterList();
