@@ -1,5 +1,6 @@
 package com.handey.web.userinfo;
 
+import com.handey.web.auth.AuthEntity;
 import com.handey.web.member.Member;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
@@ -24,8 +25,9 @@ public class JpaUserInfoRepository implements UserInfoRepository{
 
     @Override
     public Optional<UserInfo> findByUserId(Long userId) {
-        UserInfo userInfo = em.find(UserInfo.class, userId);
-        return Optional.ofNullable(userInfo);
+        return Optional.ofNullable(em.createQuery("select m from UserInfo m where m.member.id =: userId", UserInfo.class)
+                .setParameter("userId", userId)
+                .getSingleResult());
     }
 
     @Override

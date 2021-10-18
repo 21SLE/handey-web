@@ -46,7 +46,7 @@ public class MemberController {
         return tokenResponse;
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public TokenResponse login(@RequestBody MemberParam member) {
         String password = MemberController.Hashing.hashingPassword(member.getPassword());
         member.setPassword(password);
