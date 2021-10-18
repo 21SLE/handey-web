@@ -4,6 +4,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,8 +37,16 @@ public class JpaMemberRepository implements MemberRepository{
 
     @Override
     public Optional<Member> findByEmail(String email) {
-        Member member = em.find(Member.class, email);
-        return Optional.ofNullable(member);
+        try{
+            return Optional.ofNullable(em.createQuery("select m from Member m where m.email = :email", Member.class)
+                    .setParameter("email", email).getSingleResult());
+        } catch (NoResultException nre) {
+            return Optional.empty();
+        }
+//        catch (NonUniqueResultException nure) {
+//            // Code for handling NonUniqueResultException
+//            return Optional.empty();
+//        }
     }
 
     @Override

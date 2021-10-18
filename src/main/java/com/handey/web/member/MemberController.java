@@ -53,8 +53,14 @@ public class MemberController {
         return memberService.signIn(member);
     }
 
+    @GetMapping("/register/duplication")
+    public boolean checkEmailDuplication(@RequestParam String email) {
+        return memberService.findByUserEmail(email).isPresent();
+    }
+
+
     @Transactional
-    @DeleteMapping("/withdrawal")
+    @DeleteMapping("/user/withdrawal")
     public boolean userWithdrawal(@RequestBody MemberParam member) {
         memberService.deleteByUserEmailAndPassword(member.getEmail(), MemberController.Hashing.hashingPassword(member.getPassword()));
         return true;
