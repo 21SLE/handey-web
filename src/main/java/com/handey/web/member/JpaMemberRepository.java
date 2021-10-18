@@ -31,8 +31,12 @@ public class JpaMemberRepository implements MemberRepository{
 
     @Override
     public Optional<Member> findByUserIdAndPw(String email, String password) {
-        return Optional.ofNullable(em.createQuery("select m from Member m where m.email = :email and m.password = :password", Member.class)
-                .setParameter("email", email).setParameter("password", password).getSingleResult());
+        try{
+            return Optional.ofNullable(em.createQuery("select m from Member m where m.email = :email and m.password = :password", Member.class)
+                    .setParameter("email", email).setParameter("password", password).getSingleResult());
+        } catch (NoResultException nre) {
+            return Optional.empty();
+        }
     }
 
     @Override

@@ -52,9 +52,20 @@ public class MemberService {
 
     @Transactional
     public TokenResponse signIn(MemberParam member) {
-        Member findMem = memberRepository
-                        .findByUserIdAndPw(member.getEmail(), member.getPassword())
-                        .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+        boolean result = memberRepository
+                .findByUserIdAndPw(member.getEmail(), member.getPassword()).isPresent();
+        Member findMem;
+        if(result) {
+            findMem = memberRepository
+                    .findByUserIdAndPw(member.getEmail(), member.getPassword())
+                    .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+        }
+        else {
+            return TokenResponse.builder()
+                    .isSucceed(false)
+                    .build();
+        }
+
         AuthEntity authEntity =
                 authRepository
                         .findByUserId(findMem.getId())
