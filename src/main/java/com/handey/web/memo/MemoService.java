@@ -1,6 +1,7 @@
 package com.handey.web.memo;
 
 
+import com.handey.web.common.exception.MemoNoDataFoundException;
 import com.handey.web.common.exception.ToDoNoDataFoundException;
 import com.handey.web.memo.MemoParam;
 import com.handey.web.memo.Memo;
@@ -41,7 +42,7 @@ public class MemoService {
      * 메모 내용 수정
      */
     public boolean updateMemoContent(Long userId, MemoParam param) {
-        Memo memo = memoRepository.findByUserId(userId).orElseThrow(ToDoNoDataFoundException::new);
+        Memo memo = memoRepository.findByUserId(userId).orElseThrow(MemoNoDataFoundException::new);
         memo.updateMemo(param.getContent());
         return true;
     }

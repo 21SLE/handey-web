@@ -1,8 +1,6 @@
-package com.handey.web.common.Reset;
+package com.handey.web.common.reset;
 
 import com.handey.web.after.AfterService;
-import com.handey.web.afterhistory.AfterHistoryService;
-import com.handey.web.member.Member;
 import com.handey.web.weekly.WeeklyBox;
 import com.handey.web.weekly.WeeklyService;
 import org.springframework.stereotype.Component;

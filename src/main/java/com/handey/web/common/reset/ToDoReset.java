@@ -1,4 +1,4 @@
-package com.handey.web.common.Reset;
+package com.handey.web.common.reset;
 
 import com.handey.web.member.Member;
 import com.handey.web.todohistory.ToDoBoxHstService;
