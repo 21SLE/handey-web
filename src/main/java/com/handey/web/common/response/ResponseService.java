@@ -20,8 +20,8 @@ public class ResponseService {
     /**
      * success==true이고 return하는 데이터가 여러개(List)인 경우
      */
-    public <T> MultipleResponse<T> returnMultipleResponses(List<T> data) {
-        MultipleResponse<T> response = new MultipleResponse<>();
+    public <T> ListResponse<T> returnListResponse(List<T> data) {
+        ListResponse<T> response = new ListResponse<>();
         response.setData(data);
         response.setSuccess(true);
         return response;

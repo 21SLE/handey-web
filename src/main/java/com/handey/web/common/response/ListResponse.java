@@ -7,6 +7,6 @@ import java.util.List;
 
 @Getter
 @Setter
-public class MultipleResponse<T> extends Response {
+public class ListResponse<T> extends Response {
     private List<T> data;
 }
