@@ -1,8 +1,6 @@
 package com.handey.web.afterhistory;
 
-import com.handey.web.after.AfterBox;
 import com.handey.web.common.exception.AfterNoDataFoundException;
-import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.member.Member;
 import com.handey.web.weekly.WeeklyBox;
 import com.handey.web.weekly.WeeklyElm;
@@ -37,16 +35,16 @@ public class AfterHistoryService {
         AfterHistory afterHistory2 = new AfterHistory();
 
         List<WeeklyElm> weeklyElmList = weeklyBox.getWeeklyElmList();
-        AtomicBoolean allWeeklyElmCompleted = new AtomicBoolean(true);
+        //AtomicBoolean allWeeklyElmCompleted = new AtomicBoolean(true);
 
         weeklyElmList.forEach(weeklyElm -> {
-            if(!weeklyElm.isCompleted()) allWeeklyElmCompleted.set(false);
-            afterHistory2.setContent(weeklyElm.getContent());
-            afterHistoryRepository.save(afterHistory2);
+            if(weeklyElm.isCompleted()) {
+                //allWeeklyElmCompleted.set(false);
+                afterHistory2.setContent(weeklyElm.getContent());
+                afterHistoryRepository.save(afterHistory2);
+            }
         });
-
-        return allWeeklyElmCompleted.get();
-
+        return true;
     }
 
     public List<AfterHistory> getAfterList() {

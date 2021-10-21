@@ -2,7 +2,7 @@ package com.handey.web.service;
 
 import com.handey.web.afterhistory.AfterHistoryRepository;
 import com.handey.web.afterhistory.AfterHistoryService;
-import com.handey.web.common.reset.AfterReset;
+import com.handey.web.common.Reset.AfterReset;
 import com.handey.web.member.Member;
 import com.handey.web.member.MemberService;
 import com.handey.web.weekly.WeeklyElmService;
