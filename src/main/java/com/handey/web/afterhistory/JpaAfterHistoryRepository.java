@@ -22,6 +22,7 @@ public class JpaAfterHistoryRepository implements AfterHistoryRepository{
 
     @Override
     public AfterHistory save(AfterHistory afterHistory) {
+        em.persist(afterHistory);
         return afterHistory;
     }
 
@@ -32,9 +33,9 @@ public class JpaAfterHistoryRepository implements AfterHistoryRepository{
     }
 
     @Override
-    public List<AfterHistory> findByDate(Long userId, LocalDate date) {
-        return em.createQuery("select m from AfterHistory m where m.member.id =: userId and m.hist_date = :date", AfterHistory.class)
-                .setParameter("date", date)
+    public List<AfterHistory> findByDate(LocalDate saveDt) {
+        return em.createQuery("select m from AfterHistory m where m.hist_date = :saveDt", AfterHistory.class)
+                .setParameter("saveDt", saveDt)
                 .getResultList();
     }
 
