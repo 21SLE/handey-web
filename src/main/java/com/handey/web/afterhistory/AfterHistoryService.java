@@ -1,8 +1,6 @@
 package com.handey.web.afterhistory;
 
-import com.handey.web.after.AfterBox;
 import com.handey.web.common.exception.AfterNoDataFoundException;
-import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.member.Member;
 import com.handey.web.weekly.WeeklyBox;
 import com.handey.web.weekly.WeeklyElm;
@@ -21,29 +19,6 @@ public class AfterHistoryService {
 
     public AfterHistoryService(AfterHistoryRepository afterHistoryRepository) {
         this.afterHistoryRepository = afterHistoryRepository;
-    }
-
-    public List<AfterHistory> getAfterList() {
-        return afterHistoryRepository.findAll();
-    }
-
-    public List<AfterHistory> getAfterListByUserId(Long userId) {
-        return afterHistoryRepository.findByUserId(userId);
-    }
-
-
-    public void deleteAfter(Long afterId) {
-        AfterHistory afterHistory = afterHistoryRepository.findById(afterId).orElseThrow(WeeklyNoDataFoundException::new);
-        afterHistoryRepository.deleteById(afterId);
-    }
-
-    public List<AfterHistory> getAfterListByDate(Long userId, LocalDate date) {
-        return afterHistoryRepository.findByDate(userId, date);
-    }
-
-    public void updateAfterSubtitleT(Long Id) {
-        AfterHistory afterHistory = afterHistoryRepository.findById(Id).orElseThrow(AfterNoDataFoundException::new);
-        afterHistory.setSubtitle(true);
     }
 
     public boolean createAfterHistory(Member member, WeeklyBox weeklyBox) {
@@ -69,7 +44,29 @@ public class AfterHistoryService {
                 afterHistoryRepository.save(afterHistory2);
             }
         });
-
         return true;
+    }
+
+    public List<AfterHistory> getAfterList() {
+        return afterHistoryRepository.findAll();
+    }
+
+    public List<AfterHistory> getAfterListByUserId(Long userId) {
+        return afterHistoryRepository.findByUserId(userId);
+    }
+
+
+    public void deleteAfter(Long afterId) {
+        AfterHistory afterHistory = afterHistoryRepository.findById(afterId).orElseThrow(AfterNoDataFoundException::new);
+        afterHistoryRepository.deleteById(afterId);
+    }
+
+    public List<AfterHistory> getAfterListByDate(Long userId, LocalDate date) {
+        return afterHistoryRepository.findByDate(date);
+    }
+
+    public void updateAfterSubtitleT(Long Id) {
+        AfterHistory afterHistory = afterHistoryRepository.findById(Id).orElseThrow(AfterNoDataFoundException::new);
+        afterHistory.setSubtitle(true);
     }
 }

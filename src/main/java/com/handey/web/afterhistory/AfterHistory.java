@@ -34,15 +34,15 @@ public class AfterHistory {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDate hist_date;
 
+    @Column(name = "subtitle")
+    @ColumnDefault("0")
+    private boolean subtitle;
+
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "userId")
     private Member member;
 
-    @Column(name = "subtitle")
-    @ColumnDefault("0")
-    private boolean subtitle;
 
-    public void setSaveDt(LocalDate minus) {
-    }
+
 }
