@@ -1,6 +1,9 @@
 package com.handey.web.member;
 
 import com.handey.web.common.exception.MemberNoDataFoundException;
+import com.handey.web.common.response.Response;
+import com.handey.web.common.response.ResponseService;
+import com.handey.web.common.response.SingleResponse;
 import com.handey.web.common.security.TokenResponse;
 import com.handey.web.memo.MemoService;
 import com.handey.web.userinfo.UserInfoService;
@@ -19,23 +22,25 @@ public class MemberController {
     private final MemberService memberService;
     private final UserInfoService userInfoService;
     private final MemoService memoService;
+    private final ResponseService responseService;
 
     @Autowired
-    public MemberController(MemberService memberService, UserInfoService userInfoService, MemoService memoService) {
+    public MemberController(MemberService memberService, UserInfoService userInfoService, MemoService memoService, ResponseService responseService) {
         this.memberService = memberService;
         this.userInfoService = userInfoService;
         this.memoService = memoService;
+        this.responseService = responseService;
     }
 
     @PostMapping("/register")
     @Transactional
-    public TokenResponse registerUser(@RequestBody MemberParam newMember){
+    public SingleResponse<TokenResponse> registerUser(@RequestBody MemberParam newMember){
         String username = newMember.getUsername();
         String password = MemberController.Hashing.hashingPassword(newMember.getPassword());
         String email = newMember.getEmail();
 
         if(username.equals("")||password.equals("")||email.equals("")) {
-            return TokenResponse.builder().isSucceed(false).build();
+            return responseService.returnSingleResponse(TokenResponse.builder().isSucceed(false).build());
         }
 
         TokenResponse tokenResponse = memberService.join(newMember);
@@ -43,43 +48,43 @@ public class MemberController {
         userInfoService.createDefaultUserInfo(findMem);
         memoService.createMemo(findMem);
 
-        return tokenResponse;
+        return responseService.returnSingleResponse(tokenResponse);
     }
 
     @PostMapping("/login")
-    public TokenResponse login(@RequestBody MemberParam member) {
+    public SingleResponse<TokenResponse> login(@RequestBody MemberParam member) {
         String password = MemberController.Hashing.hashingPassword(member.getPassword());
         member.setPassword(password);
-        return memberService.signIn(member);
+        return responseService.returnSingleResponse(memberService.signIn(member));
     }
 
     @GetMapping("/register/duplication")
-    public boolean checkEmailDuplication(@RequestParam String email) {
-        return memberService.findByUserEmail(email).isPresent();
+    public SingleResponse<Boolean> checkEmailDuplication(@RequestParam String email) {
+        return responseService.returnSingleResponse(memberService.findByUserEmail(email).isPresent());
     }
 
 
     @Transactional
     @DeleteMapping("/user/withdrawal")
-    public boolean userWithdrawal(@RequestBody MemberParam member) {
+    public Response userWithdrawal(@RequestBody MemberParam member) {
         memberService.deleteByUserEmailAndPassword(member.getEmail(), MemberController.Hashing.hashingPassword(member.getPassword()));
-        return true;
+        return responseService.returnSuccessResponse();
     }
 
     @Transactional
     @PutMapping("/user/{userId}/username")
-    public boolean changeUserName(@PathVariable Long userId, @RequestBody MemberParam param) {
+    public Response changeUserName(@PathVariable Long userId, @RequestBody MemberParam param) {
         memberService.changeUserName(userId, param);
-        return true;
+        return responseService.returnSuccessResponse();
     }
 
     @Transactional
     @PutMapping("/user/{userId}/password")
-    public boolean changePassword(@PathVariable Long userId, @RequestBody MemberParam param) {
+    public Response changePassword(@PathVariable Long userId, @RequestBody MemberParam param) {
         String newPw = MemberController.Hashing.hashingPassword(param.getPassword());
         param.setPassword(newPw);
         memberService.changePassword(userId, param);
-        return true;
+        return responseService.returnSuccessResponse();
     }
 
 
