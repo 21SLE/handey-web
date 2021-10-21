@@ -1,6 +1,5 @@
 package com.handey.web.memo;
 
-import com.handey.web.memo.Memo;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -21,7 +20,8 @@ public class JPAMemoRepository implements MemoRepository{
 
     @Override
     public Optional<Memo> findByUserId(Long userId) {
-        Memo memo = em.find(Memo.class, userId);
-        return Optional.ofNullable(memo);
+        return Optional.ofNullable(em.createQuery("select m from Memo m where m.member.id =: userId", Memo.class)
+                .setParameter("userId", userId)
+                .getSingleResult());
     }
 }
