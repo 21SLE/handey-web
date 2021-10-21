@@ -1,49 +1,55 @@
 package com.handey.web.weekly;
 
+import com.handey.web.common.response.ListResponse;
+import com.handey.web.common.response.Response;
+import com.handey.web.common.response.ResponseService;
+import com.handey.web.common.response.SingleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class WeeklyController {
     private final WeeklyService weeklyService;
+    private final ResponseService responseService;
 
     @Autowired
-    public WeeklyController(WeeklyService weeklyService) {
+    public WeeklyController(WeeklyService weeklyService, ResponseService responseService) {
         this.weeklyService = weeklyService;
+        this.responseService = responseService;
     }
 
     @GetMapping("/weeklyBoxList")
-    public List<WeeklyBox> getWeeklyBoxList() {
-        return weeklyService.getWeeklyBoxList();
+    public ListResponse<WeeklyBox> getWeeklyBoxList() {
+        return responseService.returnListResponse(weeklyService.getWeeklyBoxList());
     }
 
     @GetMapping("/user/{userId}/weeklyBoxList")
-    public List<WeeklyBox> getWeeklyBoxListByUserId(@PathVariable Long userId) {
-        return weeklyService.getWeeklyBoxListByUserId(userId);
+    public ListResponse<WeeklyBox> getWeeklyBoxListByUserId(@PathVariable Long userId) {
+        return responseService.returnListResponse(weeklyService.getWeeklyBoxListByUserId(userId));
     }
 
     @PostMapping("/user/{userId}/weeklyBox")
-    public Long createWeeklyBoxObj(@PathVariable Long userId) {
-        return weeklyService.createWeeklyBoxObj(userId);
+    public SingleResponse<Long> createWeeklyBoxObj(@PathVariable Long userId) {
+        return responseService.returnSingleResponse(weeklyService.createWeeklyBoxObj(userId));
     }
 
     @PutMapping("/weeklyBox/{weeklyId}")
-    public boolean updateWeeklyTitle(@PathVariable Long weeklyId, @RequestBody WeeklyParam title) {
-        return weeklyService.updateWeeklyTitle(weeklyId, title);
+    public Response updateWeeklyTitle(@PathVariable Long weeklyId, @RequestBody WeeklyParam title) {
+        weeklyService.updateWeeklyTitle(weeklyId, title);
+        return responseService.returnSuccessResponse();
     }
 
     @PatchMapping("/weeklyBox/{weeklyId}")
-    public boolean updateWeeklyClear(@PathVariable Long weeklyId) {
-        return weeklyService.updateWeeklyClear(weeklyId);
+    public Response updateWeeklyClear(@PathVariable Long weeklyId) {
+        weeklyService.updateWeeklyClear(weeklyId);
+        return responseService.returnSuccessResponse();
     }
 
 
     @DeleteMapping("/weeklyBox/{weeklyId}")
-    public boolean deleteWeekly(@PathVariable Long weeklyId) {
+    public Response deleteWeekly(@PathVariable Long weeklyId) {
         weeklyService.deleteWeekly(weeklyId);
-        return true;
+        return responseService.returnSuccessResponse();
     }
 
 }
