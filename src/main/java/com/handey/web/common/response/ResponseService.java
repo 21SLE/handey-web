@@ -39,7 +39,7 @@ public class ResponseService {
     /**
      * fail했을 때 success==false를 return
      */
-    public Response returnFailedResponse() {
+    public Response returnFailResponse() {
         Response response = new Response();
         response.setSuccess(false);
         return response;
