@@ -50,25 +50,26 @@ public class AfterHistoryService {
         AfterHistory afterHistory1 = new AfterHistory();
 
         // 어제 날짜로 저장
-        afterHistory1.setSaveDt(LocalDate.now().minus(Period.ofDays(1)));
+        afterHistory1.setHist_date(LocalDate.now().minus(Period.ofDays(1)));
         afterHistory1.setContent(weeklyBox.getTitle());
 
         afterHistory1.setMember(member);
+        updateAfterSubtitleT(afterHistory1.getId());
         afterHistoryRepository.save(afterHistory1);
 
         AfterHistory afterHistory2 = new AfterHistory();
 
         List<WeeklyElm> weeklyElmList = weeklyBox.getWeeklyElmList();
-        AtomicBoolean allWeeklyElmCompleted = new AtomicBoolean(true);
+        //AtomicBoolean allWeeklyElmCompleted = new AtomicBoolean(true);
 
         weeklyElmList.forEach(weeklyElm -> {
-            if(!weeklyElm.isCompleted()) allWeeklyElmCompleted.set(false);
-            afterHistory2.setContent(weeklyElm.getContent());
-            updateAfterSubtitleT(afterHistory2.getId());
-            afterHistoryRepository.save(afterHistory2);
+            if(weeklyElm.isCompleted()) {
+                //allWeeklyElmCompleted.set(false);
+                afterHistory2.setContent(weeklyElm.getContent());
+                afterHistoryRepository.save(afterHistory2);
+            }
         });
 
-        return allWeeklyElmCompleted.get();
-
+        return true;
     }
 }
