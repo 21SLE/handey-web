@@ -1,13 +1,10 @@
 package com.handey.web.weekly;
 
-import com.handey.web.after.AfterBox;
 import com.handey.web.afterhistory.AfterHistory;
 import com.handey.web.common.exception.MemberNoDataFoundException;
 import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.member.Member;
 import com.handey.web.member.MemberRepository;
-import com.handey.web.todo.ToDoElm;
-import com.handey.web.todohistory.ToDoElmHst;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,7 +46,7 @@ public class WeeklyService {
         return weeklyRepository.findByUserId(userId);
     }
 
-    public List<WeeklyBox> getWeeklyBoxListCleared() {return weeklyRepository.findByClear(true);}
+    //public List<WeeklyBox> getWeeklyBoxListCleared() {return weeklyRepository.findByClear(true);}
 
     /**
      * WeeklyBox 단건 조회
