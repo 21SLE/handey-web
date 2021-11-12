@@ -80,6 +80,7 @@ public class MemberService {
             accessToken = tokenUtils.generateJwtToken(authEntity.getMember());
             return TokenResponse.builder()
                     .userId(findMem.getId())
+                    .userName(findMem.getUsername())
                     .accessToken(accessToken)
                     .refreshToken(authEntity.getRefreshToken())
                     .isSucceed(true)
@@ -92,7 +93,7 @@ public class MemberService {
             authEntity.refreshUpdate(refreshToken);
         }
 
-        return TokenResponse.builder().userId(findMem.getId()).accessToken(accessToken).refreshToken(refreshToken).isSucceed(true).build();
+        return TokenResponse.builder().userName(findMem.getUsername()).userId(findMem.getId()).accessToken(accessToken).refreshToken(refreshToken).isSucceed(true).build();
     }
 
     /**
