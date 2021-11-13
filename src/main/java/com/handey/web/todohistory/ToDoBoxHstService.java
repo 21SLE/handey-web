@@ -42,6 +42,7 @@ public class ToDoBoxHstService {
 
             ToDoElmHst toDoElmHst = new ToDoElmHst();
             toDoElmHst.setToDoBoxHst(toDoBoxHst);
+            toDoElmHst.setCompleted(toDoElm.isCompleted());
             toDoElmHst.setContent(toDoElm.getContent());
 
             toDoElmHstRepository.save(toDoElmHst);

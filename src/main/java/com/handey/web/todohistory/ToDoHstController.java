@@ -5,6 +5,8 @@ import com.handey.web.common.response.Response;
 import com.handey.web.common.response.ResponseService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -47,8 +49,9 @@ public class ToDoHstController {
      * 회원 투두 히스토리 박스 날짜별 조회
      */
     @GetMapping("/user/{userId}/history/todos/date")
-    public ListResponse<ToDoBoxHst> getToDoBoxHstListByUserIdAndDate(@PathVariable Long userId, @RequestBody ToDoHstParam param) {
-        return responseService.returnListResponse(toDoBoxHstService.getToDoBoxHstListByUserIdAndDate(userId, param.getSearchDt()));
+    public ListResponse<ToDoBoxHst> getToDoBoxHstListByUserIdAndDate(@PathVariable Long userId, @RequestParam String dt) {
+        LocalDate searchDt = LocalDate.parse(dt, DateTimeFormatter.ISO_DATE);
+        return responseService.returnListResponse(toDoBoxHstService.getToDoBoxHstListByUserIdAndDate(userId, searchDt));
     }
 
     /**

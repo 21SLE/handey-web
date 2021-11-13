@@ -80,6 +80,7 @@ create table todo_elm_hst
 (
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
     content varchar(255),
+    completed boolean default 0,
     todo_box_hst_id bigint not null,
     primary key (id),
     foreign key (todo_box_hst_id) references todo_box_hst(id) on delete cascade

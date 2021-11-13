@@ -19,6 +19,9 @@ public class ToDoElmHst {
     @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "completed")
+    private boolean completed;
+
     @Column(name = "content")
     private String content;
 
