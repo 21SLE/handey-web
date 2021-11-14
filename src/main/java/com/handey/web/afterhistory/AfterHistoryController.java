@@ -5,6 +5,8 @@ import com.handey.web.common.response.Response;
 import com.handey.web.common.response.ResponseService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -26,8 +28,9 @@ public class AfterHistoryController {
     }
 
     @GetMapping("/user/{userId}/history/after/date")
-    public ListResponse<AfterHistory> getAfterListByDate(@PathVariable Long userId, @RequestBody AfterHistoryParam param) {
-        return responseService.returnListResponse(afterHistoryService.getAfterListByDate(userId, param.getSearchDt()));
+    public ListResponse<AfterHistory> getAfterListByDate(@PathVariable Long userId, @RequestParam String dt) {
+        LocalDate searchDt = LocalDate.parse(dt, DateTimeFormatter.ISO_DATE);
+        return responseService.returnListResponse(afterHistoryService.getAfterListByDate(userId, searchDt));
     }
 
     @GetMapping("/user/{userId}/history/afterList")

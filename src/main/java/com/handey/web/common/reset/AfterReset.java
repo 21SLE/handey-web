@@ -67,12 +67,12 @@ public class AfterReset {
         resetAfter("6");
     }
 
-    @Scheduled(fixedDelay=1000000)
-    @Transactional
-    public void resetAfterTest() {
-        System.out.println("resetAfter 테스트");
-        resetAfter("0");
-    }
+//    @Scheduled(fixedDelay=1000000)
+//    @Transactional
+//    public void resetAfterTest() {
+//        System.out.println("resetAfter 테스트");
+//        resetAfter("0");
+//    }
 
     @Transactional
     public void resetAfter(String resetTime){
