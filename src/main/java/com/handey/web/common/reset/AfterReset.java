@@ -1,4 +1,4 @@
-package com.handey.web.common.Reset;
+package com.handey.web.common.reset;
 
 import com.handey.web.member.Member;
 import com.handey.web.afterhistory.AfterHistoryService;
@@ -69,6 +69,12 @@ public class AfterReset {
         resetAfter("6");
     }
 
+//    @Scheduled(fixedDelay=1000000)
+//    @Transactional
+//    public void resetAfterTest() {
+//        System.out.println("resetAfter 테스트");
+//        resetToDoAt01();
+//    }
 
     @Transactional
     public void resetAfter(String resetTime){
