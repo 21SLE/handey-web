@@ -1,4 +1,4 @@
-package com.handey.web.common.reset;
+package com.handey.web.common.Reset;
 
 import com.handey.web.member.Member;
 import com.handey.web.afterhistory.AfterHistoryService;
