@@ -55,7 +55,11 @@ public class MemberController {
     public SingleResponse<TokenResponse> login(@RequestBody MemberParam member) {
         String password = MemberController.Hashing.hashingPassword(member.getPassword());
         member.setPassword(password);
-        return responseService.returnSingleResponse(memberService.signIn(member));
+        TokenResponse result = memberService.signIn(member);
+        if(result.isSucceed())
+            return responseService.returnSingleResponse(result);
+        else
+            return responseService.returnSingleFailResponse();
     }
 
     @GetMapping("/register/duplication")

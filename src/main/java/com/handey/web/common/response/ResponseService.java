@@ -18,6 +18,15 @@ public class ResponseService {
     }
 
     /**
+     * success==false이고 return하는 데이터가 하나인 경우
+     */
+    public <T> SingleResponse<T> returnSingleFailResponse() {
+        SingleResponse<T> response = new SingleResponse<>();
+        response.setSuccess(false);
+        return response;
+    }
+
+    /**
      * success==true이고 return하는 데이터가 여러개(List)인 경우
      */
     public <T> ListResponse<T> returnListResponse(List<T> data) {
