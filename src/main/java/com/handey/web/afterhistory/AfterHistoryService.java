@@ -29,11 +29,13 @@ public class AfterHistoryService {
         afterHistory1.setContent(weeklyBox.getTitle());
 
         afterHistory1.setMember(member);
-        updateAfterSubtitleT(afterHistory1.getId());
         afterHistoryRepository.save(afterHistory1);
+        updateAfterSubtitleT(afterHistory1.getId());
 
         AfterHistory afterHistory2 = new AfterHistory();
 
+        afterHistory2.setHist_date(LocalDate.now().minus(Period.ofDays(1)));
+        afterHistory2.setMember(member);
         List<WeeklyElm> weeklyElmList = weeklyBox.getWeeklyElmList();
         //AtomicBoolean allWeeklyElmCompleted = new AtomicBoolean(true);
 

@@ -14,13 +14,11 @@ import java.util.List;
 @Component
 public class AfterReset {
     private final WeeklyService weeklyService;
-    private final WeeklyElmService weeklyElmService;
     private final AfterHistoryService afterHistoryService;
     private final UserInfoService userInfoService;
 
     public AfterReset(WeeklyService weeklyService, WeeklyElmService weeklyElmService, AfterHistoryService afterHistoryService, UserInfoService userInfoService) {
         this.weeklyService = weeklyService;
-        this.weeklyElmService = weeklyElmService;
         this.afterHistoryService = afterHistoryService;
         this.userInfoService = userInfoService;
     }
@@ -35,46 +33,46 @@ public class AfterReset {
 
     @Scheduled(cron="0 0 01 * * *")
     @Transactional
-    public void resetToDoAt01() {
+    public void resetAfterAt01() {
         resetAfter("1");
     }
 
     @Scheduled(cron="0 0 02 * * *")
     @Transactional
-    public void resetToDoAt02() {
+    public void resetAfterAt02() {
         resetAfter("2");
     }
 
     @Scheduled(cron="0 0 03 * * *")
     @Transactional
-    public void resetToDoAt03() {
+    public void resetAfterAt03() {
         resetAfter("3");
     }
 
     @Scheduled(cron="0 0 04 * * *")
     @Transactional
-    public void resetToDoAt04() {
+    public void resetAfterAt04() {
         resetAfter("4");
     }
 
     @Scheduled(cron="0 0 05 * * *")
     @Transactional
-    public void resetToDoAt05() {
+    public void resetAfterAt05() {
         resetAfter("5");
     }
 
     @Scheduled(cron="0 0 06 * * *")
     @Transactional
-    public void resetToDoAt06() {
+    public void resetAfterAt06() {
         resetAfter("6");
     }
 
-//    @Scheduled(fixedDelay=1000000)
-//    @Transactional
-//    public void resetAfterTest() {
-//        System.out.println("resetAfter 테스트");
-//        resetToDoAt01();
-//    }
+    @Scheduled(fixedDelay=1000000)
+    @Transactional
+    public void resetAfterTest() {
+        System.out.println("resetAfter 테스트");
+        resetAfter("0");
+    }
 
     @Transactional
     public void resetAfter(String resetTime){
