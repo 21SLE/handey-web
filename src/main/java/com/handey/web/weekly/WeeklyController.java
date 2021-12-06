@@ -33,20 +33,20 @@ public class WeeklyController {
         return responseService.returnSingleResponse(weeklyService.createWeeklyBoxObj(userId));
     }
 
-    @PutMapping("/weeklyBox/{weeklyId}")
+    @PutMapping("/user/weeklyBox/{weeklyId}")
     public Response updateWeeklyTitle(@PathVariable Long weeklyId, @RequestBody WeeklyParam title) {
         weeklyService.updateWeeklyTitle(weeklyId, title);
         return responseService.returnSuccessResponse();
     }
 
-    @PatchMapping("/weeklyBox/{weeklyId}")
+    @PatchMapping("/user/weeklyBox/{weeklyId}")
     public Response updateWeeklyClear(@PathVariable Long weeklyId) {
         weeklyService.updateWeeklyClear(weeklyId);
         return responseService.returnSuccessResponse();
     }
 
 
-    @DeleteMapping("/weeklyBox/{weeklyId}")
+    @DeleteMapping("/user/weeklyBox/{weeklyId}")
     public Response deleteWeekly(@PathVariable Long weeklyId) {
         weeklyService.deleteWeekly(weeklyId);
         return responseService.returnSuccessResponse();

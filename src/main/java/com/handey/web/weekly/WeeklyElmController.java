@@ -16,24 +16,24 @@ public class WeeklyElmController {
         this.responseService = responseService;
     }
 
-    @PostMapping("/weeklyBox/{weeklyId}")
+    @PostMapping("/user/weeklyBox/{weeklyId}")
     public SingleResponse<Long> createWeeklyElmObj(@PathVariable Long weeklyId) {
         return responseService.returnSingleResponse(weeklyElmService.createWeeklyElmObj(weeklyId));
     }
 
-    @PutMapping("/weeklyElm/{weeklyElmId}")
+    @PutMapping("/user/weeklyElm/{weeklyElmId}")
     public Response updateWeeklyElmContent(@PathVariable Long weeklyElmId, @RequestBody WeeklyElmParam param) {
         weeklyElmService.updateWeeklyElmContent(weeklyElmId,param);
         return responseService.returnSuccessResponse();
     }
 
-    @PatchMapping("/weeklyElm/{weeklyElmId}")
+    @PatchMapping("/user/weeklyElm/{weeklyElmId}")
     public Response updateWeeklyElmContent(@PathVariable Long weeklyElmId) {
         weeklyElmService.updateWeeklyElmCompleted(weeklyElmId);
         return responseService.returnSuccessResponse();
     }
 
-    @DeleteMapping("/weeklyElm/{weeklyElmId}")
+    @DeleteMapping("/user/weeklyElm/{weeklyElmId}")
     public Response deleteWeeklyElm(@PathVariable Long weeklyElmId) {
         weeklyElmService.deleteWeeklyElm(weeklyElmId);
         return responseService.returnSuccessResponse();
