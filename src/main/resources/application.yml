@@ -18,3 +18,12 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+#    <filter>
+#      <filter-name>logFilter</filter-name>
+#      <filter-class>com.kh.swith.common.filter.LogFilter</filter-class>
+#    </filter>
+#    <filter-mapping>
+#      <filter-name>logFilter</filter-name>
+#      <url-pattern>/*</url-pattern>
+#    </filter-mapping>

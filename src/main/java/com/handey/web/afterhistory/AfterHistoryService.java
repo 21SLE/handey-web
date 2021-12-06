@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @Transactional
 @Service
@@ -27,6 +26,7 @@ public class AfterHistoryService {
         // 어제 날짜로 저장
         afterHistory1.setHist_date(LocalDate.now().minus(Period.ofDays(1)));
         afterHistory1.setContent(weeklyBox.getTitle());
+        afterHistory1.setSubtitle(true);
 
         afterHistory1.setMember(member);
         afterHistoryRepository.save(afterHistory1);
@@ -37,11 +37,9 @@ public class AfterHistoryService {
         afterHistory2.setHist_date(LocalDate.now().minus(Period.ofDays(1)));
         afterHistory2.setMember(member);
         List<WeeklyElm> weeklyElmList = weeklyBox.getWeeklyElmList();
-        //AtomicBoolean allWeeklyElmCompleted = new AtomicBoolean(true);
 
         weeklyElmList.forEach(weeklyElm -> {
             if(weeklyElm.isCompleted()) {
-                //allWeeklyElmCompleted.set(false);
                 afterHistory2.setContent(weeklyElm.getContent());
                 afterHistoryRepository.save(afterHistory2);
             }
