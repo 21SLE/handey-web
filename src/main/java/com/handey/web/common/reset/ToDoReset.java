@@ -73,7 +73,7 @@ public class ToDoReset {
 //    @Transactional
 //    public void resetToDoTest() {
 //        System.out.println("resetToDo 테스트");
-//        resetToDo("1");
+//        resetToDo("0");
 //    }
 
     @Transactional

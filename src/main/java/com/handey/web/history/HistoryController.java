@@ -34,20 +34,19 @@ public class HistoryController {
     @GetMapping("/user/{userId}/history")
     public ListResponse<History> getHstListByUserId(@PathVariable Long userId) {
         List<ToDoBoxHst> toDoBoxHstList = toDoBoxHstService.getToDoBoxHstListByUserId(userId);
-        System.out.println(toDoBoxHstList);
         List<AfterHistory> afterHstList = afterHistoryService.getAfterListByUserId(userId);
-        afterHstList.forEach(afterHistory -> System.out.println(afterHistory.getContent()));
         Map<LocalDate, History> hstMap = new HashMap<>();
-        History newHistory = new History();
-        newHistory.toDoBoxHstList = new ArrayList<>();
-        newHistory.afterHstList = new ArrayList<>();
+
         toDoBoxHstList.forEach(toDoBoxHst -> {
             LocalDate saveDt = toDoBoxHst.getSaveDt();
             if(hstMap.containsKey(saveDt)){
                 hstMap.get(saveDt).toDoBoxHstList.add(toDoBoxHst);
             }
             else {
-                newHistory.setSaveDt(toDoBoxHst.getSaveDt());
+                History newHistory = new History();
+                newHistory.toDoBoxHstList = new ArrayList<>();
+                newHistory.afterHstList = new ArrayList<>();
+                newHistory.setSaveDt(saveDt);
                 newHistory.toDoBoxHstList.add(toDoBoxHst);
                 hstMap.put(saveDt, newHistory);
             }
