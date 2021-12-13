@@ -174,7 +174,7 @@ create table fw_elm
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
     content varchar(255),
     fw_box_id bigint not null,
-    weekly_elm_id bitint,
+    weekly_elm_id bigint,
     primary key (id),
     foreign key (fw_box_id) references fw_box(id) on delete cascade,
     foreign key (weekly_elm_id) references weekly_elm(id) on delete set null

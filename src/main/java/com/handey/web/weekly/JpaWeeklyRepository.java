@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -25,8 +26,12 @@ public class JpaWeeklyRepository implements WeeklyRepository {
 
     @Override
     public Optional<WeeklyBox> findById(Long id) {
-        WeeklyBox weeklyBox = em.find(WeeklyBox.class, id);
-        return Optional.ofNullable(weeklyBox);
+        try{
+            WeeklyBox weeklyBox = em.find(WeeklyBox.class, id);
+            return Optional.ofNullable(weeklyBox);
+        } catch (NoResultException nre) {
+            return Optional.empty();
+        }
     }
 
     @Override

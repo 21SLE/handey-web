@@ -100,7 +100,7 @@ public class FwService {
         boolean isThereWeeklyElm = weeklyElmRepository.findById(fwElm.getWeeklyElm().getId()).isPresent();
         if(isThereWeeklyElm) {
             WeeklyElm weeklyElm = weeklyElmRepository.findById(fwElm.getWeeklyElm().getId()).orElseThrow(WeeklyNoDataFoundException::new);
-            weeklyElm.updateCompleted(!weeklyElm.isCompleted());
+            weeklyElm.updateCompleted(false);
         } else {
             boolean isThereWeeklyBox = weeklyBoxRepository.findById(fwBox.getWeeklyBox().getId()).isPresent();
             if(isThereWeeklyBox) {
@@ -121,9 +121,10 @@ public class FwService {
             }
         }
 
-        fwElmRepository.deleteById(fwElm.getId());
-        if(fwBox.getFwElmList() == null || fwBox.getFwElmList().size() == 0) {
+        if(fwBox.getFwElmList() == null || fwBox.getFwElmList().size() == 1) {
             fwBoxRepository.deleteById(fwBox.getId());
+        } else {
+            fwElmRepository.deleteById(fwElm.getId());
         }
     }
 

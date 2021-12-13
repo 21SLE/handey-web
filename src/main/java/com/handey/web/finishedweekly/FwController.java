@@ -41,10 +41,11 @@ public class FwController {
      * 위클리 -> Fw
      */
     @PostMapping("/user/{userId}/fwelm/{weeklyElmId}")
-    public Response addFwElm(@PathVariable Long userId, @PathVariable Long weeklyElmId, @RequestParam String dt) {
+    public Response addFwElm(@PathVariable Long userId, @PathVariable Long weeklyElmId) {
         WeeklyElm weeklyElm = weeklyElmService.findOneWeeklyElm(weeklyElmId).orElseThrow(WeeklyNoDataFoundException::new);
+        weeklyElm.updateCompleted(true);
         WeeklyBox weeklyBox = weeklyService.findOneWeeklyBox(weeklyElm.getWeeklyBox().getId()).orElseThrow(WeeklyNoDataFoundException::new);
-        LocalDate searchDt = LocalDate.parse(dt, DateTimeFormatter.ISO_DATE);
+        LocalDate searchDt = LocalDate.now();
         fwService.handleAddingFwElm(userId, searchDt, weeklyBox, weeklyElm);
         return responseService.returnSuccessResponse();
     }

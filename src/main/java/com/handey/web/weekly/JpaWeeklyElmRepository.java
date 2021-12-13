@@ -1,9 +1,11 @@
 package com.handey.web.weekly;
 
+import com.handey.web.finishedweekly.FwBox;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -32,8 +34,12 @@ public class JpaWeeklyElmRepository implements WeeklyElmRepository{
 
     @Override
     public Optional<WeeklyElm> findById(Long id) {
-        WeeklyElm weeklyElm = em.find(WeeklyElm.class, id);
-        return Optional.ofNullable(weeklyElm);
+        try{
+            WeeklyElm weeklyElm = em.find(WeeklyElm.class, id);
+            return Optional.ofNullable(weeklyElm);
+        } catch (NoResultException nre) {
+            return Optional.empty();
+        }
     }
 
     @Override

@@ -1,10 +1,12 @@
 package com.handey.web.finishedweekly;
 
+import com.handey.web.member.Member;
 import com.handey.web.todohistory.ToDoBoxHst;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
@@ -34,9 +36,13 @@ public class JpaFwBoxRepository implements FwBoxRepository{
 
     @Override
     public Optional<FwBox> findByWeeklyBoxIdAndDate(Long weeklyBoxId, LocalDate saveDt) {
-        return Optional.ofNullable(em.createQuery("select m from FwBox m where m.weeklyBox.id = :weeklyBoxId and m.saveDt = :saveDt", FwBox.class)
-                .setParameter("weeklyBoxId", weeklyBoxId).setParameter("saveDt", saveDt)
-                .getSingleResult());
+        try{
+            return Optional.ofNullable(em.createQuery("select m from FwBox m where m.weeklyBox.id = :weeklyBoxId and m.saveDt = :saveDt", FwBox.class)
+                    .setParameter("weeklyBoxId", weeklyBoxId).setParameter("saveDt", saveDt)
+                    .getSingleResult());
+        } catch (NoResultException nre) {
+            return Optional.empty();
+        }
     }
 
     @Override
