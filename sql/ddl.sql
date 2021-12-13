@@ -154,3 +154,28 @@ create table schedule
     primary key (id),
     foreign key (user_id) references join_mem(id) on delete cascade
 );
+
+drop table if exists fw_box CASCADE;
+create table fw_box
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
+    title varchar(255),
+    saveDt date,
+    weekly_box_id bigint,
+    user_id bigint not null,
+    primary key (id),
+    foreign key (user_id) references join_mem(id) on delete cascade,
+    foreign key (weekly_box_id) references weekly_box(id) on delete set null
+);
+
+drop table if exists fw_elm CASCADE;
+create table fw_elm
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
+    content varchar(255),
+    fw_box_id bigint not null,
+    weekly_elm_id bitint,
+    primary key (id),
+    foreign key (fw_box_id) references fw_box(id) on delete cascade,
+    foreign key (weekly_elm_id) references weekly_elm(id) on delete set null
+);
