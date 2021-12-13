@@ -39,15 +39,8 @@ public class WeeklyBox {
     private Member member;
 
     @OneToMany(mappedBy = "weeklyBox")  //한 title이 여러 elm을 소지해도 된다. 양방향 관계의 주체가 되는 것은 weeklyBox
-    @JsonManagedReference   //양방향에서 주
-    private List<WeeklyElm> weeklyElmList = new ArrayList<WeeklyElm>();
-
-
-    public void update(String newTitle, boolean newClear) {
-        this.clear = newClear;
-        if(newTitle != null)
-            this.title = newTitle;
-    }
+    @JsonManagedReference
+    private List<WeeklyElm> weeklyElmList = new ArrayList<>();
 
     @Transactional
     public void updateTitle(String newTitle) {
@@ -63,6 +56,4 @@ public class WeeklyBox {
     public boolean getClear() {
         return clear;
     }
-
-    public void setClear(boolean clear) { this.clear = clear; }
 }
