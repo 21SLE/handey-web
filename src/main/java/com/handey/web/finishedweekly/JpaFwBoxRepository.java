@@ -33,9 +33,9 @@ public class JpaFwBoxRepository implements FwBoxRepository{
     }
 
     @Override
-    public Optional<FwBox> findByWeeklyBoxId(Long weeklyBoxId) {
-        return Optional.ofNullable(em.createQuery("select m from FwBox m where m.weeklyBox.id = :weeklyBoxId", FwBox.class)
-                .setParameter("weeklyBoxId", weeklyBoxId)
+    public Optional<FwBox> findByWeeklyBoxIdAndDate(Long weeklyBoxId, LocalDate saveDt) {
+        return Optional.ofNullable(em.createQuery("select m from FwBox m where m.weeklyBox.id = :weeklyBoxId and m.saveDt = :saveDt", FwBox.class)
+                .setParameter("weeklyBoxId", weeklyBoxId).setParameter("saveDt", saveDt)
                 .getSingleResult());
     }
 

@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface FwBoxRepository {
     FwBox save(FwBox fwBox);
     Optional<FwBox> findById(Long id);
-    Optional<FwBox> findByWeeklyBoxId(Long weeklyBoxId);
+    Optional<FwBox> findByWeeklyBoxIdAndDate(Long weeklyBoxId, LocalDate saveDt);
     List<FwBox> findByUserIdAndDate(Long userId, LocalDate saveDt);
     void deleteById(Long id);
     List<FwBox> findByUserId(Long userId);

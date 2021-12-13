@@ -40,16 +40,29 @@ public class FwService {
      * 해당 위클리박스 아이디를 가진 fw박스가 있으면 거기에 elm 추가
      * 해당 위클리박스 아이디 가진 fw박스가 없으면 새로 fw박스만듦
      */
-    public void handleAddingFwElm(Long userId, WeeklyBox weeklyBox, WeeklyElm weeklyElm) {
+    public void handleAddingFwElm(Long userId, LocalDate dt, WeeklyBox weeklyBox, WeeklyElm weeklyElm) {
         // 해당 위클리박스 아이디를 가진 fw박스가 있는지 찾는다.
-        boolean result = fwBoxRepository.findByWeeklyBoxId(weeklyBox.getId()).isPresent();
+        boolean result = fwBoxRepository.findByWeeklyBoxIdAndDate(weeklyBox.getId(), dt).isPresent();
         if(result) {
             // 해당 위클리박스 아이디를 가진 fw박스가 있다면, 그 fw박스에 fwElm만 추가
-            addFwElmToFwBox(weeklyBox, weeklyElm);
+            addFwElmToFwBox(dt, weeklyBox, weeklyElm);
         } else {
             // 해당 위클리박스 아이디를 가진 fw박스가 없다면, fw박스 새로 만들고 elm 추가
             createFwBox(userId, weeklyBox, weeklyElm);
         }
+    }
+
+    /**
+     * 해당 위클리박스 아이디를 가진 fw박스에 fwElm추가
+     */
+    public Long addFwElmToFwBox(LocalDate dt, WeeklyBox weeklyBox, WeeklyElm weeklyElm) {
+        FwBox fwBox = fwBoxRepository.findByWeeklyBoxIdAndDate(weeklyBox.getId(), dt).orElseThrow(FwNoDataFoundException::new);
+        FwElm fwElm = new FwElm();
+        fwElm.setContent(weeklyElm.getContent());
+        fwElm.setFwBox(fwBox);
+        fwElm.setWeeklyElm(weeklyElm);
+        fwElmRepository.save(fwElm);
+        return fwBox.getId();
     }
 
     /**
@@ -71,19 +84,6 @@ public class FwService {
 
         fwElmRepository.save(fwElm);
 
-        return fwBox.getId();
-    }
-
-    /**
-     * 해당 위클리박스 아이디를 가진 fw박스에 fwElm추가
-     */
-    public Long addFwElmToFwBox(WeeklyBox weeklyBox, WeeklyElm weeklyElm) {
-        FwBox fwBox = fwBoxRepository.findByWeeklyBoxId(weeklyBox.getId()).orElseThrow(FwNoDataFoundException::new);
-        FwElm fwElm = new FwElm();
-        fwElm.setContent(weeklyElm.getContent());
-        fwElm.setFwBox(fwBox);
-        fwElm.setWeeklyElm(weeklyElm);
-        fwElmRepository.save(fwElm);
         return fwBox.getId();
     }
 
