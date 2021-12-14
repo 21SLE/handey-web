@@ -57,7 +57,9 @@ public class HistoryController {
         fwBoxList.forEach(fwBox -> {
 //            LocalDate dt = fwBox.getSaveDt().minus(Period.ofDays(1));
             LocalDate dt = fwBox.getSaveDt();
-            hstMap.get(dt).fwBoxList.add(fwBox);
+            if(hstMap.containsKey(dt)) {
+                hstMap.get(dt).fwBoxList.add(fwBox);
+            }
         });
         List<History> hstList = new ArrayList<>(hstMap.values());
         return responseService.returnListResponse(hstList);
