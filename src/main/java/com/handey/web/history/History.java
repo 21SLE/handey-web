@@ -1,6 +1,6 @@
 package com.handey.web.history;
 
-import com.handey.web.afterhistory.AfterHistory;
+import com.handey.web.finishedweekly.FwBox;
 import com.handey.web.todohistory.ToDoBoxHst;
 import lombok.Data;
 
@@ -11,6 +11,6 @@ import java.util.List;
 public class History {
     LocalDate saveDt;
     List<ToDoBoxHst> toDoBoxHstList;
-    List<AfterHistory> afterHstList;
+    List<FwBox> fwBoxList;
 
 }

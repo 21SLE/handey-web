@@ -32,6 +32,10 @@ public class FwService {
         this.weeklyElmRepository = weeklyElmRepository;
     }
 
+    public List<FwBox> getFwBoxListByUserId(Long userId) {
+        return fwBoxRepository.findByUserId(userId);
+    }
+
     public List<FwBox> getFwBoxListByUserIdAndDate(Long userId, LocalDate dt) {
         return fwBoxRepository.findByUserIdAndDate(userId, dt);
     }
