@@ -47,10 +47,6 @@ public class JpaMemberRepository implements MemberRepository{
         } catch (NoResultException nre) {
             return Optional.empty();
         }
-//        catch (NonUniqueResultException nure) {
-//            // Code for handling NonUniqueResultException
-//            return Optional.empty();
-//        }
     }
 
     @Override

@@ -36,11 +36,13 @@ public class ToDoBoxService {
     /**
      * 투두박스 객체 생성
      */
-    public Long createToDoBoxObj(Long userId) {
+    public Optional<ToDoBox> createToDoBoxObj(Long userId) {
         ToDoBox toDoBox = new ToDoBox();
         toDoBox.setMember(memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new));
         toDoBoxRepository.save(toDoBox);
-        return toDoBox.getId();
+        ToDoElm toDoElm = new ToDoElm();
+        toDoElmRepository.save(toDoBox, toDoElm);
+        return Optional.ofNullable(toDoBox);
     }
 
     /**

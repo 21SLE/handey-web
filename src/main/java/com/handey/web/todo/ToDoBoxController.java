@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ToDoBoxController {
@@ -48,7 +49,7 @@ public class ToDoBoxController {
      * 투두 박스 객체 생성
      */
     @PostMapping("/user/{userId}/toDoBox")
-    public SingleResponse<Long> createToDoBoxObj(@PathVariable Long userId) {
+    public SingleResponse<Optional<ToDoBox>> createToDoBoxObj(@PathVariable Long userId) {
         return responseService.returnSingleResponse(toDoBoxService.createToDoBoxObj(userId));
     }
 
@@ -94,22 +95,22 @@ public class ToDoBoxController {
     /**
      * create toDoBox with todoElms only for tests
      */
-    @PostMapping("/user/{userId}/toDo")
-    public SingleResponse<Long> createToDoBox(@PathVariable Long userId, @RequestBody ToDoParam param) {
-        Long toDoBoxId = toDoBoxService.createToDoBoxObj(userId);
-        ToDoBoxParam toDoBoxParam = new ToDoBoxParam();
-        toDoBoxParam.setTitle(param.getTitle());
-        toDoBoxParam.setFixed(param.isFixed());
-        toDoBoxService.updateToDoBoxTitle(toDoBoxId, toDoBoxParam);
-        toDoBoxService.updateToDoBoxFixedYn(toDoBoxId);
-        param.getToDoElmList().forEach(toDoElm -> {
-            Long toDoElmId = toDoElmService.createToDoElmObj(toDoBoxId);
-            ToDoElmParam toDoElmParam = new ToDoElmParam();
-            toDoElmParam.setContent(toDoElm.getContent());
-            toDoElmService.updateToDoElmContent(toDoElmId, toDoElmParam);
-            if(toDoElm.isCompleted())
-                toDoElmService.updateToDoElmCompletedYn(toDoElmId);
-        });
-        return responseService.returnSingleResponse(toDoBoxId);
-    }
+//    @PostMapping("/user/{userId}/toDo")
+//    public SingleResponse<Long> createToDoBox(@PathVariable Long userId, @RequestBody ToDoParam param) {
+//        Long toDoBoxId = toDoBoxService.createToDoBoxObj(userId);
+//        ToDoBoxParam toDoBoxParam = new ToDoBoxParam();
+//        toDoBoxParam.setTitle(param.getTitle());
+//        toDoBoxParam.setFixed(param.isFixed());
+//        toDoBoxService.updateToDoBoxTitle(toDoBoxId, toDoBoxParam);
+//        toDoBoxService.updateToDoBoxFixedYn(toDoBoxId);
+//        param.getToDoElmList().forEach(toDoElm -> {
+//            Long toDoElmId = toDoElmService.createToDoElmObj(toDoBoxId);
+//            ToDoElmParam toDoElmParam = new ToDoElmParam();
+//            toDoElmParam.setContent(toDoElm.getContent());
+//            toDoElmService.updateToDoElmContent(toDoElmId, toDoElmParam);
+//            if(toDoElm.isCompleted())
+//                toDoElmService.updateToDoElmCompletedYn(toDoElmId);
+//        });
+//        return responseService.returnSingleResponse(toDoBoxId);
+//    }
 }
