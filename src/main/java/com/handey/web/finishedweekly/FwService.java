@@ -2,8 +2,11 @@ package com.handey.web.finishedweekly;
 
 import com.handey.web.common.exception.FwNoDataFoundException;
 import com.handey.web.common.exception.MemberNoDataFoundException;
+import com.handey.web.common.exception.ToDoNoDataFoundException;
 import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.member.MemberRepository;
+import com.handey.web.todo.ToDoBox;
+import com.handey.web.todo.ToDoBoxParam;
 import com.handey.web.weekly.WeeklyBox;
 import com.handey.web.weekly.WeeklyElm;
 import com.handey.web.weekly.WeeklyElmRepository;
@@ -138,5 +141,35 @@ public class FwService {
 
     public Optional<FwElm> findOneFwElm(Long id) {
         return fwElmRepository.findById(id);
+    }
+
+    public Optional<FwBox> finOneFwBoxByWeeklyBoxIdAndDate(Long weeklyBoxId, LocalDate dt) {
+        FwBox fwBox = fwBoxRepository.findByWeeklyBoxIdAndDate(weeklyBoxId, dt).orElseThrow(FwNoDataFoundException::new);
+        return Optional.ofNullable(fwBox);
+    }
+
+    public Optional<FwElm> finOneFwElmByFwBoxIdAndWeeklyElmId(Long fwBoxId, Long weeklyElmId) {
+        FwElm fwElm = fwElmRepository.findByFwBoxIdAndWeeklyElmId(fwBoxId, weeklyElmId).orElseThrow(FwNoDataFoundException::new);
+        return Optional.ofNullable(fwElm);
+    }
+
+    public boolean updateFwBoxTitle(Long weeklyBoxId, FwBoxParam param) {
+        LocalDate dt = LocalDate.now();
+        boolean result = fwBoxRepository.findByWeeklyBoxIdAndDate(weeklyBoxId, dt).isPresent();
+        if(result) {
+            FwBox fwBox = fwBoxRepository.findByWeeklyBoxIdAndDate(weeklyBoxId, dt).orElseThrow(FwNoDataFoundException::new);
+            fwBox.updateTitle(param.getTitle());
+        }
+        return true;
+    }
+
+    public boolean updateFwElmContent(Long weeklyBoxId, Long weeklyElmId, FwElmParam param) {
+        FwBox fwBox = fwBoxRepository.findByWeeklyBoxIdAndDate(weeklyBoxId, LocalDate.now()).orElseThrow(FwNoDataFoundException::new);
+        boolean result = fwElmRepository.findByFwBoxIdAndWeeklyElmId(fwBox.getId(), weeklyElmId).isPresent();
+        if(result) {
+            FwElm fwElm = fwElmRepository.findByFwBoxIdAndWeeklyElmId(fwBox.getId(), weeklyElmId).orElseThrow(FwNoDataFoundException::new);
+            fwElm.updateContent(param.getContent());
+        }
+        return true;
     }
 }

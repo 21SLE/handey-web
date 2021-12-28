@@ -11,6 +11,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 @Entity
 @Getter
@@ -36,4 +37,10 @@ public class FwElm {
     @OneToOne
     @JoinColumn(name = "weekly_elm_id")
     private WeeklyElm weeklyElm;
+
+    @Transactional
+    public void updateContent(String newContent) {
+        if(newContent != null)
+            this.content = newContent;
+    }
 }

@@ -5,6 +5,8 @@ import com.handey.web.common.exception.WeeklyNoDataFoundException;
 import com.handey.web.common.response.ListResponse;
 import com.handey.web.common.response.Response;
 import com.handey.web.common.response.ResponseService;
+import com.handey.web.todo.ToDoBoxParam;
+import com.handey.web.todo.ToDoElmParam;
 import com.handey.web.weekly.WeeklyBox;
 import com.handey.web.weekly.WeeklyElm;
 import com.handey.web.weekly.WeeklyElmService;
@@ -53,11 +55,34 @@ public class FwController {
     /**
      * Fw -> 위클리
      */
-    @PutMapping("/user/{userId}/fwelm/{fwElmId}")
-    public Response restoreFwElmToWeekly(@PathVariable Long userId, @PathVariable Long fwElmId) {
-        FwElm fwElm = fwService.findOneFwElm(fwElmId).orElseThrow(FwNoDataFoundException::new);
-        FwBox fwBox = fwService.findOneFwBox(fwElm.getFwBox().getId()).orElseThrow(FwNoDataFoundException::new);
+    @PutMapping("/user/{userId}/fwbox/{weeklyBoxId}/fwelm/{weeklyElmId}")
+    public Response restoreFwElmToWeekly(@PathVariable Long userId, @PathVariable Long weeklyBoxId, @PathVariable Long weeklyElmId) {
+        FwBox fwBox = fwService.finOneFwBoxByWeeklyBoxIdAndDate(weeklyBoxId, LocalDate.now()).orElseThrow(FwNoDataFoundException::new);
+        FwElm fwElm = fwService.finOneFwElmByFwBoxIdAndWeeklyElmId(fwBox.getId(), weeklyElmId).orElseThrow(FwNoDataFoundException::new);
+
         fwService.handleRestoringFwElm(userId, fwBox, fwElm);
         return responseService.returnSuccessResponse();
+    }
+
+    /**
+     * fw 타이틀 수정
+     */
+    @PutMapping("/user/fwbox/{weeklyBoxId}")
+    public Response updateFwBoxTitle(@PathVariable Long weeklyBoxId, @RequestBody FwBoxParam param) {
+        if(fwService.updateFwBoxTitle(weeklyBoxId, param))
+            return responseService.returnSuccessResponse();
+        else
+            return responseService.returnFailResponse();
+    }
+
+    /**
+     * fwelm 내용 수정
+     */
+    @PutMapping("/user/fwbox/{weeklyBoxId}/fwelm/{weeklyElmId}")
+    public Response updateFwElmContent(@PathVariable Long weeklyBoxId, @PathVariable Long weeklyElmId, @RequestBody FwElmParam param) {
+        if(fwService.updateFwElmContent(weeklyBoxId, weeklyElmId, param))
+            return responseService.returnSuccessResponse();
+        else
+            return responseService.returnFailResponse();
     }
 }

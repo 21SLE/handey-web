@@ -13,6 +13,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,4 +51,10 @@ public class FwBox {
     @OneToMany(mappedBy = "fwBox")  //한 title이 여러 elm을 소지해도 된다. 양방향 관계의 주체가 되는 것은 weeklyBox
     @JsonManagedReference
     private List<FwElm> fwElmList = new ArrayList<>();
+
+    @Transactional
+    public void updateTitle(String newTitle) {
+        if(newTitle != null)
+            this.title = newTitle;
+    }
 }

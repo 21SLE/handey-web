@@ -4,6 +4,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Repository
@@ -27,10 +29,14 @@ public class JpaFwElmRepository implements FwElmRepository{
     }
 
     @Override
-    public Optional<FwElm> findByWeeklyElmId(Long weeklyElmId) {
-        return Optional.ofNullable(em.createQuery("select m from FwElm m where m.weeklyElm.id = :weeklyElmId", FwElm.class)
-                .setParameter("weeklyElmId", weeklyElmId)
-                .getSingleResult());
+    public Optional<FwElm> findByFwBoxIdAndWeeklyElmId(Long fwBoxId, Long weeklyElmId) {
+        try{
+            return Optional.ofNullable(em.createQuery("select m from FwElm m where m.fwBox.id = :fwBoxId and m.weeklyElm.id = :weeklyElmId", FwElm.class)
+                    .setParameter("fwBoxId", fwBoxId).setParameter("weeklyElmId", weeklyElmId)
+                    .getSingleResult());
+        } catch (NoResultException nre) {
+            return Optional.empty();
+        }
     }
 
     @Override
