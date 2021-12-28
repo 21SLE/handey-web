@@ -7,6 +7,8 @@ import com.handey.web.common.response.SingleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 public class WeeklyController {
     private final WeeklyService weeklyService;
@@ -29,7 +31,7 @@ public class WeeklyController {
     }
 
     @PostMapping("/user/{userId}/weeklyBox")
-    public SingleResponse<Long> createWeeklyBoxObj(@PathVariable Long userId) {
+    public SingleResponse<Optional<WeeklyBox>> createWeeklyBoxObj(@PathVariable Long userId) {
         return responseService.returnSingleResponse(weeklyService.createWeeklyBoxObj(userId));
     }
 

@@ -1,29 +1,27 @@
 package com.handey.web.weekly;
 
-import com.handey.web.afterhistory.AfterHistory;
 import com.handey.web.common.exception.MemberNoDataFoundException;
 import com.handey.web.common.exception.WeeklyNoDataFoundException;
-import com.handey.web.member.Member;
 import com.handey.web.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @Transactional
 @Service
 public class WeeklyService {
 
     private final WeeklyRepository weeklyRepository;
+    private final WeeklyElmRepository weeklyElmRepository;
     private final MemberRepository memberRepository;
 
 
-    public WeeklyService(WeeklyRepository weeklyRepository, MemberRepository memberRepository) {
+    public WeeklyService(WeeklyRepository weeklyRepository, WeeklyElmRepository weeklyElmRepository, MemberRepository memberRepository) {
         this.weeklyRepository = weeklyRepository;
+        this.weeklyElmRepository = weeklyElmRepository;
         this.memberRepository = memberRepository;
     }
 
@@ -56,11 +54,15 @@ public class WeeklyService {
     }
 
     // Weekly 객체 생성
-    public Long createWeeklyBoxObj(Long userId) {
+    public Optional<WeeklyBox> createWeeklyBoxObj(Long userId) {
         WeeklyBox weeklyBox = new WeeklyBox();
         weeklyBox.setMember(memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new));
         weeklyRepository.save(weeklyBox);
-        return weeklyBox.getId();
+        WeeklyElm weeklyElm = new WeeklyElm();
+        weeklyElmRepository.save(weeklyElm, weeklyBox);
+        List<WeeklyElm> newWeeklyElmList = new ArrayList<>(List.of(weeklyElm));
+        weeklyBox.updateWeeklyElmList(newWeeklyElmList);
+        return Optional.ofNullable(weeklyBox);
     }
 
     /**

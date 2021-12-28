@@ -56,4 +56,9 @@ public class WeeklyBox {
     public boolean getClear() {
         return clear;
     }
+
+    @Transactional
+    public void updateWeeklyElmList(List<WeeklyElm> newWeeklyElmList) {
+        this.weeklyElmList = newWeeklyElmList;
+    }
 }
