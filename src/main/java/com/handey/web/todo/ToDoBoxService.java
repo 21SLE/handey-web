@@ -7,6 +7,8 @@ import com.handey.web.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +44,8 @@ public class ToDoBoxService {
         toDoBoxRepository.save(toDoBox);
         ToDoElm toDoElm = new ToDoElm();
         toDoElmRepository.save(toDoBox, toDoElm);
+        List<ToDoElm> newToDoElmList = new ArrayList<>(List.of(toDoElm));
+        toDoBox.updateToDoElmList(newToDoElmList);
         return Optional.ofNullable(toDoBox);
     }
 

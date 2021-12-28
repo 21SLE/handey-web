@@ -66,4 +66,9 @@ public class ToDoBox {
     public void updateFixedYn(boolean newFixedYn) {
         this.fixed = newFixedYn;
     }
+
+    @Transactional
+    public void updateToDoElmList(List<ToDoElm> newToDoElmList) {
+        this.toDoElmList = newToDoElmList;
+    }
 }
