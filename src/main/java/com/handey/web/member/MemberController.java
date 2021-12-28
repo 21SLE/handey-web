@@ -6,6 +6,7 @@ import com.handey.web.common.response.ResponseService;
 import com.handey.web.common.response.SingleResponse;
 import com.handey.web.common.security.TokenResponse;
 import com.handey.web.memo.MemoService;
+import com.handey.web.todo.ToDoBoxService;
 import com.handey.web.userinfo.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,13 +23,15 @@ public class MemberController {
     private final MemberService memberService;
     private final UserInfoService userInfoService;
     private final MemoService memoService;
+    private final ToDoBoxService toDoBoxService;
     private final ResponseService responseService;
 
     @Autowired
-    public MemberController(MemberService memberService, UserInfoService userInfoService, MemoService memoService, ResponseService responseService) {
+    public MemberController(MemberService memberService, UserInfoService userInfoService, MemoService memoService, ToDoBoxService toDoBoxService, ResponseService responseService) {
         this.memberService = memberService;
         this.userInfoService = userInfoService;
         this.memoService = memoService;
+        this.toDoBoxService = toDoBoxService;
         this.responseService = responseService;
     }
 
@@ -46,6 +49,7 @@ public class MemberController {
         TokenResponse tokenResponse = memberService.join(newMember);
         Member findMem = memberService.findByUserId(tokenResponse.getUserId()).orElseThrow(MemberNoDataFoundException::new);
         userInfoService.createDefaultUserInfo(findMem);
+        toDoBoxService.createToDoBoxObj(findMem.getId());
         memoService.createMemo(findMem);
 
         return responseService.returnSingleResponse(tokenResponse);
