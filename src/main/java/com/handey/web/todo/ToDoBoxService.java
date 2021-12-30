@@ -2,11 +2,13 @@ package com.handey.web.todo;
 
 import com.handey.web.common.exception.MemberNoDataFoundException;
 import com.handey.web.common.exception.ToDoNoDataFoundException;
+import com.handey.web.history.History;
 import com.handey.web.trash.TrashBox;
 import com.handey.web.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Transactional
@@ -98,11 +100,15 @@ public class ToDoBoxService {
     /**
      * user 투두박스 전체 순서 변경
      */
-    public boolean updateToDoBoxSequence(Long userId, Map<String, String> indexMap) {
+    public boolean updateToDoBoxSequence(Long userId, List<ToDoBoxIndexParam> indexList) {
         List<ToDoBox> currentToDoBoxList = getToDoBoxListByUserId(userId);
+        Map<Long, Long> indexMap = new HashMap<>();
+        indexList.forEach((obj -> {
+            indexMap.put(obj.getId(), obj.getIndex());
+        }));
         currentToDoBoxList.forEach((toDoBox -> {
-            String newIndex = indexMap.get(toDoBox.getId().toString());
-            toDoBox.updateIndex(Long.parseLong(newIndex));
+            Long newIndex = indexMap.get(toDoBox.getId());
+            toDoBox.updateIndex(newIndex);
         }));
         return true;
     }
