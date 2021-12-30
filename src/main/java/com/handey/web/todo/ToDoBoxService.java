@@ -7,10 +7,7 @@ import com.handey.web.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Transactional
 @Service
@@ -96,6 +93,18 @@ public class ToDoBoxService {
         ToDoBox toDoBox = toDoBoxRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
         toDoBox.updateFixedYn(!toDoBox.isFixed());
         return toDoBox.isFixed();
+    }
+
+    /**
+     * user 투두박스 전체 순서 변경
+     */
+    public boolean updateToDoBoxSequence(Long userId, Map<String, String> indexMap) {
+        List<ToDoBox> currentToDoBoxList = getToDoBoxListByUserId(userId);
+        currentToDoBoxList.forEach((toDoBox -> {
+            String newIndex = indexMap.get(toDoBox.getId().toString());
+            toDoBox.updateIndex(Long.parseLong(newIndex));
+        }));
+        return true;
     }
 
     /**

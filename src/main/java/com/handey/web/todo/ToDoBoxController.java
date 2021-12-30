@@ -81,6 +81,15 @@ public class ToDoBoxController {
     }
 
     /**
+     * 투두 박스 순서(index) 수정
+     */
+    @PutMapping("/user/{userId}/toDoBox/sequence")
+    public Response updateToDoBoxSequence(@PathVariable Long userId, @RequestBody ToDoBoxParam param) {
+        toDoBoxService.updateToDoBoxSequence(userId, param.getIndexList());
+        return responseService.returnSuccessResponse();
+    }
+
+    /**
      * 투두 박스 삭제
      */
     @DeleteMapping("user/{userId}/toDoBox/{toDoBoxId}")
