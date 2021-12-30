@@ -41,7 +41,7 @@ public class ToDoBoxService {
     public Optional<ToDoBox> createToDoBoxObj(Long userId) {
         ToDoBox toDoBox = new ToDoBox();
         toDoBox.setMember(memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new));
-        toDoBox.setIndex(((long) toDoBoxRepository.findAllByUserId(userId).size())+1);
+        toDoBox.setIndex(((long) toDoBoxRepository.findAllByUserId(userId).size()));
         toDoBoxRepository.save(toDoBox);
         ToDoElm toDoElm = new ToDoElm();
         toDoElmRepository.save(toDoBox, toDoElm);

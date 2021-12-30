@@ -3,7 +3,7 @@ create table todo_box
 (
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
     title varchar(255),
-    index bigint default 1,
+    index bigint default 0,
     fixed boolean default 0,
     user_id bigint not null,
     primary key (id),
