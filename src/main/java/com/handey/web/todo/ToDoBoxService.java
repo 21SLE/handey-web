@@ -41,6 +41,7 @@ public class ToDoBoxService {
     public Optional<ToDoBox> createToDoBoxObj(Long userId) {
         ToDoBox toDoBox = new ToDoBox();
         toDoBox.setMember(memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new));
+        toDoBox.setIndex(((long) toDoBoxRepository.findAllByUserId(userId).size())+1);
         toDoBoxRepository.save(toDoBox);
         ToDoElm toDoElm = new ToDoElm();
         toDoElmRepository.save(toDoBox, toDoElm);
@@ -82,11 +83,11 @@ public class ToDoBoxService {
     /**
      * 투두박스 타이틀 유무 변경
      */
-    public boolean updateToDoBoxNoTitleYn(Long toDoBoxId) {
-        ToDoBox toDoBox = toDoBoxRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
-        toDoBox.updateNoTitle(!toDoBox.isNoTitle());
-        return toDoBox.isNoTitle();
-    }
+//    public boolean updateToDoBoxNoTitleYn(Long toDoBoxId) {
+//        ToDoBox toDoBox = toDoBoxRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
+//        toDoBox.updateNoTitle(!toDoBox.isNoTitle());
+//        return toDoBox.isNoTitle();
+//    }
 
     /**
      * 투두박스 고정 상태 변경
@@ -95,6 +96,15 @@ public class ToDoBoxService {
         ToDoBox toDoBox = toDoBoxRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
         toDoBox.updateFixedYn(!toDoBox.isFixed());
         return toDoBox.isFixed();
+    }
+
+    /**
+     * 투두박스 index 수정
+     */
+    public boolean updateToDoBoxIndex(Long toDoBoxId, Long newIndex) {
+        ToDoBox toDoBox = toDoBoxRepository.findById(toDoBoxId).orElseThrow(ToDoNoDataFoundException::new);
+        toDoBox.updateIndex(newIndex);
+        return true;
     }
 
     /**
@@ -112,7 +122,7 @@ public class ToDoBoxService {
         ToDoBox toDoBox = new ToDoBox();
 
         toDoBox.setTitle(trashBox.getTitle());
-        toDoBox.setNoTitle(trashBox.isNoTitle());
+//        toDoBox.setNoTitle(trashBox.isNoTitle());
         toDoBox.setMember(memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new));
         toDoBoxRepository.save(toDoBox);
 

@@ -10,5 +10,5 @@ public interface WeeklyRepository {
     List<WeeklyBox> findAll();
     void deleteById(Long id);
     List<WeeklyBox> findByUserId(Long userId);
-    List<WeeklyBox> findByClear(boolean clear);
+//    List<WeeklyBox> findByClear(boolean clear);
 }

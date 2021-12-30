@@ -29,9 +29,12 @@ public class WeeklyBox {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "clear")
-    @ColumnDefault("0")
-    private boolean clear;
+//    @Column(name = "clear")
+//    @ColumnDefault("0")
+//    private boolean clear;
+
+    @Column(name = "index")
+    private Long index;
 
     @JsonIgnore
     @OneToOne
@@ -48,13 +51,18 @@ public class WeeklyBox {
             this.title = newTitle;
     }
 
-    @Transactional
-    public void updateClear(boolean newClear) {
-        this.clear = newClear;
-    }
+//    @Transactional
+//    public void updateClear(boolean newClear) {
+//        this.clear = newClear;
+//    }
+//
+//    public boolean getClear() {
+//        return clear;
+//    }
 
-    public boolean getClear() {
-        return clear;
+    @Transactional
+    public void updateIndex(Long newIndex) {
+        this.index = newIndex;
     }
 
     @Transactional

@@ -50,12 +50,12 @@ public class JpaWeeklyRepository implements WeeklyRepository {
                 .getResultList();
     }
 
-    @Override
-    public List<WeeklyBox> findByClear(boolean clear){
-        return em.createQuery("select m from WeeklyBox m where m.clear = :clear", WeeklyBox.class)
-                .setParameter("clear", clear)
-                .getResultList();
-    }
+//    @Override
+//    public List<WeeklyBox> findByClear(boolean clear){
+//        return em.createQuery("select m from WeeklyBox m where m.clear = :clear", WeeklyBox.class)
+//                .setParameter("clear", clear)
+//                .getResultList();
+//    }
 
     @Override
     public List<WeeklyBox> findAll() {

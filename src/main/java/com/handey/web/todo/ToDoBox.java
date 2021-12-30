@@ -27,8 +27,11 @@ public class ToDoBox {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "notitle")
-    private boolean noTitle;
+//    @Column(name = "notitle")
+//    private boolean noTitle;
+
+    @Column(name = "index")
+    private Long index;
 
     @Column(name = "fixed")
     @ColumnDefault("0")
@@ -58,9 +61,14 @@ public class ToDoBox {
         if(newTitle != null)
             this.title = newTitle;
     }
+//
+//    @Transactional
+//    public void updateNoTitle(boolean newNoTitle) { this.noTitle = newNoTitle; }
 
     @Transactional
-    public void updateNoTitle(boolean newNoTitle) { this.noTitle = newNoTitle; }
+    public void updateIndex(Long newIndex) {
+        this.index = newIndex;
+    }
 
     @Transactional
     public void updateFixedYn(boolean newFixedYn) {

@@ -27,7 +27,7 @@ public class TrashBoxService {
     public Long createTrashBox(Long userId, ToDoBox toDoBox) {
         TrashBox trashBox = new TrashBox();
         trashBox.setTitle(toDoBox.getTitle());
-        trashBox.setNoTitle(toDoBox.isNoTitle());
+//        trashBox.setNoTitle(toDoBox.isNoTitle());
         trashBox.setMember(memberRepository.findById(userId).orElseThrow(MemberNoDataFoundException::new));
 
         LocalDate today = LocalDate.now();

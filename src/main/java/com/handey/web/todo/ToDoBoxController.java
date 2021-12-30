@@ -67,10 +67,10 @@ public class ToDoBoxController {
     /**
      * 투두 박스 타이틀 유무 변경
      */
-    @PatchMapping("/user/toDoBox/{toDoBoxId}/title")
-    public SingleResponse<Boolean> updateToDoBoxNoTitleYn(@PathVariable Long toDoBoxId) {
-        return responseService.returnSingleResponse(toDoBoxService.updateToDoBoxNoTitleYn(toDoBoxId));
-    }
+//    @PatchMapping("/user/toDoBox/{toDoBoxId}/title")
+//    public SingleResponse<Boolean> updateToDoBoxNoTitleYn(@PathVariable Long toDoBoxId) {
+//        return responseService.returnSingleResponse(toDoBoxService.updateToDoBoxNoTitleYn(toDoBoxId));
+//    }
 
     /**
      * 투두 박스 고정상태 수정

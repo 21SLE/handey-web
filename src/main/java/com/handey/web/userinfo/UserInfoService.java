@@ -21,7 +21,7 @@ public class UserInfoService {
         UserInfo userInfo = new UserInfo();
         userInfo.setMember(member);
         userInfo.setResetTime("0");
-        userInfo.setTheme("1");
+//        userInfo.setTheme("1");
 
         return userInfoRepository.save(userInfo).getId();
     }

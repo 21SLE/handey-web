@@ -86,10 +86,10 @@ public class WeeklyService {
     /**
      weeklyBox clear 상태변경
      */
-    public boolean updateWeeklyClear(Long weeklyId) {
-        WeeklyBox weeklyBox = weeklyRepository.findById(weeklyId).orElseThrow(WeeklyNoDataFoundException::new);
-        weeklyBox.updateClear(!weeklyBox.getClear());
-        return weeklyBox.getClear();
-    }
+//    public boolean updateWeeklyClear(Long weeklyId) {
+//        WeeklyBox weeklyBox = weeklyRepository.findById(weeklyId).orElseThrow(WeeklyNoDataFoundException::new);
+//        weeklyBox.updateClear(!weeklyBox.getClear());
+//        return weeklyBox.getClear();
+//    }
 
 }

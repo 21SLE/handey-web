@@ -8,5 +8,5 @@ import javax.persistence.Column;
 public class UserInfoParam {
     private String resetTime;
 
-    private String theme;
+//    private String theme;
 }

@@ -8,8 +8,8 @@ import java.util.List;
 public class WeeklyParam {
 
     private String title;
-
-    private boolean clear;
+//
+//    private boolean clear;
 
     private List<WeeklyElm> weeklyElmList;
 

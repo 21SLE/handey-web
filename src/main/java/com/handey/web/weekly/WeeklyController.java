@@ -41,11 +41,11 @@ public class WeeklyController {
         return responseService.returnSuccessResponse();
     }
 
-    @PatchMapping("/user/weeklyBox/{weeklyId}")
-    public Response updateWeeklyClear(@PathVariable Long weeklyId) {
-        weeklyService.updateWeeklyClear(weeklyId);
-        return responseService.returnSuccessResponse();
-    }
+//    @PatchMapping("/user/weeklyBox/{weeklyId}")
+//    public Response updateWeeklyClear(@PathVariable Long weeklyId) {
+//        weeklyService.updateWeeklyClear(weeklyId);
+//        return responseService.returnSuccessResponse();
+//    }
 
 
     @DeleteMapping("/user/weeklyBox/{weeklyId}")

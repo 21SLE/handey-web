@@ -24,8 +24,8 @@ public class UserInfo {
     @Column(name = "resetTime", length = 2)
     private String resetTime;
 
-    @Column(name = "theme", length = 1)
-    private String theme;
+//    @Column(name = "theme", length = 1)
+//    private String theme;
 
     @JsonIgnore
     @OneToOne
@@ -35,11 +35,11 @@ public class UserInfo {
     @Transactional
     public void update(UserInfoParam userInfo) {
         String newResetTime = userInfo.getResetTime();
-        String newTheme = userInfo.getTheme();
+//        String newTheme = userInfo.getTheme();
 
         if(newResetTime != null)
             this.resetTime = newResetTime;
-        if(newTheme != null)
-            this.theme = newTheme;
+//        if(newTheme != null)
+//            this.theme = newTheme;
     }
 }
