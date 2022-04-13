@@ -9,15 +9,31 @@ spring:
     prefix: classpath:/templates/
 
 ---
+#spring:
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:tcp://localhost/~/test # http://192.168.176.1:8082/login.do?jsessionid=1be0d5a624d86aa95058fc11f4da0ff4
+#    username: sa
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/test # http://192.168.176.1:8082/login.do?jsessionid=1be0d5a624d86aa95058fc11f4da0ff4
-    username: sa
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/handey?serverTimezone=Asia/Seoul
+    username: root
+    password: 9999
+
   jpa:
+    show-sql: true
     hibernate:
       ddl-auto: update
-    show-sql: true
+
+    properties:
+      hibernate:
+        formal_sql: true
 
 #    <filter>
 #      <filter-name>logFilter</filter-name>

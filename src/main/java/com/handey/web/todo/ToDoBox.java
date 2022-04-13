@@ -30,7 +30,7 @@ public class ToDoBox {
 //    @Column(name = "notitle")
 //    private boolean noTitle;
 
-    @Column(name = "index")
+    @Column(name = "todobox_index")
     private Long index;
 
     @Column(name = "fixed")
