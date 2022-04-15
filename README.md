@@ -60,7 +60,7 @@ We'll help you organize your working process.
 <br>
 
 ## 📑 Future Plans
-* DB, Server 변경
+* Server 변경
 * 비밀번호 찾기 기능(이메일 전송)
 <br>
 
